@@ -7,51 +7,51 @@ const services = [
   {
     id: "diag",
     title: "Diagnóstico Estratégico de Negocio & IA",
-    short: "Identificación de oportunidades, riesgos y valor para alinear IA a objetivos.",
-    details: "Mapeamos procesos, datos y capacidades, entregando roadmap corto/mediano plazo para resultados medibles.",
-    examples: ["Análisis de eficiencia de consumo energético", "Evaluación de madurez de datos"]
+    short: "Identificamos oportunidades de IA y alineamos proyecto con KPIs clave.",
+    details: "CaraNorte genera un diagnóstico completo de procesos, datos y tecnología, proponiendo roadmap con quick wins y reducción de costos.",
+    examples: ["Medición de eficiencias para proyectos energéticos", "Hoja de ruta de IA para un plan 12 meses"]
   },
   {
     id: "auto",
     title: "Automatización Inteligente de Procesos",
-    short: "Automatizamos tareas repetitivas con RPA + ML para liberar tiempo humano.",
-    details: "Implementamos bots con estándares de control y supervisión, integrados a sistemas existentes.",
-    examples: ["Facturación automática", "Gestión de workflows de compras"]
+    short: "Reducimos errores y aceleramos flujos de trabajo con automatización cognitiva.",
+    details: "CaraNorte desarrolla pipelines automáticos API-native y RPA supervisado para tareas semiautónomas; ahorro de horas operativas y mejor seguimiento.",
+    examples: ["Validación automática de facturas", "Automatización de aprobación de órdenes"]
   },
   {
     id: "impl",
     title: "Implementación de Soluciones de IA",
-    short: "Desarrollo de modelos y pipelines productivos adaptados al sector energético.",
-    details: "Desde POC hasta deploy en cloud/híbrido, con monitoreo de desempeño y retraining.",
-    examples: ["Predicción de demanda", "Mantenimiento predictivo"]
+    short: "Llevamos los modelos de ML a producción, integrados y seguros.",
+    details: "Implantamos pipelines end-to-end, tests de drift y alertas, con supervisión de KPIs y entregables semanales.",
+    examples: ["Forecast de demanda mensual", "Sistema predictivo de fallas en activos"]
   },
   {
     id: "data",
     title: "Data Analytics & Visualización",
-    short: "Insights accionables con dashboards, reports y análisis estadístico.",
-    details: "Implementamos pipelines ETL/ELT con buenas prácticas de gobernanza de datos.",
-    examples: ["Panel de KPIs de proyecto", "Análisis de temperatura de activos"]
+    short: "Traducimos datos en indicadores claros y decisiones automatizables.",
+    details: "CaraNorte entrega plataformas de dashboards con alertas, análisis de causas raíz y simuladores de escenarios.",
+    examples: ["Dashboard de performance de red", "Modelos de coste vs. ahorro"]
   },
   {
     id: "ux",
     title: "Diseño de Experiencia y Productos Digitales",
-    short: "Diseñamos interfaces humanas, coherentes y orientadas a la adopción.",
-    details: "Prototipos interactivos y pruebas UX para validar con usuarios clave.",
-    examples: ["Portal de seguimiento de proyectos", "App de control de consumo"]
+    short: "Creamos productos digitales claros y con alto uso.",
+    details: "Prototipamos flujos, validamos con usuarios y entregamos guías de diseño para velocidad de ejecución.",
+    examples: ["Console de seguimiento cliente", "UX para mobile y web de reportes"]
   },
   {
     id: "dev",
     title: "Desarrollo de Soluciones a Medida",
-    short: "Construimos sistemas hechos a medida para cada necesidad de negocio.",
-    details: "Back-end, front-end y APIs escalables con documentación, pruebas e integración continua.",
-    examples: ["Gestor de órdenes de trabajo", "Sistema de notificaciones multisensor"]
+    short: "Entregamos software robusto y adaptable al contexto de cada cliente.",
+    details: "Arquitectura escalable, APIs seguras y despliegue continuo, con pruebas y documentación.",
+    examples: ["Plataforma de gestión de proyectos", "Sistema de seguimiento de KPIs"]
   },
   {
     id: "acom",
     title: "Acompañamiento y Mejora Continua",
     short: "Asesoría constante para iterar, medir y optimizar valor de la IA.",
-    details: "Review mensual de métricas, OKRs y acciones para mantener evolución constante.",
-    examples: ["Sprints de mejora", "Coaching de equipos de datos"]
+    details: "Revisamos métricas, OKRs y generamos planes de mejora continua con entregas periódicas.",
+    examples: ["Sprints de mejora adaptativos", "Mentoría en equipos data-driven"]
   }
 ];
 
@@ -134,24 +134,25 @@ export default function Home() {
                   onClick={() => toggleFlip(service.id)}
                   onMouseEnter={() => setHoveredService(service.id)}
                   onMouseLeave={() => setHoveredService(null)}
-                  className="group relative h-64 cursor-pointer rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-zinc-900/70 to-cyan-950/80 p-1 shadow-2xl transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.01] focus:outline-none"
+                  className="group relative h-64 cursor-pointer rounded-2xl border border-cyan-500/30 p-1 shadow-2xl transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.01] focus:outline-none"
                   type="button"
+                  style={{ perspective: 1200 }}
                 >
-                  <div className={`relative h-full w-full rounded-2xl overflow-hidden transition-transform duration-500 ease-in-out ${isFlipped ? "rotate-y-180" : ""}`}>
-                    <div className={`absolute inset-0 backface-hidden flex flex-col justify-between p-5 ${isHovered ? "bg-cyan-600/20" : "bg-zinc-900/80"}`}>
-                      <div>
-                        <h3 className="text-xl font-bold text-white">{service.title}</h3>
-                        <p className="mt-3 text-sm text-cyan-100">{service.short}</p>
-                      </div>
-                      <p className="text-xs font-medium text-cyan-200">Haz clic para ver más</p>
+                  <div className={`relative h-full w-full transition-transform duration-500 ease-in-out transform ${isFlipped ? "rotate-y-180" : ""}`}>
+                    <div className={`absolute inset-0 rounded-2xl bg-zinc-900 p-5 text-white backface-hidden ${isHovered ? "ring-2 ring-cyan-300" : ""}`}>
+                      <h3 className="text-xl font-bold">{service.title}</h3>
+                      <p className="mt-3 text-sm text-cyan-200">{service.short}</p>
+                      <p className="mt-4 text-xs text-cyan-100">Click para ver ejemplos concretos</p>
                     </div>
-                    <div className="absolute inset-0 rotate-y-180 backface-hidden bg-gradient-to-br from-cyan-500 to-indigo-600 p-6 text-white">
-                      <h3 className="text-lg font-bold">{service.title}</h3>
+                    <div className="absolute inset-0 rounded-2xl bg-cyan-700 p-5 text-white backface-hidden rotate-y-180">
+                      <h3 className="text-lg font-bold">¿Qué hace CaraNorte?</h3>
                       <p className="mt-3 text-sm">{service.details}</p>
-                      <ul className="mt-4 list-disc pl-5 text-sm text-cyan-50">
-                        {service.examples.map((example) => (<li key={example}>{example}</li>))}
+                      <ul className="mt-3 space-y-1 text-sm">
+                        {service.examples.map((example) => (
+                          <li key={example} className="list-disc pl-4 text-cyan-100">{example}</li>
+                        ))}
                       </ul>
-                      <p className="mt-4 text-xs opacity-80">Haz clic para volver.</p>
+                      <p className="mt-4 text-xs text-cyan-50">Clic para volver</p>
                     </div>
                   </div>
                 </button>

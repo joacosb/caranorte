@@ -29,9 +29,9 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-950">
-      <div className="bg-gray-900 p-8 rounded-2xl shadow-xl w-full max-w-md">
-        <h1 className="text-3xl font-bold text-orange-500 mb-2">NODEK</h1>
-        <p className="text-gray-400 mb-6">Ingresá a tu panel de proyectos</p>
+      <div className="bg-zinc-950/95 p-8 rounded-2xl shadow-xl w-full max-w-md border border-cyan-700">
+        <h1 className="text-3xl font-bold text-cyan-300 mb-2">CaraNorte</h1>
+        <p className="text-cyan-200 mb-6">Ingresá a tu panel de clientes y proyectos</p>
 
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
           <input
@@ -39,7 +39,7 @@ export default function LoginPage() {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="bg-gray-800 text-white rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-orange-500"
+            className="bg-zinc-900 text-white rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-cyan-300"
             required
           />
           <input
@@ -47,7 +47,7 @@ export default function LoginPage() {
             placeholder="Contraseña"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="bg-gray-800 text-white rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-orange-500"
+            className="bg-zinc-900 text-white rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-cyan-300"
             required
           />
           {error && <p className="text-red-400 text-sm">{error}</p>}
