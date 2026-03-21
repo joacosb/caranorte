@@ -160,6 +160,32 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="nosotros" className="rounded-2xl border border-cyan-700/30 bg-zinc-900/70 p-8">
+          <h2 className="text-3xl font-bold text-white">Nosotros</h2>
+          <p className="mt-4 text-cyan-100">CaraNorte SAS es una consultora de sistemas de información e inteligencia artificial. Trabajamos con enfoque minimalista, moderno y profesional para acompañar a empresas en su transformación digital.</p>
+
+          <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <article className="rounded-xl border border-cyan-500/20 bg-cyan-900/50 p-4">
+              <h3 className="font-semibold text-cyan-100">Misión</h3>
+              <p className="mt-2 text-cyan-200">Guiar a organizaciones en la integración estratégica de IA con sus procesos de negocio. Transformar el potencial tecnológico en resultados concretos.</p>
+            </article>
+            <article className="rounded-xl border border-cyan-500/20 bg-cyan-900/50 p-4">
+              <h3 className="font-semibold text-cyan-100">Visión</h3>
+              <p className="mt-2 text-cyan-200">Ser la consultora referente en América Latina en transformación inteligente de organizaciones.</p>
+            </article>
+            <article className="rounded-xl border border-cyan-500/20 bg-cyan-900/50 p-4">
+              <h3 className="font-semibold text-cyan-100">Valores</h3>
+              <ul className="mt-2 list-disc pl-5 text-cyan-200">
+                <li>Dirección estratégica</li>
+                <li>Orientación a resultados</li>
+                <li>Inteligencia aplicada</li>
+                <li>Simplicidad y eficiencia</li>
+                <li>Compromiso y cercanía</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
         <section id="equipo">
           <h2 className="text-3xl font-bold text-white">Equipo CaraNorte</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
