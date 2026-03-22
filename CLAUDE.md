@@ -1,3 +1,5 @@
+@AGENTS.md
+
 # CLAUDE.md — caranorte
 
 > Contexto del proyecto para Claude Code. Actualizar este archivo cuando haya cambios importantes.
@@ -9,19 +11,30 @@
 - **Base de datos**: Supabase
 - **Cliente activo**: Kodek (único cliente por ahora, el sistema está diseñado para soportar múltiples)
 
+## Stack técnico
+
+- Next.js 16.2.1 con App Router
+- React 19.2.4
+- TypeScript 5
+- Tailwind CSS 4 (usa sintaxis nueva con `@import`, no `@tailwind`)
+- Supabase (Auth + PostgreSQL)
+- Deploy en Vercel
+
 ## Equipo (Grupo 2)
 
-- Julieta Chinkes — Product Owner
-- Agustina Sol Forini — Scrum Master
-- Renata Belén Moreno Vera — Diseñadora UX/UI
-- Camila Primo — UX/UI
-- Tabatha Veronica Cesar Castaño — Product Analyst
-- Tiago Harari — Tech Leader
-- Joaquín Sosa Beláustegui — Desarrollador
+| Nombre | Rol |
+|--------|-----|
+| Julieta Chinkes | Product Owner |
+| Agustina Sol Forini | Scrum Master |
+| Renata Belén Moreno Vera | Diseñadora UX/UI |
+| Camila Primo | UX/UI |
+| Tabatha Veronica Cesar Castaño | Product Analyst |
+| Tiago Harari | Tech Leader |
+| Joaquín Sosa Beláustegui | Desarrollador |
 
 ## Contexto académico
 
-Materia universitaria de consultoría de transformación digital. El equipo trabaja con un cliente real (Kodek) a lo largo de 12 entregas organizadas en 4 épicas (sprints). El framework usado es PMBOK para gestión y TOGAF para arquitectura empresarial.
+Materia universitaria de consultoría de transformación digital (UBA). El equipo trabaja con un cliente real (Kodek) a lo largo de 12 entregas organizadas en 4 épicas (sprints). El framework usado es PMBOK para gestión y TOGAF para arquitectura empresarial.
 
 ## Las 12 entregas
 
@@ -40,7 +53,43 @@ Materia universitaria de consultoría de transformación digital. El equipo trab
 | 11 | Análisis de la propuesta comercial | 4 | Template Word + Matriz RFP completa |
 | 12 | Cierre del Proyecto | 4 | Presentación final + Página Web + Resumen Ejecutivo |
 
-## Arquitectura planeada
+---
+
+## Estado actual del código (marzo 2026)
+
+### Páginas implementadas
+
+| Ruta | Estado | Descripción |
+|------|--------|-------------|
+| `/` | ✅ Implementada | Landing público de CaraNorte SAS (NO es lista de clientes) |
+| `/login` | ✅ Implementada | Login con Supabase Auth |
+| `/dashboard` | ✅ Básico | Muestra email del usuario logueado + "Próximamente..." |
+
+### Lo que NO existe aún (arquitectura planeada pendiente)
+
+- Rutas `/[clientSlug]` y `/[clientSlug]/entregas/[number]`
+- API routes `/api/clients`, `/api/deliveries`, etc.
+- Carpeta `/templates` con las consignas
+- Tablas `clients`, `deliveries`, `submissions` en Supabase (o al menos no se consumen desde el frontend)
+- El formulario de contacto en el landing **no tiene handler** — no envía nada
+
+### Deuda técnica conocida
+
+- Existe un directorio duplicado `src/src/app/` con copias de `login/page.tsx` y `dashboard/page.tsx`. Probablemente resto de una migración. Hay que borrar `src/src/`.
+- El dashboard hardcodea el título "NODEK" en lugar de obtenerlo dinámicamente.
+
+### Contenido actual del landing (`/`)
+
+- Marquee con partners: Nodek Energía, YPF Luz, Edesur, Enel Green Power, Petrobras, Cotec, Globant, Mercado Libre
+- 7 service cards con flip animation (Diagnóstico, Automatización, Implementación, Data Analytics, UX Design, Desarrollo, Acompañamiento)
+- Sección Nosotros con Misión, Visión y Valores
+- Sección Equipo con links a LinkedIn
+- Formulario de contacto (sin backend)
+- Valores corporativos: Dirección estratégica, Orientación a resultados, Inteligencia aplicada, Simplicidad y eficiencia, Compromiso y cercanía
+
+---
+
+## Arquitectura planeada (target state)
 
 ### Supabase — Tablas
 
@@ -74,7 +123,7 @@ submissions (id, client_id, delivery_id, status, file_url, notes, submitted_at, 
 
 Los `consigna.md` se fetchean desde GitHub raw en el frontend para que los cambios en el repo se reflejen sin redeployar.
 
-### API Routes
+### API Routes planeadas
 
 ```
 GET /api/clients
@@ -84,18 +133,17 @@ GET /api/deliveries/[number]
 GET /api/clients/[slug]/deliveries/[number]
 ```
 
-### Páginas frontend
+### Páginas frontend planeadas
 
 ```
-/                              → lista de clientes
+/                              → landing público (YA EXISTE)
+/login                         → login (YA EXISTE)
+/dashboard                     → redirigir a /[clientSlug] del usuario logueado (por implementar)
 /[clientSlug]                  → dashboard del cliente, entregas agrupadas por épica
 /[clientSlug]/entregas/[number] → detalle de entrega con consigna, template y submission
 ```
 
-## Estado actual de entregas
-
-- Ninguna submission real todavía. Todas en estado `pending`.
-- Templates disponibles en el repo: 01, 02, 03 (los demás están pendientes de subir).
+---
 
 ## Convenciones
 
@@ -109,3 +157,4 @@ GET /api/clients/[slug]/deliveries/[number]
 - El sistema debe escalar para múltiples clientes aunque por ahora solo existe Kodek.
 - El frontend debe poder navegar las 12 entregas aunque no haya submissions reales.
 - Usar Vercel environment variables para las credenciales de Supabase (ya deberían estar configuradas).
+- La ruta `/` es el **landing público** de la consultora, no el portal de clientes. El portal empieza en `/login` → `/[clientSlug]`.
