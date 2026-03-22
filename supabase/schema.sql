@@ -25,15 +25,6 @@ create table if not exists deliveries (
   created_at      timestamptz default now()
 );
 
--- Une usuarios de Supabase Auth con clientes
-create table if not exists client_users (
-  id         uuid primary key default gen_random_uuid(),
-  client_id  uuid references clients(id) on delete cascade,
-  user_id    uuid references auth.users(id) on delete cascade,
-  created_at timestamptz default now(),
-  unique(client_id, user_id)
-);
-
 create table if not exists submissions (
   id           uuid primary key default gen_random_uuid(),
   client_id    uuid references clients(id) on delete cascade,
@@ -71,55 +62,23 @@ on conflict (number) do nothing;
 -- -------------------------------------------------------
 
 insert into clients (name, slug, description)
-values ('Kodek', 'kodek', 'Empresa de tecnología energética. Primer cliente de CaraNorte.')
+values ('Kodek', 'kodek', 'Empresa de tecnología energética. Cliente de CaraNorte.')
 on conflict (slug) do nothing;
 
 -- -------------------------------------------------------
--- RLS (Row Level Security)
+-- RLS: cualquier usuario autenticado puede leer todo
+-- (modelo adecuado para tesis: equipo + profesores ven lo mismo)
 -- -------------------------------------------------------
 
-alter table clients      enable row level security;
-alter table deliveries   enable row level security;
-alter table client_users enable row level security;
-alter table submissions  enable row level security;
+alter table clients    enable row level security;
+alter table deliveries enable row level security;
+alter table submissions enable row level security;
 
--- deliveries: lectura pública para usuarios autenticados
+create policy "authenticated users can read clients"
+  on clients for select to authenticated using (true);
+
 create policy "authenticated users can read deliveries"
-  on deliveries for select
-  to authenticated
-  using (true);
+  on deliveries for select to authenticated using (true);
 
--- clients: un usuario solo ve los clientes a los que está vinculado
-create policy "users see their own clients"
-  on clients for select
-  to authenticated
-  using (
-    id in (
-      select client_id from client_users where user_id = auth.uid()
-    )
-  );
-
--- client_users: cada usuario ve solo sus propias filas
-create policy "users see their own client_users rows"
-  on client_users for select
-  to authenticated
-  using (user_id = auth.uid());
-
--- submissions: un usuario ve solo las submissions de su cliente
-create policy "users see their client submissions"
-  on submissions for select
-  to authenticated
-  using (
-    client_id in (
-      select client_id from client_users where user_id = auth.uid()
-    )
-  );
-
--- -------------------------------------------------------
--- VINCULAR usuario a Kodek
--- Reemplazá <USER_ID> con el UUID del usuario en Auth → Users
--- -------------------------------------------------------
-
--- insert into client_users (client_id, user_id)
--- select c.id, '<USER_ID>'::uuid
--- from clients c where c.slug = 'kodek';
+create policy "authenticated users can read submissions"
+  on submissions for select to authenticated using (true);

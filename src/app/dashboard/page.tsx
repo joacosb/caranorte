@@ -64,15 +64,14 @@ export default function DashboardPage() {
       if (!user) { router.push('/login'); return }
       setEmail(user.email ?? '')
 
-      // Cliente vinculado al usuario
-      const { data: clientUserRow } = await supabase
-        .from('client_users')
-        .select('client_id, clients(id, name, slug, description)')
-        .eq('user_id', user.id)
+      // Cliente activo: Kodek (visible para todo el equipo y profesores)
+      const { data: clientData } = await supabase
+        .from('clients')
+        .select('*')
+        .eq('slug', 'kodek')
         .single()
 
-      const linkedClient = clientUserRow?.clients as unknown as Client | null
-      if (linkedClient) setClient(linkedClient)
+      if (clientData) setClient(clientData)
 
       // Las 12 entregas fijas
       const { data: deliveriesData } = await supabase
@@ -82,11 +81,11 @@ export default function DashboardPage() {
       setDeliveries(deliveriesData ?? [])
 
       // Submissions del cliente
-      if (linkedClient) {
+      if (clientData) {
         const { data: subsData } = await supabase
           .from('submissions')
           .select('delivery_id, status, file_url, notes, submitted_at')
-          .eq('client_id', linkedClient.id)
+          .eq('client_id', clientData.id)
         setSubmissions(subsData ?? [])
       }
 
