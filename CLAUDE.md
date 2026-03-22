@@ -8,7 +8,7 @@
 
 - **Repo**: https://github.com/joacosb/caranorte
 - **Deploy**: caranorte.online (Vercel)
-- **Base de datos**: Supabase
+- **Base de datos**: Supabase (tablas ya creadas y con datos)
 - **Cliente activo**: Kodek (único cliente por ahora, el sistema está diseñado para soportar múltiples)
 
 ## Stack técnico
@@ -34,24 +34,34 @@
 
 ## Contexto académico
 
-Materia universitaria de consultoría de transformación digital (UBA). El equipo trabaja con un cliente real (Kodek) a lo largo de 12 entregas organizadas en 4 épicas (sprints). El framework usado es PMBOK para gestión y TOGAF para arquitectura empresarial.
+Materia: APLSI (Análisis y Planificación de LSI), cátedra Daniel Piorun, Prof. Iván Duarte. UBA FCE, cursada 2026-01.
+El equipo trabaja con un cliente real (Kodek) a lo largo de 12 entregas organizadas en 4 épicas. Framework PMBOK para gestión, TOGAF para arquitectura empresarial.
+Inicio de clases: 12/03/2026. Fin de clases: 03/07/2026.
 
 ## Las 12 entregas
 
-| # | Temática | Épica | Resultado Esperado |
-|---|----------|-------|--------------------|
-| 1 | Selección del Caso | 1 | Presentación PowerPoint (4 slides) |
-| 2 | Diagnóstico Organizacional | 1 | Template Word completado |
-| 3 | Arquitectura Empresarial Origen | 1 | Template Word + Diagrama AE Origen |
-| 4 | Innovación para la transformación | 2 | Template Word + Elevator Pitch |
-| 5 | Arquitectura Empresarial Destino | 2 | Template Word + Diagrama AE Destino |
-| 6 | Matriz de Brechas y Escenarios | 2 | Matriz Excel + Modelo de Escenarios |
-| 7 | Alcance del Proyecto | 3 | Template Word completado |
-| 8 | Análisis del Mercado y Benchmarking | 3 | RFI + links videos de proveedores |
-| 9 | Factibilidad | 3 | Matriz RFP en Excel |
-| 10 | Evaluación Económica | 4 | Template Word + aspecto económico en RFP |
-| 11 | Análisis de la propuesta comercial | 4 | Template Word + Matriz RFP completa |
-| 12 | Cierre del Proyecto | 4 | Presentación final + Página Web + Resumen Ejecutivo |
+Fechas según cronograma APLSI 2026-01.
+
+| # | Temática | Épica | Fecha | Resultado Esperado |
+|---|----------|-------|-------|--------------------|
+| 1 | Selección del Caso | 1 | 20/03/2026 | Presentación del cliente en PowerPoint (4 slides) |
+| 2 | Diagnóstico Organizacional | 1 | 27/03/2026 | Completar template de Diagnóstico Organizacional |
+| 3 | Arquitectura Empresarial Origen | 1 | 03/04/2026 | Completar Template + Diagrama AE Origen |
+| 4 | Innovación para la transformación | 2 | 10/04/2026 | Completar Template + Elevator Pitch de Innovación |
+| 5 | Arquitectura Empresarial Destino | 2 | 17/04/2026 | Completar Template + Diagrama AE Destino |
+| 6 | Matriz de Brechas y Escenarios | 2 | 24/04/2026 | Matriz de brechas en Excel + Modelo de Escenarios |
+| 7 | Alcance del Proyecto | 3 | 01/05/2026 | Completar template de Alcance |
+| 8 | Análisis del Mercado y Benchmarking | 3 | 08/05/2026 | RFI + Links videos de proveedores preseleccionados |
+| 9 | Factibilidad | 3 | 15/05/2026 | Matriz RFP en Excel |
+| 10 | Evaluación Económica | 4 | 22/05/2026 | Completar Template + aspecto económico en RFP |
+| 11 | Análisis de la propuesta comercial | 4 | 29/05/2026 | Completar Template + Matriz RFP completa |
+| 12 | Cierre del Proyecto | 4 | 05/06/2026 | Presentación final + Página Web + Resumen Ejecutivo |
+
+Nombres de épicas en el frontend:
+- Épica 1: "Diagnóstico y Arquitectura Origen"
+- Épica 2: "Innovación y Arquitectura Destino"
+- Épica 3: "Planificación y Factibilidad"
+- Épica 4: "Evaluación y Cierre"
 
 ---
 
@@ -61,100 +71,105 @@ Materia universitaria de consultoría de transformación digital (UBA). El equip
 
 | Ruta | Estado | Descripción |
 |------|--------|-------------|
-| `/` | ✅ Implementada | Landing público de CaraNorte SAS (NO es lista de clientes) |
-| `/login` | ✅ Implementada | Login con Supabase Auth |
-| `/dashboard` | ✅ Básico | Muestra email del usuario logueado + "Próximamente..." |
+| `/` | ✅ | Landing público de CaraNorte SAS |
+| `/login` | ✅ | Login con Supabase Auth |
+| `/dashboard` | ✅ | Dashboard con épicas, entregas, fechas y estado por submission |
 
-### Lo que NO existe aún (arquitectura planeada pendiente)
+### Lo que NO existe aún
 
-- Rutas `/[clientSlug]` y `/[clientSlug]/entregas/[number]`
-- API routes `/api/clients`, `/api/deliveries`, etc.
-- Carpeta `/templates` con las consignas
-- Tablas `clients`, `deliveries`, `submissions` en Supabase (o al menos no se consumen desde el frontend)
+- Rutas `/[clientSlug]` y `/[clientSlug]/entregas/[number]` (el dashboard vive en `/dashboard` por ahora)
+- API routes (no son necesarias por ahora, se usa Supabase directamente)
 - El formulario de contacto en el landing **no tiene handler** — no envía nada
 
 ### Deuda técnica conocida
 
-- Existe un directorio duplicado `src/src/app/` con copias de `login/page.tsx` y `dashboard/page.tsx`. Probablemente resto de una migración. Hay que borrar `src/src/`.
-- El dashboard hardcodea el título "NODEK" en lugar de obtenerlo dinámicamente.
+- Existe un directorio duplicado `src/src/app/` con copias de archivos. Hay que borrar `src/src/`.
+- El formulario de contacto en el landing no tiene backend.
 
-### Contenido actual del landing (`/`)
+### Contenido del landing (`/`)
 
 - Marquee con partners: Nodek Energía, YPF Luz, Edesur, Enel Green Power, Petrobras, Cotec, Globant, Mercado Libre
 - 7 service cards con flip animation (Diagnóstico, Automatización, Implementación, Data Analytics, UX Design, Desarrollo, Acompañamiento)
 - Sección Nosotros con Misión, Visión y Valores
 - Sección Equipo con links a LinkedIn
 - Formulario de contacto (sin backend)
-- Valores corporativos: Dirección estratégica, Orientación a resultados, Inteligencia aplicada, Simplicidad y eficiencia, Compromiso y cercanía
 
 ---
 
-## Arquitectura planeada (target state)
+## Supabase — Estado actual
 
-### Supabase — Tablas
+### Tablas creadas y con datos
 
 ```sql
--- Clientes
-clients (id, name, slug, description, created_at)
-
--- Las 12 entregas fijas
-deliveries (id, number, title, epic, expected_result, template_path, created_at)
-
--- Submissions de cada cliente por entrega
+clients     (id, name, slug, description, created_at)
+deliveries  (id, number, title, epic, expected_result, template_path, due_date, created_at)
 submissions (id, client_id, delivery_id, status, file_url, notes, submitted_at, created_at)
 -- status: 'pending' | 'submitted' | 'approved' | 'rejected'
 ```
 
-### Estructura de templates en el repo
+- Las 12 entregas están cargadas con `due_date` según el cronograma.
+- El cliente Kodek está cargado con `slug = 'kodek'`.
+- RLS habilitado: cualquier usuario autenticado puede leer todas las tablas (modelo adecuado para tesis — equipo + profesores ven lo mismo, sin vincular usuarios a clientes).
+- El schema completo está en `supabase/schema.sql`.
+
+### Acceso de usuarios
+
+No hay tabla `client_users`. Cualquier usuario autenticado en Supabase Auth ve el cliente Kodek. Para dar acceso al equipo o profesores: crear usuario en Supabase Dashboard → Authentication → Users → Add user.
+
+---
+
+## Templates
+
+### Carpeta en el repo
 
 ```
 /templates
   /01-seleccion-del-caso/
-    consigna.md
-    template.docx        ← subir cuando esté disponible
   /02-diagnostico-organizacional/
-    consigna.md
-    template.docx
   /03-arquitectura-empresarial-origen/
-    consigna.md
-    template.docx
-  ... (hasta /12-cierre-del-proyecto/)
+  /04-innovacion-para-la-transformacion/
+  /05-arquitectura-empresarial-destino/
+  /06-matriz-de-brechas-y-escenarios/
+  /07-alcance-del-proyecto/
+  /08-analisis-del-mercado-y-benchmarking/
+  /09-factibilidad/
+  /10-evaluacion-economica/
+  /11-analisis-de-la-propuesta-comercial/
+  /12-cierre-del-proyecto/
+  /presentaciones/
 ```
 
-Los `consigna.md` se fetchean desde GitHub raw en el frontend para que los cambios en el repo se reflejen sin redeployar.
+Cada carpeta tiene `.gitkeep`. Los archivos reales (Word, Excel, PowerPoint) se suben manualmente.
 
-### API Routes planeadas
+### Link a templates
 
-```
-GET /api/clients
-GET /api/clients/[slug]
-GET /api/deliveries
-GET /api/deliveries/[number]
-GET /api/clients/[slug]/deliveries/[number]
-```
+Las cards del dashboard linkean a la carpeta de SharePoint donde están los templates actualizados:
+`https://economicasuba-my.sharepoint.com/:f:/g/personal/29id33012909_campus_economicas_uba_ar/IgBf9lLv958yTI9Lfd7c0oHXAQKp3gnDEhEHOOaxYv6L1mc?e=7rcrOY`
 
-### Páginas frontend planeadas
+---
 
-```
-/                              → landing público (YA EXISTE)
-/login                         → login (YA EXISTE)
-/dashboard                     → redirigir a /[clientSlug] del usuario logueado (por implementar)
-/[clientSlug]                  → dashboard del cliente, entregas agrupadas por épica
-/[clientSlug]/entregas/[number] → detalle de entrega con consigna, template y submission
-```
+## Comportamiento del dashboard (`/dashboard`)
+
+- Carga el cliente Kodek por slug.
+- Carga las 12 entregas desde Supabase ordenadas por número.
+- Carga las submissions del cliente.
+- Agrupa entregas por épica (4 secciones).
+- Cada card muestra: número, título, resultado esperado, estado (badge), fecha de entrega, días restantes / "Vence hoy" / "Vencido" / "✓ Entregado".
+- Click en card abre la carpeta de SharePoint en pestaña nueva.
+- El badge de estado se calcula: si hay submission → usa su status; si no → 'pending'.
+- Si status es 'submitted' o 'approved' → muestra "✓ Entregado" en lugar de días restantes.
 
 ---
 
 ## Convenciones
 
-- Los slugs de clientes van en kebab-case (ej: `kodek`)
-- Las carpetas de templates usan el número con dos dígitos + nombre en kebab-case
-- El contenido de cada `consigna.md` se redacta en español
-- Los archivos de template van nombrados como `template.docx` / `template.xlsx` / `template.pptx` según corresponda
+- Slugs de clientes en kebab-case (`kodek`)
+- Carpetas de templates: número con dos dígitos + nombre en kebab-case
+- Archivos de template nombrados `template.docx` / `template.xlsx` / `template.pptx`
+- Código en inglés, comentarios y contenido en español
 
 ## Notas importantes
 
 - El sistema debe escalar para múltiples clientes aunque por ahora solo existe Kodek.
-- El frontend debe poder navegar las 12 entregas aunque no haya submissions reales.
-- Usar Vercel environment variables para las credenciales de Supabase (ya deberían estar configuradas).
-- La ruta `/` es el **landing público** de la consultora, no el portal de clientes. El portal empieza en `/login` → `/[clientSlug]`.
+- La ruta `/` es el landing público de la consultora, no el portal de clientes. El portal empieza en `/login` → `/dashboard`.
+- Usar Vercel environment variables para las credenciales de Supabase (ya configuradas).
