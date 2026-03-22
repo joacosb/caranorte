@@ -43,7 +43,7 @@ const STATUS_STYLES: Record<string, string> = {
   rejected:  'bg-red-800/60 text-red-200',
 }
 
-const GITHUB_BASE = 'https://github.com/joacosb/caranorte/tree/main'
+const TEMPLATES_URL = 'https://economicasuba-my.sharepoint.com/:f:/g/personal/29id33012909_campus_economicas_uba_ar/IgBf9lLv958yTI9Lfd7c0oHXAQKp3gnDEhEHOOaxYv6L1mc?e=7rcrOY'
 
 function DeadlineBadge({ dueDate, status }: { dueDate: string | null; status: string }) {
   if (!dueDate) return null
@@ -188,9 +188,7 @@ export default function DashboardPage() {
               {deliveriesByEpic[epic].map(delivery => {
                 const sub = submissionByDelivery[delivery.id]
                 const status = sub?.status ?? 'pending'
-                const templateUrl = delivery.template_path
-                  ? `${GITHUB_BASE}/${delivery.template_path}`
-                  : null
+                const templateUrl = TEMPLATES_URL
 
                 const card = (
                   <div className={`rounded-2xl border bg-zinc-900 p-5 flex flex-col gap-3 h-full transition-all duration-200 ${
