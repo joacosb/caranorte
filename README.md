@@ -1,3 +1,8 @@
+## 📋 Ideas y Requerimientos
+
+Documento de ideas, requerimientos y decisiones del proyecto:
+👉 [Ver documento](https://docs.google.com/document/d/1e8tzbAAq3IMfjhr1ePlHZwEgUrQbteLb4WUXJzZWhsU/edit?usp=sharing)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
