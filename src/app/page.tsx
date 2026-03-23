@@ -115,7 +115,7 @@ export default function Home() {
           <div className="relative rounded-3xl border border-cyan-500/30 bg-cyan-900/40 p-8 backdrop-blur-xl shadow-[0_8px_30px_rgba(20,20,55,0.5)]">
             <h2 className="text-white text-2xl font-bold">Misión & Visión</h2>
             <p className="mt-4 text-cyan-100">Guiar a organizaciones en la integración estratégica de IA con sus procesos de negocio, transformando potencial tecnológico en resultados concretos.</p>
-            <p className="mt-3 text-cyan-100">Ser la consultora referente en América Latina en transformación inteligente de organizaciones.</p>
+            <p className="mt-3 text-cyan-100">Ser la consultora N1 en América Latina en transformación inteligente de organizaciones.</p>
           </div>
         </section>
 
