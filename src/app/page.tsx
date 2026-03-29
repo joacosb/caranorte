@@ -96,7 +96,7 @@ export default function Home() {
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
         <div>
           <p className="text-2xl font-extrabold tracking-tight text-white">CaraNorte SAS</p>
-          <p className="text-sm text-cyan-200">Transformamos la Inteligencia Artificial en resultados reales</p>
+          <p className="text-sm text-cyan-200">Consultoría de negocio e inteligencia artificial</p>
         </div>
         <nav className="flex items-center gap-4 text-sm font-semibold text-cyan-100">
           <a href="#servicios" className="transition hover:text-white">Servicios</a>
@@ -112,8 +112,8 @@ export default function Home() {
         <section className="grid gap-8 lg:grid-cols-2 lg:items-center">
           <div>
             <p className="inline-block rounded-full bg-cyan-500/15 px-4 py-1 text-xs font-bold uppercase tracking-widest text-cyan-200">Consultoría estratégica</p>
-            <h1 className="mt-6 text-4xl font-bold leading-tight text-white md:text-6xl">Transformamos la Inteligencia Artificial en resultados reales</h1>
-            <p className="mt-5 max-w-xl text-lg text-cyan-200">Acompañamos a organizaciones en cada paso de su viaje IA: diagnóstico, automatización, implementación y mejora continua, con foco en impacto tangible.</p>
+            <h1 className="mt-6 text-4xl font-bold leading-tight text-white md:text-6xl">Combinamos inteligencia, artificial y humana, para revolucionar tu negocio</h1>
+            <p className="mt-5 max-w-xl text-lg text-cyan-200">Acompañamos a organizaciones en su transformación combinando experiencia humana e inteligencia artificial: diagnóstico, automatización, implementación y mejora continua, con foco en impacto real y medible.</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/login" className="rounded-xl bg-cyan-500 px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-cyan-400">Panel de cliente</Link>
               <a href="#servicios" className="rounded-xl border border-cyan-300 px-6 py-3 text-sm font-semibold text-cyan-100 transition hover:border-white hover:text-white">Ver servicios</a>
@@ -170,7 +170,7 @@ export default function Home() {
 
         <section id="nosotros" className="rounded-2xl border border-cyan-700/30 bg-zinc-900/70 p-8">
           <h2 className="text-3xl font-bold text-white">Nosotros</h2>
-          <p className="mt-4 text-cyan-100">CaraNorte SAS es una consultora de inteligencia artificial con raíces en la Patagonia argentina. Actuamos con un enfoque claro: entender el negocio antes que la tecnología.</p>
+          <p className="mt-4 text-cyan-100">CaraNorte SAS es una consultora con raíces en la Patagonia argentina que combina inteligencia humana e inteligencia artificial para transformar organizaciones. Entendemos el negocio antes que la tecnología, y cada solución que proponemos responde a objetivos concretos alineados con los resultados que el cliente necesita alcanzar.</p>
 
           <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <article className="rounded-xl border border-cyan-500/20 bg-cyan-900/50 p-4">
@@ -189,14 +189,10 @@ export default function Home() {
 
           <div className="mt-6">
             <h3 className="text-xl font-semibold text-white">Valores</h3>
-            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               <article className="rounded-xl border border-cyan-500/20 bg-cyan-900/30 p-4">
                 <h4 className="font-semibold text-cyan-100">Orientación a resultados</h4>
-                <p className="mt-2 text-sm text-cyan-200">Medimos nuestro éxito en función del impacto generado. Trabajamos con métricas claras y buscamos que cada iniciativa se traduzca en mejoras tangibles: tiempos, costos y resultados ambientales sostenibles.</p>
-              </article>
-              <article className="rounded-xl border border-cyan-500/20 bg-cyan-900/30 p-4">
-                <h4 className="font-semibold text-cyan-100">Inteligencia aplicada</h4>
-                <p className="mt-2 text-sm text-cyan-200">Creemos que a través de las nuevas tecnologías y la IA es posible desarrollar automatizaciones criteriosas que optimicen el uso del tiempo y los recursos, reduciendo el esfuerzo operativo.</p>
+                <p className="mt-2 text-sm text-cyan-200">Nos importan los resultados y cumplir objetivos predefinidos, pero también tener resultados ambientales sostenibles siendo responsables con el entorno.</p>
               </article>
               <article className="rounded-xl border border-cyan-500/20 bg-cyan-900/30 p-4">
                 <h4 className="font-semibold text-cyan-100">Simplicidad y eficiencia</h4>
@@ -204,7 +200,7 @@ export default function Home() {
               </article>
               <article className="rounded-xl border border-cyan-500/20 bg-cyan-900/30 p-4">
                 <h4 className="font-semibold text-cyan-100">Compromiso y cercanía</h4>
-                <p className="mt-2 text-sm text-cyan-200">Con raíces en la Patagonia argentina, promovemos soluciones que respeten el medio ambiente y el uso sostenible de los recursos. Nos involucramos entendiendo no solo el negocio, sino su impacto en la comunidad.</p>
+                <p className="mt-2 text-sm text-cyan-200">Con raíces en la Patagonia argentina, promovemos soluciones que respeten el medio ambiente y el uso sostenible de los recursos naturales. Nos involucramos entendiendo no solo el negocio, sino también su impacto en la comunidad y el entorno.</p>
               </article>
             </div>
           </div>
@@ -246,7 +242,7 @@ export default function Home() {
 
       <footer className="border-t border-zinc-800 px-6 py-6 text-sm text-cyan-200">
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-2 sm:flex-row">
-          <span>CaraNorte SAS · Transformamos la Inteligencia Artificial en resultados reales</span>
+          <span>CaraNorte SAS · Combinamos inteligencia, artificial y humana, para revolucionar tu negocio</span>
           <span>© {new Date().getFullYear()} · caranorte.online</span>
         </div>
       </footer>

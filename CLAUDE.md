@@ -88,10 +88,10 @@ Nombres de épicas en el frontend:
 
 ### Contenido del landing (`/`)
 
-- **Slogan**: "Transformamos la Inteligencia Artificial en resultados reales" (en header, H1 hero y footer)
+- **Lema** (H1 hero y footer): "Combinamos inteligencia, artificial y humana, para revolucionar tu negocio"
 - **Marquee** full-width con fade en bordes (maskImage), fondo `zinc-900`, nombres en uppercase — partners: Nodek Energía, YPF Luz, Edesur, Enel Green Power, Petrobras, Cotec, Globant, Mercado Libre
-- **7 service cards** con flip animation: Diagnóstico, Automatización, Implementación, Data Analytics, UX Design, Desarrollo, Acompañamiento (descripciones actualizadas al catálogo oficial)
-- **Sección Nosotros**: Misión (texto completo), Visión (texto completo), Estrategia + sección Valores con 4 cards: Orientación a resultados, Inteligencia aplicada, Simplicidad y eficiencia, Compromiso y cercanía
+- **7 service cards** con flip animation: Diagnóstico, Automatización, Implementación, Data Analytics, UX Design, Desarrollo, Acompañamiento
+- **Sección Nosotros**: descripción amplia (humana + IA), Misión, Visión, Estrategia + sección Valores con 3 cards: Orientación a resultados, Simplicidad y eficiencia, Compromiso y cercanía
 - Sección Equipo con links a LinkedIn
 - Formulario de contacto (sin backend)
 
