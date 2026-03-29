@@ -7,51 +7,51 @@ const services = [
   {
     id: "diag",
     title: "Diagnóstico Estratégico de Negocio & IA",
-    short: "Identificamos oportunidades de IA y alineamos proyecto con KPIs clave.",
-    details: "CaraNorte genera un diagnóstico completo de procesos, datos y tecnología, proponiendo roadmap con quick wins y reducción de costos.",
-    examples: ["Medición de eficiencias para proyectos energéticos", "Hoja de ruta de IA para un plan 12 meses"]
+    short: "Relevamos procesos, identificamos cuellos de botella y definimos el roadmap de IA.",
+    details: "Evaluamos oportunidades de automatización e IA alineadas a los objetivos del negocio, proponiendo un roadmap con pasos concretos y medibles.",
+    examples: ["Relevamiento de procesos actuales", "Identificación de cuellos de botella", "Evaluación de oportunidades de IA", "Definición de roadmap"]
   },
   {
     id: "auto",
     title: "Automatización Inteligente de Procesos",
-    short: "Reducimos errores y aceleramos flujos de trabajo con automatización cognitiva.",
-    details: "CaraNorte desarrolla pipelines automáticos API-native y RPA supervisado para tareas semiautónomas; ahorro de horas operativas y mejor seguimiento.",
-    examples: ["Validación automática de facturas", "Automatización de aprobación de órdenes"]
+    short: "Automatizamos tareas repetitivas e integramos sistemas para optimizar workflows.",
+    details: "Diseñamos e implementamos automatizaciones que reducen el esfuerzo operativo y liberan tiempo para que los equipos se concentren en lo que importa.",
+    examples: ["Automatización de tareas repetitivas", "Integración entre sistemas", "Optimización de workflows operativos"]
   },
   {
     id: "impl",
     title: "Implementación de Soluciones de IA",
-    short: "Llevamos los modelos de ML a producción, integrados y seguros.",
-    details: "Implantamos pipelines end-to-end, tests de drift y alertas, con supervisión de KPIs y entregables semanales.",
-    examples: ["Forecast de demanda mensual", "Sistema predictivo de fallas en activos"]
+    short: "Llevamos modelos de IA a producción: predictivos, recomendaciones, chatbots y más.",
+    details: "Implementamos soluciones de IA end-to-end adaptadas al contexto de cada cliente, con supervisión de performance y métricas de impacto.",
+    examples: ["Modelos predictivos", "Sistemas de recomendación", "Chatbots y asistentes inteligentes", "Procesamiento de datos"]
   },
   {
     id: "data",
     title: "Data Analytics & Visualización",
-    short: "Traducimos datos en indicadores claros y decisiones automatizables.",
-    details: "CaraNorte entrega plataformas de dashboards con alertas, análisis de causas raíz y simuladores de escenarios.",
-    examples: ["Dashboard de performance de red", "Modelos de coste vs. ahorro"]
+    short: "Traducimos datos en dashboards claros, KPIs accionables y análisis de performance.",
+    details: "Desarrollamos plataformas de visualización en Power BI y Tableau con definición de KPIs y análisis orientado a la toma de decisiones.",
+    examples: ["Dashboards en Power BI / Tableau", "Definición de KPIs", "Análisis de performance"]
   },
   {
     id: "ux",
     title: "Diseño de Experiencia y Productos Digitales",
-    short: "Creamos productos digitales claros y con alto uso.",
-    details: "Prototipamos flujos, validamos con usuarios y entregamos guías de diseño para velocidad de ejecución.",
-    examples: ["Console de seguimiento cliente", "UX para mobile y web de reportes"]
+    short: "Diseñamos experiencias digitales centradas en el usuario, desde el prototipo al producto.",
+    details: "Combinamos diseño UX/UI con prototipado y validación para mejorar la experiencia en plataformas internas y externas.",
+    examples: ["Diseño UX/UI", "Prototipado de soluciones", "Mejora de experiencia en plataformas"]
   },
   {
     id: "dev",
     title: "Desarrollo de Soluciones a Medida",
-    short: "Entregamos software robusto y adaptable al contexto de cada cliente.",
-    details: "Arquitectura escalable, APIs seguras y despliegue continuo, con pruebas y documentación.",
-    examples: ["Plataforma de gestión de proyectos", "Sistema de seguimiento de KPIs"]
+    short: "Construimos aplicaciones internas, herramientas de gestión y sistemas personalizados.",
+    details: "Desarrollamos software robusto y escalable ajustado a las necesidades reales del cliente, con arquitectura limpia y despliegue continuo.",
+    examples: ["Desarrollo de aplicaciones internas", "Herramientas de gestión", "Sistemas personalizados"]
   },
   {
     id: "acom",
     title: "Acompañamiento y Mejora Continua",
-    short: "Asesoría constante para iterar, medir y optimizar valor de la IA.",
-    details: "Revisamos métricas, OKRs y generamos planes de mejora continua con entregas periódicas.",
-    examples: ["Sprints de mejora adaptativos", "Mentoría en equipos data-driven"]
+    short: "Soporte post-implementación, iteración de soluciones y optimización continua.",
+    details: "Acompañamos a los equipos luego del lanzamiento, revisando métricas e iterando sobre las soluciones para maximizar el valor generado.",
+    examples: ["Soporte post-implementación", "Iteración de soluciones", "Optimización continua"]
   }
 ];
 
@@ -70,7 +70,7 @@ const partners = ["Nodek Energía", "YPF Luz", "Edesur", "Enel Green Power", "Pe
 export default function Home() {
   const [flipped, setFlipped] = useState<Record<string, boolean>>({});
   const [hoveredService, setHoveredService] = useState<string | null>(null);
-  const companyList = useMemo(() => partners.join("   •   "), []);
+  const companyList = useMemo(() => partners.join("    ·    "), []);
 
   function toggleFlip(id: string) {
     setFlipped((s) => ({ ...s, [id]: !s[id] }));
@@ -78,10 +78,17 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
-      <div className="border-b border-zinc-800 bg-gradient-to-r from-cyan-800 via-cyan-900 to-indigo-900 py-2 text-sm text-cyan-100">
-        <div className="mx-auto flex w-full max-w-6xl overflow-hidden">
-          <div className="animate-marquee whitespace-nowrap text-cyan-100 font-semibold" style={{ animationDuration: "24s" }}>
-            {companyList}   •   {companyList}
+      <div className="border-b border-zinc-800/60 bg-zinc-900/90 py-4">
+        <p className="text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-500 mb-3">Empresas que confían en nosotros</p>
+        <div
+          className="overflow-hidden"
+          style={{ maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)" }}
+        >
+          <div
+            className="animate-marquee whitespace-nowrap text-xs font-bold uppercase tracking-widest text-zinc-300"
+            style={{ animationDuration: "32s" }}
+          >
+            {companyList}    ·    {companyList}
           </div>
         </div>
       </div>
@@ -89,7 +96,7 @@ export default function Home() {
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
         <div>
           <p className="text-2xl font-extrabold tracking-tight text-white">CaraNorte SAS</p>
-          <p className="text-sm text-cyan-200">Consultoría de Sistemas de Información e IA</p>
+          <p className="text-sm text-cyan-200">Transformamos la Inteligencia Artificial en resultados reales</p>
         </div>
         <nav className="flex items-center gap-4 text-sm font-semibold text-cyan-100">
           <a href="#servicios" className="transition hover:text-white">Servicios</a>
@@ -105,7 +112,7 @@ export default function Home() {
         <section className="grid gap-8 lg:grid-cols-2 lg:items-center">
           <div>
             <p className="inline-block rounded-full bg-cyan-500/15 px-4 py-1 text-xs font-bold uppercase tracking-widest text-cyan-200">Consultoría estratégica</p>
-            <h1 className="mt-6 text-4xl font-bold leading-tight text-white md:text-6xl">Transformamos la inteligencia artificial en resultados reales</h1>
+            <h1 className="mt-6 text-4xl font-bold leading-tight text-white md:text-6xl">Transformamos la Inteligencia Artificial en resultados reales</h1>
             <p className="mt-5 max-w-xl text-lg text-cyan-200">Acompañamos a organizaciones en cada paso de su viaje IA: diagnóstico, automatización, implementación y mejora continua, con foco en impacto tangible.</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/login" className="rounded-xl bg-cyan-500 px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-cyan-400">Panel de cliente</Link>
@@ -114,8 +121,8 @@ export default function Home() {
           </div>
           <div className="relative rounded-3xl border border-cyan-500/30 bg-cyan-900/40 p-8 backdrop-blur-xl shadow-[0_8px_30px_rgba(20,20,55,0.5)]">
             <h2 className="text-white text-2xl font-bold">Misión & Visión</h2>
-            <p className="mt-4 text-cyan-100">Guiar a organizaciones en la integración estratégica de IA con sus procesos de negocio, transformando potencial tecnológico en resultados concretos.</p>
-            <p className="mt-3 text-cyan-100">Ser la consultora referente en América Latina en transformación inteligente de organizaciones.</p>
+            <p className="mt-4 text-cyan-100">Guiamos a las organizaciones en la integración estratégica de la inteligencia artificial con sus procesos de negocio. Transformamos el potencial tecnológico en resultados concretos, ayudando a tomar mejores decisiones, optimizar operaciones y generar valor sostenible.</p>
+            <p className="mt-3 text-cyan-100">Aspiramos a ser la consultora referente en América Latina en la transformación inteligente de organizaciones, liderando una adopción de IA con sentido y con impacto real y medible.</p>
           </div>
         </section>
 
@@ -163,27 +170,43 @@ export default function Home() {
 
         <section id="nosotros" className="rounded-2xl border border-cyan-700/30 bg-zinc-900/70 p-8">
           <h2 className="text-3xl font-bold text-white">Nosotros</h2>
-          <p className="mt-4 text-cyan-100">CaraNorte SAS es una consultora de sistemas de información e inteligencia artificial. Trabajamos con enfoque minimalista, moderno y profesional para acompañar a empresas en su transformación digital.</p>
+          <p className="mt-4 text-cyan-100">CaraNorte SAS es una consultora de inteligencia artificial con raíces en la Patagonia argentina. Actuamos con un enfoque claro: entender el negocio antes que la tecnología.</p>
 
           <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <article className="rounded-xl border border-cyan-500/20 bg-cyan-900/50 p-4">
               <h3 className="font-semibold text-cyan-100">Misión</h3>
-              <p className="mt-2 text-cyan-200">Guiar a organizaciones en la integración estratégica de IA con sus procesos de negocio. Transformar el potencial tecnológico en resultados concretos.</p>
+              <p className="mt-2 text-cyan-200">Guiamos a las organizaciones en la integración estratégica de la inteligencia artificial con sus procesos de negocio. Nuestro propósito es transformar el potencial tecnológico en resultados concretos, ayudando a las empresas a tomar mejores decisiones basadas en datos, optimizar sus operaciones y generar valor sostenible en el tiempo.</p>
             </article>
             <article className="rounded-xl border border-cyan-500/20 bg-cyan-900/50 p-4">
               <h3 className="font-semibold text-cyan-100">Visión</h3>
-              <p className="mt-2 text-cyan-200">Ser la consultora referente en América Latina en transformación inteligente de organizaciones.</p>
+              <p className="mt-2 text-cyan-200">Aspiramos a ser la consultora referente en América Latina en la transformación inteligente de organizaciones, reconocida por nuestra capacidad de conectar tecnología, procesos y negocios. Buscamos liderar el camino hacia una adopción de inteligencia artificial con sentido, donde cada implementación tenga un impacto real y medible.</p>
             </article>
             <article className="rounded-xl border border-cyan-500/20 bg-cyan-900/50 p-4">
-              <h3 className="font-semibold text-cyan-100">Valores</h3>
-              <ul className="mt-2 list-disc pl-5 text-cyan-200">
-                <li>Dirección estratégica</li>
-                <li>Orientación a resultados</li>
-                <li>Inteligencia aplicada</li>
-                <li>Simplicidad y eficiencia</li>
-                <li>Compromiso y cercanía</li>
-              </ul>
+              <h3 className="font-semibold text-cyan-100">Estrategia</h3>
+              <p className="mt-2 text-cyan-200">Actuamos con un enfoque claro: entender el negocio antes que la tecnología. Cada solución que proponemos responde a un objetivo concreto y ajustado con los resultados que el cliente necesita alcanzar.</p>
             </article>
+          </div>
+
+          <div className="mt-6">
+            <h3 className="text-xl font-semibold text-white">Valores</h3>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <article className="rounded-xl border border-cyan-500/20 bg-cyan-900/30 p-4">
+                <h4 className="font-semibold text-cyan-100">Orientación a resultados</h4>
+                <p className="mt-2 text-sm text-cyan-200">Medimos nuestro éxito en función del impacto generado. Trabajamos con métricas claras y buscamos que cada iniciativa se traduzca en mejoras tangibles: tiempos, costos y resultados ambientales sostenibles.</p>
+              </article>
+              <article className="rounded-xl border border-cyan-500/20 bg-cyan-900/30 p-4">
+                <h4 className="font-semibold text-cyan-100">Inteligencia aplicada</h4>
+                <p className="mt-2 text-sm text-cyan-200">Creemos que a través de las nuevas tecnologías y la IA es posible desarrollar automatizaciones criteriosas que optimicen el uso del tiempo y los recursos, reduciendo el esfuerzo operativo.</p>
+              </article>
+              <article className="rounded-xl border border-cyan-500/20 bg-cyan-900/30 p-4">
+                <h4 className="font-semibold text-cyan-100">Simplicidad y eficiencia</h4>
+                <p className="mt-2 text-sm text-cyan-200">Diseñamos soluciones prácticas, escalables y fáciles de implementar. La complejidad no es un valor en sí mismo: nuestro objetivo es simplificar procesos y mejorar la operación.</p>
+              </article>
+              <article className="rounded-xl border border-cyan-500/20 bg-cyan-900/30 p-4">
+                <h4 className="font-semibold text-cyan-100">Compromiso y cercanía</h4>
+                <p className="mt-2 text-sm text-cyan-200">Con raíces en la Patagonia argentina, promovemos soluciones que respeten el medio ambiente y el uso sostenible de los recursos. Nos involucramos entendiendo no solo el negocio, sino su impacto en la comunidad.</p>
+              </article>
+            </div>
           </div>
         </section>
 
@@ -223,7 +246,7 @@ export default function Home() {
 
       <footer className="border-t border-zinc-800 px-6 py-6 text-sm text-cyan-200">
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-2 sm:flex-row">
-          <span>CaraNorte SAS · Transformación inteligente de organizaciones</span>
+          <span>CaraNorte SAS · Transformamos la Inteligencia Artificial en resultados reales</span>
           <span>© {new Date().getFullYear()} · caranorte.online</span>
         </div>
       </footer>
