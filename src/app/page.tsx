@@ -123,9 +123,9 @@ export default function Home() {
         >
           <div
             className="animate-marquee whitespace-nowrap text-xs font-bold uppercase tracking-widest text-zinc-300"
-            style={{ animationDuration: "32s" }}
+            style={{ animationDuration: "40s", willChange: "transform" }}
           >
-            {companyList}    ·    {companyList}
+            {companyList}    ·    {companyList}    ·    {companyList}    ·    {companyList}
           </div>
         </div>
       </div>
@@ -309,15 +309,14 @@ export default function Home() {
                 className="group flex flex-col items-center rounded-2xl border border-zinc-800 bg-zinc-900/80 p-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-cyan-500/50 hover:bg-zinc-900"
               >
                 {/* Avatar */}
-                <div className="relative w-20 h-20 rounded-full mb-4 overflow-hidden shrink-0">
-                  <div className="absolute inset-0 rounded-full bg-cyan-800/60 flex items-center justify-center">
-                    <span className="text-xl font-bold text-cyan-100">{member.initials}</span>
-                  </div>
-                  {!imgErrors[member.name] && (
+                <div className="w-20 h-20 rounded-full overflow-hidden bg-cyan-800 flex items-center justify-center shrink-0 mb-4">
+                  {imgErrors[member.name] ? (
+                    <span className="text-xl font-bold text-white select-none">{member.initials}</span>
+                  ) : (
                     <img
                       src={member.photo}
                       alt={member.name}
-                      className="absolute inset-0 w-full h-full object-cover rounded-full"
+                      className="w-full h-full object-cover"
                       onError={() => handleImgError(member.name)}
                     />
                   )}
