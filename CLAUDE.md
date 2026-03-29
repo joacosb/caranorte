@@ -89,11 +89,26 @@ Nombres de épicas en el frontend:
 ### Contenido del landing (`/`)
 
 - **Lema** (H1 hero y footer): "Combinamos inteligencia, artificial y humana, para revolucionar tu negocio"
-- **Marquee** full-width con fade en bordes (maskImage), fondo `zinc-900`, nombres en uppercase — partners: Nodek Energía, YPF Luz, Edesur, Enel Green Power, Petrobras, Cotec, Globant, Mercado Libre
-- **7 service cards** con flip animation: Diagnóstico, Automatización, Implementación, Data Analytics, UX Design, Desarrollo, Acompañamiento
-- **Sección Nosotros**: descripción amplia (humana + IA), Misión, Visión, Estrategia + sección Valores con 3 cards: Orientación a resultados, Simplicidad y eficiencia, Compromiso y cercanía
-- Sección Equipo con links a LinkedIn
+- **Header sticky** con nav desktop + hamburger mobile (con animación)
+- **Marquee** full-width con fade en bordes, fondo `zinc-900`, uppercase
+- **7 service cards** con flip animation — reverso muestra caso real inventado con tag, título y resultado concreto
+- **Sección "Cómo trabajamos"** (id: `proceso`): 4 pasos (Escucha profunda → Diagnóstico y diseño → Implementación iterativa → Medición y mejora continua)
+- **Sección Nosotros** (id: `nosotros`): descripción amplia (humana + IA), Misión, Visión, Estrategia + Valores (3 cards)
+- **Sección Equipo**: cards con foto circular (`/team/[nombre].jpg`) + fallback a iniciales. Subir fotos a `public/team/`
 - Formulario de contacto (sin backend)
+
+### Fotos del equipo
+
+Subir a `public/team/` con estos nombres exactos:
+- `camila-primo.jpg`
+- `julieta-chinkes.jpg`
+- `renata-moreno.jpg`
+- `agustina-forini.jpg`
+- `tabatha-cesar.jpg`
+- `tiago-harari.jpg`
+- `joaquin-sosa.jpg`
+
+Si no existe la foto, se muestra un círculo con las iniciales automáticamente.
 
 ---
 
