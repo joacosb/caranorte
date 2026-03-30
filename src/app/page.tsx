@@ -180,24 +180,17 @@ export default function Home() {
       <main className="mx-auto flex w-full max-w-6xl flex-col gap-20 px-6 pb-24 pt-12">
 
         {/* Hero */}
-        <section className="grid gap-10 lg:grid-cols-2 lg:items-center">
-          <div>
-            <p className="inline-block rounded-full bg-cyan-500/15 px-4 py-1 text-xs font-bold uppercase tracking-widest text-cyan-200">Consultoría estratégica</p>
-            <h1 className="mt-6 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
-              Combinamos inteligencia, artificial y humana, para revolucionar tu negocio
-            </h1>
-            <p className="mt-5 max-w-xl text-lg text-cyan-200">
-              Acompañamos a organizaciones en su transformación combinando el criterio humano y la potencia de la inteligencia artificial. Diagnóstico honesto, implementación iterativa e impacto real y medible.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#proceso" className="rounded-xl bg-cyan-500 px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-cyan-400">Cómo trabajamos</a>
-              <a href="#servicios" className="rounded-xl border border-cyan-300 px-6 py-3 text-sm font-semibold text-cyan-100 transition hover:border-white hover:text-white">Ver servicios</a>
-            </div>
-          </div>
-          <div className="relative rounded-3xl border border-cyan-500/30 bg-cyan-900/40 p-8 backdrop-blur-xl shadow-[0_8px_30px_rgba(20,20,55,0.5)]">
-            <h2 className="text-white text-2xl font-bold">Misión & Visión</h2>
-            <p className="mt-4 text-cyan-100">Guiamos a las organizaciones en la integración estratégica de la inteligencia artificial con sus procesos de negocio. Transformamos el potencial tecnológico en resultados concretos, ayudando a tomar mejores decisiones, optimizar operaciones y generar valor sostenible.</p>
-            <p className="mt-3 text-cyan-100">Aspiramos a ser la consultora referente en América Latina en la transformación inteligente de organizaciones, liderando una adopción de IA con sentido y con impacto real y medible.</p>
+        <section className="flex flex-col items-center text-center py-8">
+          <p className="inline-block rounded-full bg-cyan-500/15 px-4 py-1 text-xs font-bold uppercase tracking-widest text-cyan-200">Consultoría estratégica</p>
+          <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+            Combinamos inteligencia, artificial y humana, para revolucionar tu negocio
+          </h1>
+          <p className="mt-5 max-w-2xl text-lg text-cyan-200">
+            Acompañamos a organizaciones en su transformación combinando el criterio humano y la potencia de la inteligencia artificial. Diagnóstico honesto, implementación iterativa e impacto real y medible.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <a href="#proceso" className="rounded-xl bg-cyan-500 px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-cyan-400">Cómo trabajamos</a>
+            <a href="#servicios" className="rounded-xl border border-cyan-300 px-6 py-3 text-sm font-semibold text-cyan-100 transition hover:border-white hover:text-white">Ver servicios</a>
           </div>
         </section>
 
