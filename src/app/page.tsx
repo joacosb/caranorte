@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const services = [
   {
@@ -111,6 +111,23 @@ export default function Home() {
     setImgErrors((s) => ({ ...s, [name]: true }));
   }
 
+  useEffect(() => {
+    const elements = document.querySelectorAll('[data-reveal]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
 
@@ -196,10 +213,10 @@ export default function Home() {
 
         {/* Services */}
         <section id="servicios">
-          <h2 className="text-3xl font-bold text-white">Nuestros servicios</h2>
-          <p className="mt-2 max-w-2xl text-cyan-300">Hacé clic en cada servicio para ver un caso concreto de impacto real.</p>
+          <h2 className="text-3xl font-bold text-white" data-reveal="left">Nuestros servicios</h2>
+          <p className="mt-2 max-w-2xl text-cyan-300" data-reveal="left" style={{ transitionDelay: '100ms' }}>Hacé clic en cada servicio para ver un caso concreto de impacto real.</p>
 
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-3" data-reveal="left" style={{ transitionDelay: '220ms' }}>
             {services.map((service) => {
               const isFlipped = flipped[service.id];
               return (
@@ -235,10 +252,10 @@ export default function Home() {
 
         {/* Process */}
         <section id="proceso">
-          <h2 className="text-3xl font-bold text-white">Cómo trabajamos</h2>
-          <p className="mt-2 max-w-2xl text-cyan-300">Un proceso probado, diseñado para minimizar el riesgo y maximizar el impacto desde el primer día.</p>
+          <h2 className="text-3xl font-bold text-white" data-reveal="right">Cómo trabajamos</h2>
+          <p className="mt-2 max-w-2xl text-cyan-300" data-reveal="right" style={{ transitionDelay: '100ms' }}>Un proceso probado, diseñado para minimizar el riesgo y maximizar el impacto desde el primer día.</p>
 
-          <div className="mt-10 grid gap-px bg-zinc-800/50 rounded-2xl overflow-hidden sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-px bg-zinc-800/50 rounded-2xl overflow-hidden sm:grid-cols-2 lg:grid-cols-4" data-reveal="right" style={{ transitionDelay: '220ms' }}>
             {steps.map((step) => (
               <div key={step.n} className="bg-zinc-900 p-6 flex flex-col gap-3">
                 <span className="text-5xl font-black text-cyan-500/25 leading-none">{step.n}</span>
@@ -251,10 +268,10 @@ export default function Home() {
 
         {/* Nosotros */}
         <section id="nosotros" className="rounded-2xl border border-cyan-700/30 bg-zinc-900/70 p-6 sm:p-8">
-          <h2 className="text-3xl font-bold text-white">Nosotros</h2>
-          <p className="mt-4 text-cyan-100 max-w-3xl">CaraNorte SAS es una consultora con raíces en la Patagonia argentina que combina inteligencia humana e inteligencia artificial para transformar organizaciones. Entendemos el negocio antes que la tecnología, y cada solución que proponemos responde a objetivos concretos alineados con los resultados que el cliente necesita alcanzar.</p>
+          <h2 className="text-3xl font-bold text-white" data-reveal="left">Nosotros</h2>
+          <p className="mt-4 text-cyan-100 max-w-3xl" data-reveal="left" style={{ transitionDelay: '100ms' }}>CaraNorte SAS es una consultora con raíces en la Patagonia argentina que combina inteligencia humana e inteligencia artificial para transformar organizaciones. Entendemos el negocio antes que la tecnología, y cada solución que proponemos responde a objetivos concretos alineados con los resultados que el cliente necesita alcanzar.</p>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3" data-reveal="left" style={{ transitionDelay: '220ms' }}>
             <article className="rounded-xl border border-cyan-500/20 bg-cyan-900/50 p-4">
               <h3 className="font-semibold text-cyan-100">Misión</h3>
               <p className="mt-2 text-sm text-cyan-200">Guiamos a las organizaciones en la integración estratégica de la inteligencia artificial con sus procesos de negocio. Nuestro propósito es transformar el potencial tecnológico en resultados concretos, ayudando a las empresas a tomar mejores decisiones basadas en datos, optimizar sus operaciones y generar valor sostenible en el tiempo.</p>
@@ -270,8 +287,8 @@ export default function Home() {
           </div>
 
           <div className="mt-6">
-            <h3 className="text-xl font-semibold text-white">Valores</h3>
-            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <h3 className="text-xl font-semibold text-white" data-reveal="left" style={{ transitionDelay: '340ms' }}>Valores</h3>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-reveal="right" style={{ transitionDelay: '460ms' }}>
               <article className="rounded-xl border border-cyan-500/20 bg-cyan-900/30 p-4">
                 <h4 className="font-semibold text-cyan-100">Orientación a resultados</h4>
                 <p className="mt-2 text-sm text-cyan-200">Nos importan los resultados y cumplir objetivos predefinidos, pero también tener resultados ambientales sostenibles siendo responsables con el entorno.</p>
@@ -290,9 +307,9 @@ export default function Home() {
 
         {/* Team */}
         <section id="equipo">
-          <h2 className="text-3xl font-bold text-white">Equipo CaraNorte</h2>
-          <p className="mt-2 text-cyan-300">Las personas detrás de cada proyecto.</p>
-          <div className="mt-8 grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <h2 className="text-3xl font-bold text-white" data-reveal="right">Equipo CaraNorte</h2>
+          <p className="mt-2 text-cyan-300" data-reveal="right" style={{ transitionDelay: '100ms' }}>Las personas detrás de cada proyecto.</p>
+          <div className="mt-8 grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4" data-reveal="right" style={{ transitionDelay: '220ms' }}>
             {team.map((member) => (
               <a
                 key={member.name}
@@ -324,9 +341,9 @@ export default function Home() {
 
         {/* Contact */}
         <section id="contacto" className="rounded-2xl border border-cyan-800/60 bg-zinc-900/80 p-6 sm:p-8">
-          <h2 className="text-3xl font-bold text-white">Contacto</h2>
-          <p className="mt-2 text-cyan-300">Escríbenos y te responderemos en breve.</p>
-          <form className="mt-6 grid gap-4 sm:grid-cols-2">
+          <h2 className="text-3xl font-bold text-white" data-reveal="left">Contacto</h2>
+          <p className="mt-2 text-cyan-300" data-reveal="left" style={{ transitionDelay: '100ms' }}>Escríbenos y te responderemos en breve.</p>
+          <form className="mt-6 grid gap-4 sm:grid-cols-2" data-reveal="right" style={{ transitionDelay: '220ms' }}>
             <input type="text" placeholder="Nombre" className="rounded-lg border border-cyan-700/50 bg-zinc-950 px-4 py-3 text-white outline-none focus:border-cyan-300 transition" />
             <input type="email" placeholder="Email" className="rounded-lg border border-cyan-700/50 bg-zinc-950 px-4 py-3 text-white outline-none focus:border-cyan-300 transition" />
             <input type="text" placeholder="Empresa" className="sm:col-span-2 rounded-lg border border-cyan-700/50 bg-zinc-950 px-4 py-3 text-white outline-none focus:border-cyan-300 transition" />
