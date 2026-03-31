@@ -146,10 +146,13 @@ export default function DashboardPage() {
       {/* Header */}
       <header className="border-b border-zinc-800 bg-zinc-900/80 px-6 py-4">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
-          <div>
-            <p className="text-xl font-extrabold tracking-tight text-white">CaraNorte SAS</p>
-            <p className="text-xs text-cyan-300">Panel de cliente</p>
-          </div>
+  <button
+    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+    className="text-left cursor-pointer"
+  >
+    <p className="text-xl font-extrabold tracking-tight text-white">CaraNorte SAS</p>
+    <p className="text-xs text-cyan-300">Panel de cliente</p>
+  </button>
           <div className="flex items-center gap-4">
             <span className="hidden text-sm text-zinc-400 sm:block">{email}</span>
             <button
