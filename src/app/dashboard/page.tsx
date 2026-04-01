@@ -153,7 +153,7 @@ export default function DashboardPage() {
     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
     className="text-left cursor-pointer"
   >
-    <p className="text-xl font-extrabold tracking-tight text-white">CaraNorte SAS</p>
+    <p className="text-xl font-extrabold tracking-tight text-white">CaraNorte</p>
     <p className="text-xs text-cyan-300">Panel de cliente</p>
   </button>
           <div className="flex items-center gap-4">
