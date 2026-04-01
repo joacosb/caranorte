@@ -79,12 +79,15 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true)
   const router = useRouter()
   const supabase = useMemo(() => createClient(), [])
+  const [empresaNombre, setEmpresaNombre] = useState('')
 
   useEffect(() => {
     const load = async () => {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) { router.push('/login'); return }
       setEmail(user.email ?? '')
+      const empresaGuardada = localStorage.getItem('empresa')
+      if (empresaGuardada) setEmpresaNombre(empresaGuardada)
 
       // Cliente activo: Kodek (visible para todo el equipo y profesores)
       const { data: clientData } = await supabase
@@ -154,6 +157,9 @@ export default function DashboardPage() {
     <p className="text-xs text-cyan-300">Panel de cliente</p>
   </button>
           <div className="flex items-center gap-4">
+            {empresaNombre && (
+              <span className="hidden text-sm text-cyan-400 sm:block">{empresaNombre}</span>
+            )}
             <span className="hidden text-sm text-zinc-400 sm:block">{email}</span>
             <button
               onClick={handleLogout}

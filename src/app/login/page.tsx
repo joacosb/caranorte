@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
@@ -7,6 +8,7 @@ import { useRouter } from 'next/navigation'
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [empresa, setEmpresa] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
@@ -23,6 +25,9 @@ export default function LoginPage() {
       setError('Email o contraseña incorrectos')
       setLoading(false)
     } else {
+      if (empresa.trim()) {
+        localStorage.setItem('empresa', empresa.trim())
+      }
       router.push('/dashboard')
     }
   }
@@ -30,10 +35,19 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-950">
       <div className="bg-zinc-950/95 p-8 rounded-2xl shadow-xl w-full max-w-md border border-cyan-700">
-        <h1 className="text-3xl font-bold text-cyan-300 mb-2">CaraNorte</h1>
+        <Link href="/" className="text-3xl font-bold text-cyan-300 mb-2 hover:text-cyan-200 transition-colors block">
+          CaraNorte
+        </Link>
         <p className="text-cyan-200 mb-6">Ingresá a tu panel de clientes y proyectos</p>
 
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
+          <input
+            type="text"
+            placeholder="Nombre de la empresa"
+            value={empresa}
+            onChange={(e) => setEmpresa(e.target.value)}
+            className="bg-zinc-900 text-white rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-cyan-300"
+          />
           <input
             type="email"
             placeholder="Email"
