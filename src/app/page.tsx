@@ -151,7 +151,7 @@ export default function Home() {
       <header className="sticky top-0 z-50 border-b border-zinc-800/60 bg-zinc-950/90 backdrop-blur-md">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
           <a href="#" className="cursor-pointer">
-              <p className="text-xl font-extrabold tracking-tight text-white">CaraNorte SAS</p>
+              <p className="text-xl font-extrabold tracking-tight text-white">CaraNorte</p>
               <p className="text-xs text-cyan-400 hidden sm:block">Consultoría de negocio e inteligencia artificial</p>
           </a>
 
