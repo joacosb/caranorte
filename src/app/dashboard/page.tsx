@@ -206,9 +206,12 @@ export default function DashboardPage() {
       {/* Cabecera del cliente (banda verde a todo el ancho) */}
       <section className="bg-forest">
         <div className="mx-auto max-w-6xl px-8 py-10">
-          <p className="text-xs font-semibold uppercase tracking-widest text-gold">Cliente activo</p>
-          <h1 className="mt-2 text-4xl font-bold text-white">{CLIENT.name}</h1>
+          <h1 className="text-4xl font-bold text-white">{CLIENT.name}</h1>
           <p className="mt-2 text-sm text-white/70">{CLIENT.description}</p>
+          <span className="mt-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/60 bg-white/[0.06] px-3 py-1">
+            <span className="h-2 w-2 rounded-full bg-emerald-400" />
+            <span className="text-xs font-semibold uppercase tracking-widest text-emerald-300">Activo</span>
+          </span>
         </div>
       </section>
 
