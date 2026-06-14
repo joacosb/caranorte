@@ -239,7 +239,7 @@ export default function Home() {
     <div className="min-h-screen bg-cream text-ink">
 
       {/* Línea guía de scroll: barra vertical que se llena al hacer scroll */}
-      <div aria-hidden className="pointer-events-none fixed left-0 top-0 z-40 hidden h-full w-1 lg:block">
+      <div aria-hidden className="pointer-events-none fixed left-0 top-0 z-40 h-full w-0.5 lg:w-1">
         <div className="absolute inset-0 bg-forest/10" />
         <div
           className="absolute left-0 top-0 w-full bg-gold transition-[height] duration-150 ease-out"
@@ -247,7 +247,7 @@ export default function Home() {
         />
         {/* punto guía que avanza */}
         <div
-          className="absolute left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold shadow-[0_0_10px_2px_rgba(232,187,75,0.55)] transition-all duration-150 ease-out"
+          className="absolute left-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold shadow-[0_0_10px_2px_rgba(232,187,75,0.55)] transition-all duration-150 ease-out lg:h-2.5 lg:w-2.5"
           style={{ top: `${scrollProgress * 100}%` }}
         />
       </div>
@@ -334,14 +334,6 @@ export default function Home() {
             fill="none"
             className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-32 w-full sm:h-44"
           >
-            <style>{`
-              @keyframes summit-flash {
-                0%   { opacity: 0.9; transform: scale(0.3); }
-                30%  { opacity: 0.7; transform: scale(1);   }
-                60%  { opacity: 0;   transform: scale(2.6); }
-                100% { opacity: 0;   transform: scale(2.6); }
-              }
-            `}</style>
             <path
               d="M 0 215 L 150 195 L 260 205 L 400 165 L 560 72 L 600 45 L 640 72 L 800 175 L 950 200 L 1080 188 L 1200 205 L 1200 240 L 0 240 Z"
               fill="#2E5538"
@@ -500,12 +492,14 @@ export default function Home() {
           <div className="relative mt-10" data-reveal="right" style={{ transitionDelay: '220ms' }}>
             {/* Línea conectora (solo desktop) */}
             <div className="pointer-events-none absolute left-[12.5%] right-[12.5%] top-[3.6rem] hidden border-t-2 border-dashed border-gold/50 lg:block" />
-            <div className="grid gap-6 grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 grid-cols-1 lg:gap-6 lg:grid-cols-4">
               {steps.map((step) => (
-                <div key={step.n} className="relative flex flex-col gap-3 rounded-2xl border border-forest/10 bg-white p-6 shadow-sm">
-                  <span className="text-6xl font-black text-gold leading-none">{step.n}</span>
-                  <h3 className="text-base font-bold text-forest">{step.title}</h3>
-                  <p className="text-sm text-muted leading-relaxed">{step.body}</p>
+                <div key={step.n} className="relative flex flex-row items-start gap-4 rounded-2xl border border-forest/10 bg-white p-4 shadow-sm lg:flex-col lg:gap-3 lg:p-6">
+                  <span className="shrink-0 text-4xl font-black text-gold leading-none lg:text-6xl">{step.n}</span>
+                  <div className="flex flex-col gap-1 lg:contents">
+                    <h3 className="text-base font-bold text-forest">{step.title}</h3>
+                    <p className="text-sm text-muted leading-relaxed">{step.body}</p>
+                  </div>
                 </div>
               ))}
             </div>
