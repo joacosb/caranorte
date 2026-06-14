@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs -0 grep -l \"personas\\\\|capacidad\")",
+      "Bash(xargs -0 grep -l \"abedules\\\\|auquinco\\\\|aurelia\\\\|meliquina\\\\|donostia\\\\|euskadi\\\\|mamba\\\\|maria\\\\|patagonia\\\\|victoria\\\\|yellowstone\")",
+      "Bash(xargs -0 grep -l \"personas\\\\|capacidad\\\\|abedules\\\\|auquinco\\\\|aurelia\\\\|meliquina\")",
+      "Bash(find /c/Users/joaqu/OneDrive/Escritorio/caranorte -type f ! -path */node_modules/* ! -path */.next/* ! -path */dist/* ! -path */.git/* -newer /c/Users/joaqu/OneDrive/Escritorio/caranorte/package.json)",
+      "Read(//c/Users/joaqu/OneDrive/Escritorio/caranorte/**)"
+    ]
+  }
+}
