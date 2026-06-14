@@ -2,8 +2,11 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { createClient } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
+
+// Validación simple de acceso (sin backend)
+const VALID_EMAIL = 'cliente@nodek.com'
+const VALID_PASSWORD = 'Nodek123'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -12,23 +15,22 @@ export default function LoginPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
-  const supabase = createClient()
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError('')
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-
-    if (error) {
-      setError('Email o contraseña incorrectos')
-      setLoading(false)
-    } else {
+    if (email.trim().toLowerCase() === VALID_EMAIL && password === VALID_PASSWORD) {
+      localStorage.setItem('auth', 'true')
+      localStorage.setItem('email', VALID_EMAIL)
       if (empresa.trim()) {
         localStorage.setItem('empresa', empresa.trim())
       }
       router.push('/dashboard')
+    } else {
+      setError('Email o contraseña incorrectos')
+      setLoading(false)
     }
   }
 

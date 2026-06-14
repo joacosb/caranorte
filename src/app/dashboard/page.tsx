@@ -1,33 +1,35 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { createClient } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 
 type Delivery = {
-  id: string
   number: number
   title: string
   epic: number
-  expected_result: string
-  template_path: string | null
-  due_date: string | null
 }
 
-type Submission = {
-  delivery_id: string
-  status: 'pending' | 'submitted' | 'approved' | 'rejected'
-  file_url: string | null
-  notes: string | null
-  submitted_at: string | null
+// Cliente activo (datos fijos, sin backend)
+const CLIENT = {
+  name: 'Nodek Energía',
+  description: 'Empresa de tecnología energética. Cliente de CaraNorte.',
 }
 
-type Client = {
-  id: string
-  name: string
-  slug: string
-  description: string | null
-}
+// Las 12 entregas (estructura fija)
+const DELIVERIES: Delivery[] = [
+  { number: 1, title: 'Selección del Caso', epic: 1 },
+  { number: 2, title: 'Diagnóstico Organizacional', epic: 1 },
+  { number: 3, title: 'Arquitectura Empresarial Origen', epic: 1 },
+  { number: 4, title: 'Innovación para la transformación', epic: 2 },
+  { number: 5, title: 'Arquitectura Empresarial Destino', epic: 2 },
+  { number: 6, title: 'Matriz de Brechas y Escenarios', epic: 2 },
+  { number: 7, title: 'Alcance del Proyecto', epic: 3 },
+  { number: 8, title: 'Análisis del Mercado y Benchmarking', epic: 3 },
+  { number: 9, title: 'Factibilidad', epic: 3 },
+  { number: 10, title: 'Evaluación Económica', epic: 4 },
+  { number: 11, title: 'Análisis de la Propuesta Comercial', epic: 4 },
+  { number: 12, title: 'Cierre del Proyecto', epic: 4 },
+]
 
 const EPIC_NAMES: Record<number, string> = {
   1: 'Épica 1 — Diagnóstico y Arquitectura Origen',
@@ -135,63 +137,21 @@ const DELIVERY_DETAIL: Record<number, string[]> = {
   ],
 }
 
-// Badge de estado (único, esquina superior derecha de cada card).
-// Solo se muestra "Rechazado"; "Entregado", "Vencido" y "Pendiente" no se muestran.
-function statusBadge(status: string): { label: string; className: string } | null {
-  if (status === 'rejected') {
-    return { label: 'Rechazado', className: 'bg-red-100 text-red-600' }
-  }
-  return null
-}
-
 export default function DashboardPage() {
-  const [client, setClient] = useState<Client | null>(null)
-  const [deliveries, setDeliveries] = useState<Delivery[]>([])
-  const [submissions, setSubmissions] = useState<Submission[]>([])
-  const [email, setEmail] = useState('')
-  const [loading, setLoading] = useState(true)
   const router = useRouter()
-  const supabase = useMemo(() => createClient(), [])
+  const [email, setEmail] = useState('')
   const [empresaNombre, setEmpresaNombre] = useState('')
+  const [ready, setReady] = useState(false)
   const [modalDelivery, setModalDelivery] = useState<Delivery | null>(null)
 
+  // Gate de acceso simple (la validación de credenciales ocurre en /login)
   useEffect(() => {
-    const load = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) { router.push('/login'); return }
-      setEmail(user.email ?? '')
-      const empresaGuardada = localStorage.getItem('empresa')
-      if (empresaGuardada) setEmpresaNombre(empresaGuardada)
-
-      // Cliente activo: Kodek (visible para todo el equipo y profesores)
-      const { data: clientData } = await supabase
-        .from('clients')
-        .select('*')
-        .eq('slug', 'kodek')
-        .single()
-
-      if (clientData) setClient(clientData)
-
-      // Las 12 entregas fijas
-      const { data: deliveriesData } = await supabase
-        .from('deliveries')
-        .select('*')
-        .order('number')
-      setDeliveries(deliveriesData ?? [])
-
-      // Submissions del cliente
-      if (clientData) {
-        const { data: subsData } = await supabase
-          .from('submissions')
-          .select('delivery_id, status, file_url, notes, submitted_at')
-          .eq('client_id', clientData.id)
-        setSubmissions(subsData ?? [])
-      }
-
-      setLoading(false)
-    }
-    load()
-  }, [router, supabase])
+    if (localStorage.getItem('auth') !== 'true') { router.push('/login'); return }
+    setEmail(localStorage.getItem('email') ?? '')
+    const empresaGuardada = localStorage.getItem('empresa')
+    if (empresaGuardada) setEmpresaNombre(empresaGuardada)
+    setReady(true)
+  }, [router])
 
   // Cerrar el modal con la tecla Escape
   useEffect(() => {
@@ -200,24 +160,19 @@ export default function DashboardPage() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut()
+  const handleLogout = () => {
+    localStorage.removeItem('auth')
+    localStorage.removeItem('email')
     router.push('/login')
   }
 
-  const submissionByDelivery = useMemo(() => {
-    const map: Record<string, Submission> = {}
-    submissions.forEach(s => { map[s.delivery_id] = s })
-    return map
-  }, [submissions])
-
   const deliveriesByEpic = useMemo(() => {
     const map: Record<number, Delivery[]> = { 1: [], 2: [], 3: [], 4: [] }
-    deliveries.forEach(d => { map[d.epic]?.push(d) })
+    DELIVERIES.forEach(d => { map[d.epic]?.push(d) })
     return map
-  }, [deliveries])
+  }, [])
 
-  if (loading) {
+  if (!ready) {
     return (
       <div className="min-h-screen bg-cream flex flex-col items-center justify-center gap-3">
         <div className="h-5 w-5 animate-spin rounded-full border-2 border-forest/20 border-t-forest" />
@@ -255,21 +210,13 @@ export default function DashboardPage() {
       </header>
 
       {/* Cabecera del cliente (banda verde a todo el ancho) */}
-      {client ? (
-        <section className="bg-forest">
-          <div className="mx-auto max-w-6xl px-8 py-10">
-            <p className="text-xs font-semibold uppercase tracking-widest text-gold">Cliente activo</p>
-            <h1 className="mt-2 text-4xl font-bold text-white">{client.name}</h1>
-            {client.description && <p className="mt-2 text-sm text-white/70">{client.description}</p>}
-          </div>
-        </section>
-      ) : (
-        <div className="mx-auto max-w-6xl px-6 py-10">
-          <div className="rounded-xl border border-forest/15 bg-white p-6">
-            <p className="text-muted">No se encontró el cliente. Verificá que el schema de Supabase esté aplicado.</p>
-          </div>
+      <section className="bg-forest">
+        <div className="mx-auto max-w-6xl px-8 py-10">
+          <p className="text-xs font-semibold uppercase tracking-widest text-gold">Cliente activo</p>
+          <h1 className="mt-2 text-4xl font-bold text-white">{CLIENT.name}</h1>
+          <p className="mt-2 text-sm text-white/70">{CLIENT.description}</p>
         </div>
-      )}
+      </section>
 
       <main className="mx-auto max-w-6xl px-6 py-10 flex flex-col gap-10">
         {/* Épicas */}
@@ -280,27 +227,19 @@ export default function DashboardPage() {
             </h2>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {deliveriesByEpic[epic].map(delivery => {
-                const sub = submissionByDelivery[delivery.id]
-                const status = sub?.status ?? 'pending'
-                const badge = statusBadge(status)
                 const templates = TEMPLATE_LINKS[delivery.number] ?? []
 
                 return (
                   <div
-                    key={delivery.id}
+                    key={delivery.number}
                     className="flex h-full flex-col gap-3 rounded-2xl border border-forest/15 bg-white p-5 transition-[transform,box-shadow] duration-150 ease-out hover:-translate-y-0.5 hover:shadow-md animate-card-in"
                     style={{ animationDelay: `${(delivery.number - 1) * 30}ms` }}
                   >
-                    {/* Número + badge de estado */}
+                    {/* Número */}
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-xs font-bold text-muted">
                         {String(delivery.number).padStart(2, '0')}
                       </span>
-                      {badge && (
-                        <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${badge.className}`}>
-                          {badge.label}
-                        </span>
-                      )}
                     </div>
 
                     {/* Título */}
@@ -308,7 +247,7 @@ export default function DashboardPage() {
 
                     {/* Descripción del contenido del entregable */}
                     <p className="flex-1 text-sm leading-relaxed text-gray-500">
-                      {DELIVERY_DESC[delivery.number] ?? delivery.expected_result}
+                      {DELIVERY_DESC[delivery.number]}
                     </p>
 
                     {/* Botones */}
