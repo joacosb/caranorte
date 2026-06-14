@@ -220,8 +220,9 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-cream flex items-center justify-center">
-        <p className="text-forest animate-pulse">Cargando...</p>
+      <div className="min-h-screen bg-cream flex flex-col items-center justify-center gap-3">
+        <div className="h-5 w-5 animate-spin rounded-full border-2 border-forest/20 border-t-forest" />
+        <p className="text-sm text-forest/60">Cargando...</p>
       </div>
     )
   }
@@ -246,7 +247,7 @@ export default function DashboardPage() {
             <span className="hidden text-sm text-cream/70 sm:block">{email}</span>
             <button
               onClick={handleLogout}
-              className="rounded-full bg-gold px-4 py-2 text-sm font-semibold text-forest-dark transition hover:bg-gold-dark"
+              className="rounded-full bg-gold px-4 py-2 text-sm font-semibold text-forest-dark transition-[transform,background-color] duration-150 ease-out hover:bg-gold-dark active:scale-[0.97]"
             >
               Cerrar sesión
             </button>
@@ -288,7 +289,8 @@ export default function DashboardPage() {
                 return (
                   <div
                     key={delivery.id}
-                    className="flex h-full flex-col gap-3 rounded-2xl border border-forest/15 bg-white p-5 transition-shadow duration-200 hover:shadow-md"
+                    className="flex h-full flex-col gap-3 rounded-2xl border border-forest/15 bg-white p-5 transition-[transform,box-shadow] duration-150 ease-out hover:-translate-y-0.5 hover:shadow-md animate-card-in"
+                    style={{ animationDelay: `${(delivery.number - 1) * 30}ms` }}
                   >
                     {/* Número + badge de estado */}
                     <div className="flex items-center justify-between gap-2">
@@ -315,7 +317,7 @@ export default function DashboardPage() {
                       <button
                         type="button"
                         onClick={() => setModalDelivery(delivery)}
-                        className="rounded-md bg-forest px-3 py-1.5 text-xs font-medium text-white transition hover:bg-forest-dark"
+                        className="rounded-md bg-forest px-3 py-1.5 text-xs font-medium text-white transition-[transform,background-color] duration-150 ease-out hover:bg-forest-dark active:scale-[0.97]"
                       >
                         Ver detalle
                       </button>
@@ -325,7 +327,7 @@ export default function DashboardPage() {
                           href={t.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="rounded-md border border-forest/40 px-3 py-1.5 text-center text-xs font-medium text-forest transition hover:bg-forest/5"
+                          className="rounded-md border border-forest/40 px-3 py-1.5 text-center text-xs font-medium text-forest transition-[transform,background-color] duration-150 ease-out hover:bg-forest/5 active:scale-[0.97]"
                         >
                           {t.label}
                         </a>
@@ -342,18 +344,18 @@ export default function DashboardPage() {
       {/* Modal "Ver detalle" */}
       {modalDelivery && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 p-4"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 p-4 animate-modal-backdrop"
           onClick={() => setModalDelivery(null)}
         >
           <div
-            className="relative max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-lg bg-white p-6 shadow-xl sm:p-8"
+            className="relative max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-lg bg-white p-6 shadow-xl sm:p-8 animate-modal-panel"
             onClick={e => e.stopPropagation()}
           >
             <button
               type="button"
               onClick={() => setModalDelivery(null)}
               aria-label="Cerrar"
-              className="absolute right-4 top-4 text-2xl leading-none text-forest/60 transition hover:text-forest"
+              className="absolute right-4 top-4 text-2xl leading-none text-forest/60 transition-[transform,color] duration-100 ease-out hover:text-forest active:scale-[0.97]"
             >
               ×
             </button>

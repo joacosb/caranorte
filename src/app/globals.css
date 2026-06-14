@@ -21,6 +21,7 @@ html {
 :root {
   --background: #f5f0e8;
   --foreground: #1a2e1f;
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 @theme inline {
@@ -61,6 +62,44 @@ body {
 @keyframes marquee {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-25%); }
+}
+
+/* Modal animations */
+@keyframes modal-backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes modal-panel-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.animate-modal-backdrop {
+  animation: modal-backdrop-in 150ms var(--ease-out-strong) forwards;
+}
+
+.animate-modal-panel {
+  animation: modal-panel-in 200ms var(--ease-out-strong) forwards;
+}
+
+/* Card stagger entrance */
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-card-in {
+  animation: card-in 250ms var(--ease-out-strong) both;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-modal-backdrop,
+  .animate-modal-panel,
+  .animate-card-in {
+    animation: none;
+  }
 }
 
 .backface-hidden {
