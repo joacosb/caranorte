@@ -233,10 +233,11 @@ export default function DashboardPage() {
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-5">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="cursor-pointer text-left"
+            className="flex cursor-pointer items-center gap-3 text-left"
           >
-            <p className="text-2xl font-extrabold tracking-tight text-cream">Cara<span className="text-gold">Norte</span></p>
-            <p className="text-xs text-cream/60">Panel de cliente</p>
+            <p className="text-3xl font-extrabold leading-none tracking-tight text-cream">Cara<span className="text-gold">Norte</span></p>
+            <span className="hidden h-6 w-px bg-cream/30 sm:block" />
+            <p className="hidden text-xs text-cream/70 sm:block">Panel de cliente</p>
           </button>
           <div className="flex items-center gap-4">
             {empresaNombre && (
