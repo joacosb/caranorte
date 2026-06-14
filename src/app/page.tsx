@@ -110,9 +110,10 @@ export default function Home() {
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-forest-dark/40 bg-forest/95 backdrop-blur-md shadow-sm">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-5">
-          <a href="#" className="cursor-pointer">
-              <p className="text-2xl font-extrabold tracking-tight text-cream">Cara<span className="text-gold">Norte</span></p>
-              <p className="text-xs text-cream opacity-70">Consultoría de negocio e inteligencia artificial</p>
+          <a href="#" className="flex items-center gap-3 cursor-pointer">
+            <p className="text-3xl font-extrabold tracking-tight text-cream leading-none">Cara<span className="text-gold">Norte</span></p>
+            <span className="hidden sm:block h-6 w-px bg-cream/30" />
+            <p className="hidden sm:block text-xs text-cream/70">Consultoría de negocio e inteligencia artificial</p>
           </a>
 
           {/* Desktop nav */}
