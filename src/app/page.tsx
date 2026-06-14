@@ -89,6 +89,7 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState("servicios");
   const [mountainDrawn, setMountainDrawn] = useState(false);
   const mountainRef = useRef<SVGSVGElement | null>(null);
+  const [heroMountainDrawn, setHeroMountainDrawn] = useState(false);
 
   function toggleFlip(id: string) {
     setFlipped((s) => ({ ...s, [id]: !s[id] }));
@@ -153,7 +154,13 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  // La montaña se dibuja al entrar en viewport
+  // Montaña del hero: se dibuja poco después del mount (siempre visible)
+  useEffect(() => {
+    const t = setTimeout(() => setHeroMountainDrawn(true), 300);
+    return () => clearTimeout(t);
+  }, []);
+
+  // La montaña de Cumbre se dibuja al entrar en viewport
   useEffect(() => {
     const el = mountainRef.current;
     if (!el) return;
@@ -256,23 +263,63 @@ export default function Home() {
 
         {/* Hero */}
         <section
-          className="relative flex flex-col items-center overflow-hidden rounded-3xl py-12 text-center"
+          className="relative overflow-hidden rounded-3xl py-12 text-center"
           style={{
             backgroundImage:
               "radial-gradient(rgba(26,74,56,0.07) 1px, transparent 1px), linear-gradient(to bottom, transparent 55%, rgba(255,255,255,0.7))",
             backgroundSize: "22px 22px, 100% 100%",
           }}
         >
-          <p className="inline-block rounded-full bg-gold/20 px-4 py-1 text-xs font-bold uppercase tracking-widest text-forest">Consultoría estratégica</p>
-          <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-tight text-forest md:text-5xl lg:text-6xl">
-            Combinamos inteligencia, artificial y humana, para escalar tu negocio
-          </h1>
-          <p className="mt-5 max-w-2xl text-lg text-muted">
-            Acompañamos a organizaciones en su transformación combinando el criterio humano y la potencia de la inteligencia artificial. Diagnóstico honesto, implementación iterativa e impacto real y medible.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a href="#proceso" className="rounded-xl bg-gold px-6 py-3 text-sm font-semibold text-forest-dark transition hover:bg-gold-dark">Cómo trabajamos</a>
-            <a href="#servicios" className="rounded-xl border border-forest px-6 py-3 text-sm font-semibold text-forest transition hover:bg-forest hover:text-white">Ver servicios</a>
+          {/* Silueta de montaña — fondo decorativo */}
+          <svg
+            viewBox="0 0 1200 240"
+            preserveAspectRatio="none"
+            fill="none"
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-32 w-full opacity-25 sm:h-44"
+          >
+            <path
+              d="M 0 215 L 150 195 L 260 205 L 400 165 L 560 72 L 600 45 L 640 72 L 800 175 L 950 200 L 1080 188 L 1200 205 L 1200 240 L 0 240 Z"
+              className="fill-gold/20"
+              style={{ opacity: heroMountainDrawn ? 1 : 0, transition: "opacity 1s ease 1.2s" }}
+            />
+            <path
+              d="M 0 215 L 150 195 L 260 205 L 400 165 L 560 72 L 600 45 L 640 72 L 800 175 L 950 200 L 1080 188 L 1200 205"
+              pathLength={1}
+              stroke="currentColor"
+              strokeWidth={2.5}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              vectorEffect="non-scaling-stroke"
+              className="text-gold"
+              style={{ strokeDasharray: 1, strokeDashoffset: heroMountainDrawn ? 0 : 1, transition: "stroke-dashoffset 2s ease" }}
+            />
+            {/* cumbre nevada — en gold-dark para ser visible sobre fondo claro */}
+            <path
+              d="M 560 84 L 582 64 L 598 74 L 600 66 L 614 56 L 628 70 L 648 86"
+              pathLength={1}
+              stroke="currentColor"
+              strokeWidth={2.5}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              vectorEffect="non-scaling-stroke"
+              className="text-gold-dark"
+              style={{ strokeDasharray: 1, strokeDashoffset: heroMountainDrawn ? 0 : 1, transition: "stroke-dashoffset 1s ease 1.6s" }}
+            />
+          </svg>
+
+          {/* Contenido sobre la montaña */}
+          <div className="relative z-10 flex flex-col items-center">
+            <p className="inline-block rounded-full bg-gold/20 px-4 py-1 text-xs font-bold uppercase tracking-widest text-forest">Consultoría estratégica</p>
+            <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-tight text-forest md:text-5xl lg:text-6xl">
+              Combinamos inteligencia, artificial y humana, para escalar tu negocio
+            </h1>
+            <p className="mt-5 max-w-2xl text-lg text-muted">
+              Acompañamos a organizaciones en su transformación combinando el criterio humano y la potencia de la inteligencia artificial. Diagnóstico honesto, implementación iterativa e impacto real y medible.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <a href="#proceso" className="rounded-xl bg-gold px-6 py-3 text-sm font-semibold text-forest-dark transition hover:bg-gold-dark">Cómo trabajamos</a>
+              <a href="#servicios" className="rounded-xl border border-forest px-6 py-3 text-sm font-semibold text-forest transition hover:bg-forest hover:text-white">Ver servicios</a>
+            </div>
           </div>
         </section>
 
