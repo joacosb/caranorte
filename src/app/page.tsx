@@ -90,6 +90,9 @@ export default function Home() {
   const [mountainDrawn, setMountainDrawn] = useState(false);
   const mountainRef = useRef<SVGSVGElement | null>(null);
   const [heroMountainDrawn, setHeroMountainDrawn] = useState(false);
+  const [heroSummitGlow, setHeroSummitGlow] = useState(false);
+  const [heroTransition, setHeroTransition] = useState(false);
+  const heroSectionRef = useRef<HTMLElement | null>(null);
 
   function toggleFlip(id: string) {
     setFlipped((s) => ({ ...s, [id]: !s[id] }));
@@ -154,10 +157,63 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  // Montaña del hero: se dibuja poco después del mount (siempre visible)
+  // Montaña del hero: loop animado mientras la sección esté visible en el viewport
   useEffect(() => {
-    const t = setTimeout(() => setHeroMountainDrawn(true), 300);
-    return () => clearTimeout(t);
+    const section = heroSectionRef.current;
+    if (!section) return;
+
+    let active = false;
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
+    function clearTimers() {
+      timers.forEach(clearTimeout);
+      timers.length = 0;
+    }
+
+    function startCycle() {
+      clearTimers();
+      if (!active) return;
+
+      // Reset instantáneo (sin transición)
+      setHeroTransition(false);
+      setHeroMountainDrawn(false);
+      setHeroSummitGlow(false);
+
+      requestAnimationFrame(() => {
+        // Frame 1: habilitar transición
+        setHeroTransition(true);
+        requestAnimationFrame(() => {
+          if (!active) return;
+          // Frame 2: arrancar el trazado (la transición CSS ya está activa)
+          setHeroMountainDrawn(true);
+
+          timers.push(
+            setTimeout(() => {
+              if (!active) return;
+              setHeroSummitGlow(true);
+              // Mantener visible 5s y repetir
+              timers.push(setTimeout(startCycle, 5000));
+            }, 3500)
+          );
+        });
+      });
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        active = entry.isIntersecting;
+        if (active) startCycle();
+        else clearTimers();
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(section);
+    return () => {
+      observer.disconnect();
+      clearTimers();
+      active = false;
+    };
   }, []);
 
   // La montaña de Cumbre se dibuja al entrar en viewport
@@ -263,7 +319,8 @@ export default function Home() {
 
         {/* Hero */}
         <section
-          className="relative overflow-hidden rounded-3xl py-12 text-center"
+          ref={heroSectionRef}
+          className="relative overflow-hidden rounded-3xl pt-12 pb-36 text-center sm:pb-48"
           style={{
             backgroundImage:
               "radial-gradient(rgba(26,74,56,0.07) 1px, transparent 1px), linear-gradient(to bottom, transparent 55%, rgba(255,255,255,0.7))",
@@ -275,15 +332,25 @@ export default function Home() {
             viewBox="0 0 1200 240"
             preserveAspectRatio="none"
             fill="none"
-            className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-32 w-full opacity-25 sm:h-44"
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-32 w-full sm:h-44"
           >
+            <style>{`
+              @keyframes summit-flash {
+                0%   { opacity: 0.9; transform: scale(0.3); }
+                30%  { opacity: 0.7; transform: scale(1);   }
+                60%  { opacity: 0;   transform: scale(2.6); }
+                100% { opacity: 0;   transform: scale(2.6); }
+              }
+            `}</style>
             <path
               d="M 0 215 L 150 195 L 260 205 L 400 165 L 560 72 L 600 45 L 640 72 L 800 175 L 950 200 L 1080 188 L 1200 205 L 1200 240 L 0 240 Z"
-              className="fill-gold/20"
-              style={{ opacity: heroMountainDrawn ? 1 : 0, transition: "opacity 1s ease 1.2s" }}
+              fill="#2E5538"
+              style={{ opacity: heroMountainDrawn ? 1 : 0, transition: heroTransition ? "opacity 1s ease 3s" : "none" }}
             />
+
+            {/* Mitad izquierda: borde izquierdo → cumbre (600,45) */}
             <path
-              d="M 0 215 L 150 195 L 260 205 L 400 165 L 560 72 L 600 45 L 640 72 L 800 175 L 950 200 L 1080 188 L 1200 205"
+              d="M 0 215 L 150 195 L 260 205 L 400 165 L 560 72 L 600 45"
               pathLength={1}
               stroke="currentColor"
               strokeWidth={2.5}
@@ -291,9 +358,35 @@ export default function Home() {
               strokeLinejoin="round"
               vectorEffect="non-scaling-stroke"
               className="text-gold"
-              style={{ strokeDasharray: 1, strokeDashoffset: heroMountainDrawn ? 0 : 1, transition: "stroke-dashoffset 2s ease" }}
+              style={{
+                strokeDasharray: 1,
+                strokeDashoffset: heroMountainDrawn ? 0 : 1,
+                strokeOpacity: heroMountainDrawn ? 1 : 0.3,
+                transition: heroTransition
+                  ? "stroke-dashoffset 3.5s ease-out, stroke-opacity 3.5s ease-out"
+                  : "none",
+              }}
             />
-            {/* cumbre nevada — en gold-dark para ser visible sobre fondo claro */}
+            {/* Mitad derecha: borde derecho → cumbre (600,45) */}
+            <path
+              d="M 1200 205 L 1080 188 L 950 200 L 800 175 L 640 72 L 600 45"
+              pathLength={1}
+              stroke="currentColor"
+              strokeWidth={2.5}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              vectorEffect="non-scaling-stroke"
+              className="text-gold"
+              style={{
+                strokeDasharray: 1,
+                strokeDashoffset: heroMountainDrawn ? 0 : 1,
+                strokeOpacity: heroMountainDrawn ? 1 : 0.3,
+                transition: heroTransition
+                  ? "stroke-dashoffset 3.5s ease-out, stroke-opacity 3.5s ease-out"
+                  : "none",
+              }}
+            />
+            {/* cumbre nevada — aparece justo antes de que converjan los trazos */}
             <path
               d="M 560 84 L 582 64 L 598 74 L 600 66 L 614 56 L 628 70 L 648 86"
               pathLength={1}
@@ -302,9 +395,30 @@ export default function Home() {
               strokeLinecap="round"
               strokeLinejoin="round"
               vectorEffect="non-scaling-stroke"
-              className="text-gold-dark"
-              style={{ strokeDasharray: 1, strokeDashoffset: heroMountainDrawn ? 0 : 1, transition: "stroke-dashoffset 1s ease 1.6s" }}
+              className="text-cream"
+              style={{
+                strokeDasharray: 1,
+                strokeDashoffset: heroMountainDrawn ? 0 : 1,
+                transition: heroTransition ? "stroke-dashoffset 0.8s ease-out 3.2s" : "none",
+              }}
             />
+            {/* destello dorado en la cumbre al converger los dos trazos */}
+            {heroSummitGlow && (
+              <>
+                <circle
+                  cx={600} cy={45} r={28}
+                  fill="currentColor" fillOpacity={0.25}
+                  className="text-gold"
+                  style={{ animation: "summit-flash 1.8s ease-out infinite", transformBox: "fill-box", transformOrigin: "center" }}
+                />
+                <circle
+                  cx={600} cy={45} r={10}
+                  fill="currentColor" fillOpacity={0.9}
+                  className="text-gold"
+                  style={{ animation: "summit-flash 1.8s ease-out infinite", transformBox: "fill-box", transformOrigin: "center" }}
+                />
+              </>
+            )}
           </svg>
 
           {/* Contenido sobre la montaña */}
