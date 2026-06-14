@@ -36,7 +36,36 @@ const EPIC_NAMES: Record<number, string> = {
   4: 'Épica 4 — Evaluación y Cierre',
 }
 
-const TEMPLATES_URL = 'https://economicasuba-my.sharepoint.com/:f:/g/personal/29id33012909_campus_economicas_uba_ar/IgBf9lLv958yTI9Lfd7c0oHXAQKp3gnDEhEHOOaxYv6L1mc?e=7rcrOY'
+// Links de Drive por entregable (uno o más archivos por entrega)
+const TEMPLATE_LINKS: Record<number, { label: string; url: string }[]> = {
+  1: [
+    { label: 'Ver template (Word)', url: 'https://drive.google.com/file/d/1q8vTac7gpQotI8-dI-D8YsXIbJmZUHRA/view' },
+    { label: 'Ver template (PDF)', url: 'https://drive.google.com/file/d/1_SWGHuKXWyvcNVFtPRVvFVT-V36pfGrJ/view' },
+  ],
+  2: [{ label: 'Ver template →', url: 'https://drive.google.com/file/d/1H0kqxDLkD6FjJIi7Yc9Rlav155FtpBli/view' }],
+  3: [{ label: 'Ver template →', url: 'https://drive.google.com/file/d/1pnbL0jbBNlT8BJJiO8_B53rUKESk4pwG/view' }],
+  4: [{ label: 'Ver template →', url: 'https://drive.google.com/file/d/1J6Lw8bSkjiWqw8yp7TDPtxeOVRLIPR_s/view' }],
+  5: [
+    { label: 'Ver template (Word)', url: 'https://drive.google.com/file/d/1U8wlvDndxy9aSsLwEQ7HAk6Eza6N7WwT/view' },
+    { label: 'Ver template (PNG)', url: 'https://drive.google.com/file/d/1D4K8R131H83eBuKXRX3GNda5xfNKM14U/view' },
+  ],
+  6: [
+    { label: 'Ver template (Word)', url: 'https://drive.google.com/file/d/1CMtgpPHMyOO-sdg2zdkZVkWV9uyD29A5/view' },
+    { label: 'Ver template (Excel)', url: 'https://drive.google.com/file/d/1C_VSgxqj9wArtktDCnKxoi3tgyJecNyM/view' },
+  ],
+  7: [
+    { label: 'Ver template (Word)', url: 'https://drive.google.com/file/d/1UVS_BWJgsmDgTRCsftc6TDdG-SJAzuaD/view' },
+    { label: 'Ver template (Gantt)', url: 'https://drive.google.com/file/d/1tOs5rduqIUdNVWRLaxeEp8VtHl4UQ92J/view' },
+  ],
+  8: [{ label: 'Ver template →', url: 'https://drive.google.com/file/d/1RqL2u_8_R52FcgRwIxzYLRNqxkzSLqIJ/view' }],
+  9: [
+    { label: 'Ver template (Word)', url: 'https://drive.google.com/file/d/1zstOgKiEfltZ4Bfk7fvIwtTFiK0EpeG5/view' },
+    { label: 'Ver template (Excel)', url: 'https://drive.google.com/file/d/1kN9rg8Fv73RuH9Clo7kWfU9T4ZT6DI2B/view' },
+  ],
+  10: [{ label: 'Ver template (Word v2)', url: 'https://drive.google.com/file/d/1rRse2n8hcejsv97RVSSy5CJfKSKaQ2rn/view' }],
+  11: [{ label: 'Ver template →', url: 'https://drive.google.com/file/d/1b8qzExtKN25JRFIuZkPIDalwJng9J916/view' }],
+  12: [{ label: 'Ver template →', url: 'https://drive.google.com/file/d/1LHu0B4zsV4kcmn7IN8cjrUaoyyAmdc22/view' }],
+}
 
 // Descripción del contenido de cada entregable (subtítulo de la card)
 const DELIVERY_DESC: Record<number, string> = {
@@ -106,21 +135,12 @@ const DELIVERY_DETAIL: Record<number, string[]> = {
   ],
 }
 
-// Badge de estado (único, esquina superior derecha de cada card)
-function statusBadge(status: string, dueDate: string | null): { label: string; className: string } {
-  if (status === 'submitted' || status === 'approved') {
-    return { label: 'Entregado', className: 'bg-forest text-white' }
-  }
+// Badge de estado (único, esquina superior derecha de cada card).
+// "Entregado" y "Vencido" no se muestran (devuelven null).
+function statusBadge(status: string): { label: string; className: string } | null {
+  if (status === 'submitted' || status === 'approved') return null
   if (status === 'rejected') {
     return { label: 'Rechazado', className: 'bg-red-100 text-red-600' }
-  }
-  if (dueDate) {
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
-    const due = new Date(dueDate + 'T00:00:00')
-    if (due.getTime() < today.getTime()) {
-      return { label: 'Vencido', className: 'bg-red-100 text-red-600' }
-    }
   }
   return { label: 'Pendiente', className: 'bg-cream text-forest border border-forest/30' }
 }
@@ -261,7 +281,8 @@ export default function DashboardPage() {
               {deliveriesByEpic[epic].map(delivery => {
                 const sub = submissionByDelivery[delivery.id]
                 const status = sub?.status ?? 'pending'
-                const badge = statusBadge(status, delivery.due_date)
+                const badge = statusBadge(status)
+                const templates = TEMPLATE_LINKS[delivery.number] ?? []
 
                 return (
                   <div
@@ -273,9 +294,11 @@ export default function DashboardPage() {
                       <span className="text-xs font-bold text-muted">
                         {String(delivery.number).padStart(2, '0')}
                       </span>
-                      <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${badge.className}`}>
-                        {badge.label}
-                      </span>
+                      {badge && (
+                        <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${badge.className}`}>
+                          {badge.label}
+                        </span>
+                      )}
                     </div>
 
                     {/* Título */}
@@ -287,7 +310,7 @@ export default function DashboardPage() {
                     </p>
 
                     {/* Botones */}
-                    <div className="mt-auto flex flex-col gap-2 sm:flex-row">
+                    <div className="mt-auto flex flex-wrap gap-2">
                       <button
                         type="button"
                         onClick={() => setModalDelivery(delivery)}
@@ -295,14 +318,17 @@ export default function DashboardPage() {
                       >
                         Ver detalle
                       </button>
-                      <a
-                        href={TEMPLATES_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="rounded-md border border-forest/40 px-3 py-1.5 text-center text-xs font-medium text-forest transition hover:bg-forest/5"
-                      >
-                        Ver template →
-                      </a>
+                      {templates.map((t) => (
+                        <a
+                          key={t.url}
+                          href={t.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="rounded-md border border-forest/40 px-3 py-1.5 text-center text-xs font-medium text-forest transition hover:bg-forest/5"
+                        >
+                          {t.label}
+                        </a>
+                      ))}
                     </div>
                   </div>
                 )
