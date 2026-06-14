@@ -36,30 +36,6 @@ const services = [
     caseTitle: "Empresa de servicios financieros",
     caseBody: "15 reportes en Excel que tardaban 3 días en consolidarse cada semana. Construimos un dashboard en tiempo real con alertas automáticas por desvío de KPIs. El equipo directivo pasó de decidir en días a decidir en horas.",
   },
-  {
-    id: "ux",
-    title: "Diseño de Experiencia y Productos Digitales",
-    short: "Diseñamos experiencias digitales centradas en el usuario, desde el prototipo al producto.",
-    caseTag: "Construcción · 6 semanas",
-    caseTitle: "Plataforma interna de gestión de obras",
-    caseBody: "60% de abandono en el proceso de carga de datos por parte de los operarios en campo. Rediseñamos el flujo completo con validación en terreno. La adopción subió al 91% en el primer mes post-lanzamiento.",
-  },
-  {
-    id: "dev",
-    title: "Desarrollo de Soluciones a Medida",
-    short: "Construimos aplicaciones internas, herramientas de gestión y sistemas personalizados.",
-    caseTag: "Construcción · 4 meses",
-    caseTitle: "Empresa constructora mediana",
-    caseBody: "Usaban 4 herramientas distintas para gestionar proyectos sin integración entre ellas: planillas, emails y chats. Desarrollamos un sistema centralizado a medida. Ahorro de $28k/año en licencias y visibilidad 100% en tiempo real.",
-  },
-  {
-    id: "acom",
-    title: "Acompañamiento y Mejora Continua",
-    short: "Soporte post-implementación, iteración de soluciones y optimización continua.",
-    caseTag: "Energía · 6 meses",
-    caseTitle: "Empresa de energía renovable",
-    caseBody: "Tras implementar un modelo predictivo de fallas en activos, acompañamos al equipo durante 6 meses con revisiones mensuales. La precisión del modelo mejoró un 23% y se evitaron 4 paradas no programadas que representaban $180k en pérdidas.",
-  },
 ];
 
 const steps = [
@@ -216,7 +192,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-forest" data-reveal="left">Nuestros servicios</h2>
           <p className="mt-2 max-w-2xl text-muted" data-reveal="left" style={{ transitionDelay: '100ms' }}>Hacé clic en cada servicio para ver un caso concreto de impacto real.</p>
 
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-3" data-reveal="left" style={{ transitionDelay: '220ms' }}>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2" data-reveal="left" style={{ transitionDelay: '220ms' }}>
             {services.map((service) => {
               const isFlipped = flipped[service.id];
               return (
