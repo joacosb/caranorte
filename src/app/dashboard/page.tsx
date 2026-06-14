@@ -37,10 +37,10 @@ const EPIC_NAMES: Record<number, string> = {
 }
 
 const STATUS_STYLES: Record<string, string> = {
-  pending:   'bg-zinc-700 text-zinc-300',
-  submitted: 'bg-blue-800/60 text-blue-200',
-  approved:  'bg-emerald-800/60 text-emerald-200',
-  rejected:  'bg-red-800/60 text-red-200',
+  pending:   'bg-forest/10 text-forest',
+  submitted: 'bg-blue-100 text-blue-700',
+  approved:  'bg-emerald-100 text-emerald-700',
+  rejected:  'bg-red-100 text-red-700',
 }
 
 const TEMPLATES_URL = 'https://economicasuba-my.sharepoint.com/:f:/g/personal/29id33012909_campus_economicas_uba_ar/IgBf9lLv958yTI9Lfd7c0oHXAQKp3gnDEhEHOOaxYv6L1mc?e=7rcrOY'
@@ -50,7 +50,7 @@ function DeadlineBadge({ dueDate, status }: { dueDate: string | null; status: st
 
   const isDelivered = status === 'submitted' || status === 'approved'
   if (isDelivered) {
-    return <span className="text-xs text-emerald-400 font-medium">✓ Entregado</span>
+    return <span className="text-xs text-emerald-600 font-medium">✓ Entregado</span>
   }
 
   const today = new Date()
@@ -59,13 +59,13 @@ function DeadlineBadge({ dueDate, status }: { dueDate: string | null; status: st
   const diffDays = Math.round((due.getTime() - today.getTime()) / 86400000)
 
   if (diffDays < 0) {
-    return <span className="text-xs text-red-400 font-medium">Vencido</span>
+    return <span className="text-xs text-red-600 font-medium">Vencido</span>
   }
   if (diffDays === 0) {
-    return <span className="text-xs text-amber-400 font-medium">Vence hoy</span>
+    return <span className="text-xs text-gold-dark font-medium">Vence hoy</span>
   }
   return (
-    <span className="text-xs text-zinc-400">
+    <span className="text-xs text-muted">
       {diffDays} {diffDays === 1 ? 'día' : 'días'} restantes
     </span>
   )
@@ -138,32 +138,32 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
-        <p className="text-cyan-300 animate-pulse">Cargando...</p>
+      <div className="min-h-screen bg-cream flex items-center justify-center">
+        <p className="text-forest animate-pulse">Cargando...</p>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+    <div className="min-h-screen bg-cream text-ink">
       {/* Header */}
-      <header className="border-b border-zinc-800 bg-zinc-900/80 px-6 py-4">
+      <header className="border-b border-forest-dark/40 bg-forest px-6 py-4">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
   <button
     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
     className="text-left cursor-pointer"
   >
-    <p className="text-xl font-extrabold tracking-tight text-white">CaraNorte</p>
-    <p className="text-xs text-cyan-300">Panel de cliente</p>
+    <p className="text-xl font-extrabold tracking-tight text-cream">Cara<span className="text-gold">Norte</span></p>
+    <p className="text-xs text-cream/70">Panel de cliente</p>
   </button>
           <div className="flex items-center gap-4">
             {empresaNombre && (
-              <span className="hidden text-sm text-cyan-400 sm:block">{empresaNombre}</span>
+              <span className="hidden text-sm text-gold sm:block">{empresaNombre}</span>
             )}
-            <span className="hidden text-sm text-zinc-400 sm:block">{email}</span>
+            <span className="hidden text-sm text-cream/70 sm:block">{email}</span>
             <button
               onClick={handleLogout}
-              className="rounded-lg border border-zinc-700 px-3 py-1.5 text-sm text-zinc-300 transition hover:border-zinc-500 hover:text-white"
+              className="rounded-lg border border-cream/40 px-3 py-1.5 text-sm text-cream/90 transition hover:border-gold hover:text-gold"
             >
               Cerrar sesión
             </button>
@@ -176,13 +176,13 @@ export default function DashboardPage() {
         <section>
           {client ? (
             <div>
-              <p className="text-xs uppercase tracking-widest text-cyan-400 font-semibold">Cliente activo</p>
-              <h1 className="mt-1 text-3xl font-bold text-white">{client.name}</h1>
-              {client.description && <p className="mt-1 text-zinc-400">{client.description}</p>}
+              <p className="text-xs uppercase tracking-widest text-gold-dark font-semibold">Cliente activo</p>
+              <h1 className="mt-1 text-3xl font-bold text-forest">{client.name}</h1>
+              {client.description && <p className="mt-1 text-muted">{client.description}</p>}
             </div>
           ) : (
-            <div className="rounded-xl border border-zinc-700 bg-zinc-900 p-6">
-              <p className="text-zinc-400">No se encontró el cliente. Verificá que el schema de Supabase esté aplicado.</p>
+            <div className="rounded-xl border border-forest/15 bg-white p-6">
+              <p className="text-muted">No se encontró el cliente. Verificá que el schema de Supabase esté aplicado.</p>
             </div>
           )}
         </section>
@@ -190,7 +190,7 @@ export default function DashboardPage() {
         {/* Épicas */}
         {([1, 2, 3, 4] as const).map(epic => (
           <section key={epic}>
-            <h2 className="text-lg font-bold text-cyan-200 border-b border-zinc-800 pb-2 mb-4">
+            <h2 className="text-lg font-bold text-forest border-b border-forest/20 pb-2 mb-4">
               {EPIC_NAMES[epic]}
             </h2>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -200,14 +200,14 @@ export default function DashboardPage() {
                 const templateUrl = TEMPLATES_URL
 
                 const card = (
-                  <div className={`rounded-2xl border bg-zinc-900 p-5 flex flex-col gap-3 h-full transition-all duration-200 ${
+                  <div className={`rounded-2xl border bg-white p-5 flex flex-col gap-3 h-full transition-all duration-200 ${
                     templateUrl
-                      ? 'border-zinc-800 hover:border-cyan-600 hover:bg-zinc-800/60 cursor-pointer'
-                      : 'border-zinc-800'
+                      ? 'border-forest/15 hover:border-gold hover:shadow-lg cursor-pointer'
+                      : 'border-forest/15'
                   }`}>
                     {/* Número + estado */}
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs font-bold text-zinc-500">
+                      <span className="text-xs font-bold text-muted">
                         {String(delivery.number).padStart(2, '0')}
                       </span>
                       <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${STATUS_STYLES[status]}`}>
@@ -219,15 +219,15 @@ export default function DashboardPage() {
                     </div>
 
                     {/* Título */}
-                    <h3 className="font-semibold text-white leading-snug">{delivery.title}</h3>
+                    <h3 className="font-semibold text-forest leading-snug">{delivery.title}</h3>
 
                     {/* Resultado esperado */}
-                    <p className="text-xs text-zinc-400 leading-relaxed flex-1">{delivery.expected_result}</p>
+                    <p className="text-xs text-muted leading-relaxed flex-1">{delivery.expected_result}</p>
 
                     {/* Footer: fecha + días */}
-                    <div className="flex items-center justify-between gap-2 pt-1 border-t border-zinc-800">
+                    <div className="flex items-center justify-between gap-2 pt-1 border-t border-forest/10">
                       {delivery.due_date && (
-                        <span className="text-xs text-zinc-500">
+                        <span className="text-xs text-muted">
                           {new Date(delivery.due_date + 'T00:00:00').toLocaleDateString('es-AR', {
                             day: '2-digit', month: '2-digit', year: 'numeric'
                           })}
@@ -238,7 +238,7 @@ export default function DashboardPage() {
 
                     {/* Link hint */}
                     {templateUrl && (
-                      <p className="text-xs text-cyan-600 group-hover:text-cyan-400">
+                      <p className="text-xs text-gold-dark group-hover:text-gold">
                         Ver template →
                       </p>
                     )}

@@ -33,12 +33,12 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-950">
-      <div className="bg-zinc-950/95 p-8 rounded-2xl shadow-xl w-full max-w-md border border-cyan-700">
-        <Link href="/" className="text-3xl font-bold text-cyan-300 mb-2 hover:text-cyan-200 transition-colors block">
-          CaraNorte
+    <div className="min-h-screen flex items-center justify-center bg-forest px-4">
+      <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-forest/15">
+        <Link href="/" className="text-3xl font-bold text-forest mb-2 hover:text-forest-light transition-colors block">
+          Cara<span className="text-gold">Norte</span>
         </Link>
-        <p className="text-cyan-200 mb-6">Ingresá a tu panel de clientes y proyectos</p>
+        <p className="text-muted mb-6">Ingresá a tu panel de clientes y proyectos</p>
 
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
           <input
@@ -46,14 +46,14 @@ export default function LoginPage() {
             placeholder="Nombre de la empresa"
             value={empresa}
             onChange={(e) => setEmpresa(e.target.value)}
-            className="bg-zinc-900 text-white rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-cyan-300"
+            className="bg-cream text-ink rounded-lg px-4 py-3 outline-none border border-forest/15 focus:ring-2 focus:ring-gold"
           />
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="bg-zinc-900 text-white rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-cyan-300"
+            className="bg-cream text-ink rounded-lg px-4 py-3 outline-none border border-forest/15 focus:ring-2 focus:ring-gold"
             required
           />
           <input
@@ -61,14 +61,14 @@ export default function LoginPage() {
             placeholder="Contraseña"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="bg-zinc-900 text-white rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-cyan-300"
+            className="bg-cream text-ink rounded-lg px-4 py-3 outline-none border border-forest/15 focus:ring-2 focus:ring-gold"
             required
           />
-          {error && <p className="text-red-400 text-sm">{error}</p>}
+          {error && <p className="text-red-600 text-sm">{error}</p>}
           <button
             type="submit"
             disabled={loading}
-            className="bg-cyan-500 hover:bg-cyan-400 text-zinc-950 font-bold py-3 rounded-lg transition-colors disabled:opacity-50"
+            className="bg-gold hover:bg-gold-dark text-forest-dark font-bold py-3 rounded-lg transition-colors disabled:opacity-50"
           >
             {loading ? 'Ingresando...' : 'Ingresar'}
           </button>
