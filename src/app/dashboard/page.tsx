@@ -136,13 +136,12 @@ const DELIVERY_DETAIL: Record<number, string[]> = {
 }
 
 // Badge de estado (único, esquina superior derecha de cada card).
-// "Entregado" y "Vencido" no se muestran (devuelven null).
+// Solo se muestra "Rechazado"; "Entregado", "Vencido" y "Pendiente" no se muestran.
 function statusBadge(status: string): { label: string; className: string } | null {
-  if (status === 'submitted' || status === 'approved') return null
   if (status === 'rejected') {
     return { label: 'Rechazado', className: 'bg-red-100 text-red-600' }
   }
-  return { label: 'Pendiente', className: 'bg-cream text-forest border border-forest/30' }
+  return null
 }
 
 export default function DashboardPage() {
