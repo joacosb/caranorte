@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const services = [
   {
@@ -73,11 +73,22 @@ const team = [
 
 const partners = ["Nodek Energía", "YPF Luz", "Edesur", "Enel Green Power", "Petrobras", "Cotec", "Globant", "Mercado Libre"];
 
+const sections = [
+  { id: "servicios", label: "Servicios" },
+  { id: "proceso", label: "Proceso" },
+  { id: "nosotros", label: "Nosotros" },
+  { id: "equipo", label: "Equipo" },
+];
+
 export default function Home() {
   const [flipped, setFlipped] = useState<Record<string, boolean>>({});
   const [menuOpen, setMenuOpen] = useState(false);
   const [imgErrors, setImgErrors] = useState<Record<string, boolean>>({});
   const companyList = useMemo(() => partners.join("    ·    "), []);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState("servicios");
+  const [mountainDrawn, setMountainDrawn] = useState(false);
+  const mountainRef = useRef<SVGSVGElement | null>(null);
 
   function toggleFlip(id: string) {
     setFlipped((s) => ({ ...s, [id]: !s[id] }));
@@ -104,8 +115,94 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  // Progreso de scroll para la línea guía
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const el = document.documentElement;
+        const max = el.scrollHeight - el.clientHeight;
+        setScrollProgress(max > 0 ? Math.min(1, el.scrollTop / max) : 0);
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  // Sección activa (scroll-spy) para resaltar en la línea guía
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: "-45% 0px -45% 0px" }
+    );
+    sections.forEach((s) => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  // La montaña se dibuja al entrar en viewport
+  useEffect(() => {
+    const el = mountainRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setMountainDrawn(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-cream text-ink">
+
+      {/* Línea guía de scroll: barra vertical que se llena al hacer scroll */}
+      <div aria-hidden className="pointer-events-none fixed left-0 top-0 z-40 hidden h-full w-1 lg:block">
+        <div className="absolute inset-0 bg-forest/10" />
+        <div
+          className="absolute left-0 top-0 w-full bg-gold transition-[height] duration-150 ease-out"
+          style={{ height: `${scrollProgress * 100}%` }}
+        />
+        {/* punto guía que avanza */}
+        <div
+          className="absolute left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold shadow-[0_0_10px_2px_rgba(232,187,75,0.55)] transition-all duration-150 ease-out"
+          style={{ top: `${scrollProgress * 100}%` }}
+        />
+      </div>
+
+      {/* Etiquetas de sección que se resaltan (pantallas anchas) */}
+      <aside aria-hidden className="pointer-events-none fixed left-5 top-1/2 z-40 hidden -translate-y-1/2 2xl:block">
+        <ul className="flex flex-col gap-7">
+          {sections.map((s) => {
+            const isActive = activeSection === s.id;
+            return (
+              <li key={s.id} className="flex items-center gap-2.5">
+                <span className={`h-2 w-2 rounded-full transition-all duration-300 ${isActive ? "scale-125 bg-gold" : "bg-forest/25"}`} />
+                <span className={`text-[11px] uppercase tracking-widest transition-colors duration-300 ${isActive ? "font-semibold text-forest" : "text-muted"}`}>{s.label}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </aside>
 
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-forest-dark/40 bg-forest/95 backdrop-blur-md shadow-sm">
@@ -325,6 +422,62 @@ export default function Home() {
               </a>
             ))}
           </div>
+        </section>
+
+        {/* Cumbre — oferta de servicio + montaña dibujada por la línea */}
+        <section className="relative overflow-hidden rounded-2xl bg-forest px-6 py-16 text-center sm:px-10 sm:py-20">
+          <div className="relative z-10 mx-auto max-w-2xl">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold" data-reveal="left">La cara norte</p>
+            <h2 className="mt-3 text-3xl font-bold text-cream md:text-4xl" data-reveal="left" style={{ transitionDelay: "100ms" }}>
+              Te acompañamos hasta la cumbre
+            </h2>
+            <p className="mt-4 text-cream/80" data-reveal="left" style={{ transitionDelay: "200ms" }}>
+              Como en la cara norte del Lanín, llegar arriba exige método, ritmo y buena compañía. Trazamos la ruta, marcamos cada hito y subimos junto a tu equipo hasta el resultado.
+            </p>
+            <a href="#contacto" className="mt-8 inline-block rounded-xl bg-gold px-6 py-3 text-sm font-semibold text-forest-dark transition hover:bg-gold-dark" data-reveal="left" style={{ transitionDelay: "300ms" }}>
+              Empezá el ascenso
+            </a>
+          </div>
+
+          {/* La línea dibuja la montaña (cara norte del Lanín) */}
+          <svg
+            ref={mountainRef}
+            viewBox="0 0 1200 240"
+            preserveAspectRatio="none"
+            fill="none"
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-44 w-full sm:h-56"
+          >
+            {/* relleno tenue que aparece tras el trazado */}
+            <path
+              d="M 0 215 L 150 195 L 260 205 L 400 165 L 560 72 L 600 45 L 640 72 L 800 175 L 950 200 L 1080 188 L 1200 205 L 1200 240 L 0 240 Z"
+              className="fill-gold/10"
+              style={{ opacity: mountainDrawn ? 1 : 0, transition: "opacity 1s ease 1.2s" }}
+            />
+            {/* contorno principal */}
+            <path
+              d="M 0 215 L 150 195 L 260 205 L 400 165 L 560 72 L 600 45 L 640 72 L 800 175 L 950 200 L 1080 188 L 1200 205"
+              pathLength={1}
+              stroke="currentColor"
+              strokeWidth={2.5}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              vectorEffect="non-scaling-stroke"
+              className="text-gold"
+              style={{ strokeDasharray: 1, strokeDashoffset: mountainDrawn ? 0 : 1, transition: "stroke-dashoffset 2s ease" }}
+            />
+            {/* cumbre nevada */}
+            <path
+              d="M 560 84 L 582 64 L 598 74 L 600 66 L 614 56 L 628 70 L 648 86"
+              pathLength={1}
+              stroke="currentColor"
+              strokeWidth={2.5}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              vectorEffect="non-scaling-stroke"
+              className="text-cream"
+              style={{ strokeDasharray: 1, strokeDashoffset: mountainDrawn ? 0 : 1, transition: "stroke-dashoffset 1s ease 1.6s" }}
+            />
+          </svg>
         </section>
 
         {/* Contact */}
