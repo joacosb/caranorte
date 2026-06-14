@@ -425,7 +425,7 @@ export default function Home() {
         </section>
 
         {/* Cumbre — oferta de servicio + montaña dibujada por la línea */}
-        <section className="relative overflow-hidden rounded-2xl bg-forest px-6 py-16 text-center sm:px-10 sm:py-20">
+        <section className="relative overflow-hidden rounded-2xl bg-forest px-6 py-16 text-center sm:px-10 sm:py-20 md:pb-56">
           <div className="relative z-10 mx-auto max-w-2xl">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold" data-reveal="left">La cara norte</p>
             <h2 className="mt-3 text-3xl font-bold text-cream md:text-4xl" data-reveal="left" style={{ transitionDelay: "100ms" }}>
@@ -496,7 +496,7 @@ export default function Home() {
 
       <footer className="border-t border-white/20 bg-forest px-6 py-8 text-sm text-cream/60">
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-3 text-center sm:flex-row sm:text-left">
-          <span className="text-cream/80">CaraNorte · Combinamos inteligencia, artificial y humana, para revolucionar tu negocio</span>
+          <span className="text-cream/80">CaraNorte · Combinamos inteligencia, artificial y humana, para escalar tu negocio</span>
           <span className="opacity-60">© {new Date().getFullYear()} · caranorte.online</span>
         </div>
       </footer>
