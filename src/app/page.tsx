@@ -200,30 +200,30 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-forest" data-reveal="left">Nuestros servicios</h2>
           <p className="mt-2 max-w-2xl text-muted" data-reveal="left" style={{ transitionDelay: '100ms' }}>Hacé clic en cada servicio para ver un caso concreto de impacto real.</p>
 
-          <div className="mt-8 grid gap-6 sm:grid-cols-2" data-reveal="left" style={{ transitionDelay: '220ms' }}>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-reveal="left" style={{ transitionDelay: '220ms' }}>
             {services.map((service) => {
               const isFlipped = flipped[service.id];
               return (
                 <button
                   key={service.id}
                   onClick={() => toggleFlip(service.id)}
-                  className="group relative h-64 cursor-pointer rounded-2xl shadow-md transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-lg focus:outline-none"
+                  className="group relative h-48 cursor-pointer rounded-2xl shadow-md transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-lg focus:outline-none"
                   type="button"
                   style={{ perspective: 1200 }}
                 >
                   <div className={`relative h-full w-full transition-transform duration-500 ease-in-out ${isFlipped ? "rotate-y-180" : ""}`} style={{ transformStyle: "preserve-3d" }}>
                     {/* Front */}
-                    <div className="absolute inset-0 rounded-2xl border-l-4 border-l-gold bg-white p-5 text-left backface-hidden group-hover:ring-2 group-hover:ring-gold/60">
-                      <h3 className="text-lg font-bold text-forest leading-snug">{service.title}</h3>
-                      <p className="mt-3 text-sm text-muted">{service.short}</p>
-                      <p className="absolute bottom-5 left-5 text-xs text-gold-dark font-medium">Toca para ver caso real →</p>
+                    <div className="absolute inset-0 rounded-2xl border-l-4 border-l-gold bg-white p-4 text-left backface-hidden group-hover:ring-2 group-hover:ring-gold/60">
+                      <h3 className="text-sm font-bold text-forest leading-snug">{service.title}</h3>
+                      <p className="mt-2 text-xs text-muted leading-relaxed">{service.short}</p>
+                      <p className="absolute bottom-4 left-4 text-[10px] text-gold-dark font-medium">Toca para ver caso real →</p>
                     </div>
                     {/* Back */}
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-forest to-forest-dark p-5 text-left backface-hidden rotate-y-180 flex flex-col justify-between">
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-forest to-forest-dark p-4 text-left backface-hidden rotate-y-180 flex flex-col justify-between">
                       <div>
                         <span className="inline-block rounded-full bg-gold/25 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-gold">{service.caseTag}</span>
-                        <h3 className="mt-2 text-sm font-bold text-cream">{service.caseTitle}</h3>
-                        <p className="mt-2 text-xs text-cream/85 leading-relaxed">{service.caseBody}</p>
+                        <h3 className="mt-1.5 text-xs font-bold text-cream">{service.caseTitle}</h3>
+                        <p className="mt-1.5 text-[11px] text-cream/85 leading-relaxed">{service.caseBody}</p>
                       </div>
                       <p className="text-[10px] text-cream/50">Toca para volver</p>
                     </div>
@@ -257,20 +257,20 @@ export default function Home() {
         {/* Nosotros */}
         <section id="nosotros" className="rounded-2xl border border-forest/15 bg-white p-6 sm:p-8">
           <h2 className="text-3xl font-bold text-forest" data-reveal="left">Nosotros</h2>
-          <p className="mt-4 text-ink max-w-3xl" data-reveal="left" style={{ transitionDelay: '100ms' }}>CaraNorte es una consultora con raíces en la Patagonia argentina que combina inteligencia humana e inteligencia artificial para transformar organizaciones. Entendemos el negocio antes que la tecnología, y cada solución que proponemos responde a objetivos concretos alineados con los resultados que el cliente necesita alcanzar.</p>
+          <p className="mt-4 text-ink max-w-2xl" data-reveal="left" style={{ transitionDelay: '100ms' }}>Consultora patagónica que combina criterio humano e inteligencia artificial para transformar organizaciones. Negocio primero, tecnología después.</p>
 
           <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3" data-reveal="left" style={{ transitionDelay: '220ms' }}>
             <article className="rounded-xl border border-forest/15 bg-cream p-4">
               <h3 className="text-base font-semibold text-forest">Misión</h3>
-              <p className="mt-2 text-sm text-gray-600">Guiamos a las organizaciones en la integración estratégica de la inteligencia artificial con sus procesos de negocio. Nuestro propósito es transformar el potencial tecnológico en resultados concretos, ayudando a las empresas a tomar mejores decisiones basadas en datos, optimizar sus operaciones y generar valor sostenible en el tiempo.</p>
+              <p className="mt-2 text-sm text-gray-600">Transformar el potencial de la IA en resultados concretos: mejores decisiones, procesos optimizados y valor sostenible.</p>
             </article>
             <article className="rounded-xl border border-forest/15 bg-cream p-4">
               <h3 className="text-base font-semibold text-forest">Visión</h3>
-              <p className="mt-2 text-sm text-gray-600">Aspiramos a ser la consultora referente en América Latina en la transformación inteligente de organizaciones, reconocida por nuestra capacidad de conectar tecnología, procesos y negocios. Buscamos liderar el camino hacia una adopción de inteligencia artificial con sentido, donde cada implementación tenga un impacto real y medible.</p>
+              <p className="mt-2 text-sm text-gray-600">Ser la consultora referente en América Latina en transformación inteligente, donde cada implementación tenga impacto real y medible.</p>
             </article>
             <article className="rounded-xl border border-forest/15 bg-cream p-4">
               <h3 className="text-base font-semibold text-forest">Estrategia</h3>
-              <p className="mt-2 text-sm text-gray-600">Actuamos con un enfoque claro: entender el negocio antes que la tecnología. Cada solución que proponemos responde a un objetivo concreto y ajustado con los resultados que el cliente necesita alcanzar.</p>
+              <p className="mt-2 text-sm text-gray-600">Entender el negocio antes que la tecnología. Cada solución responde a un objetivo concreto acordado con el cliente.</p>
             </article>
           </div>
 
@@ -279,15 +279,15 @@ export default function Home() {
             <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-reveal="right" style={{ transitionDelay: '460ms' }}>
               <article className="rounded-xl border border-forest/15 bg-cream p-4">
                 <h4 className="text-base font-semibold text-forest">Orientación a resultados</h4>
-                <p className="mt-2 text-sm text-gray-600">Nos importan los resultados y cumplir objetivos predefinidos, pero también tener resultados ambientales sostenibles siendo responsables con el entorno.</p>
+                <p className="mt-2 text-sm text-gray-600">Resultados concretos y medibles. El impacto real es nuestro único indicador de éxito.</p>
               </article>
               <article className="rounded-xl border border-forest/15 bg-cream p-4">
                 <h4 className="text-base font-semibold text-forest">Simplicidad y eficiencia</h4>
-                <p className="mt-2 text-sm text-gray-600">Diseñamos soluciones prácticas, escalables y fáciles de implementar. La complejidad no es un valor en sí mismo: nuestro objetivo es simplificar procesos y mejorar la operación.</p>
+                <p className="mt-2 text-sm text-gray-600">Soluciones prácticas y escalables. La complejidad no es un valor; la claridad, sí.</p>
               </article>
               <article className="rounded-xl border border-forest/15 bg-cream p-4">
                 <h4 className="text-base font-semibold text-forest">Compromiso y cercanía</h4>
-                <p className="mt-2 text-sm text-gray-600">Con raíces en la Patagonia argentina, promovemos soluciones que respeten el medio ambiente y el uso sostenible de los recursos naturales. Nos involucramos entendiendo no solo el negocio, sino también su impacto en la comunidad y el entorno.</p>
+                <p className="mt-2 text-sm text-gray-600">Nos involucramos de verdad. Entendemos el negocio, el equipo y el entorno antes de proponer cualquier solución.</p>
               </article>
             </div>
           </div>
