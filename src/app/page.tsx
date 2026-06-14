@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 
 const services = [
   {
@@ -174,24 +175,25 @@ export default function Home() {
       clearTimers();
       if (!active) return;
 
-      // Reset instantáneo (sin transición)
-      setHeroTransition(false);
-      setHeroMountainDrawn(false);
-      setHeroSummitGlow(false);
+      // Reset sincrónico: flushSync garantiza que React haga commit al DOM antes
+      // de continuar, evitando que mobile omita el frame de "paths en offset 1".
+      flushSync(() => {
+        setHeroTransition(false);
+        setHeroMountainDrawn(false);
+        setHeroSummitGlow(false);
+      });
 
       requestAnimationFrame(() => {
-        // Frame 1: habilitar transición
+        if (!active) return;
         setHeroTransition(true);
         requestAnimationFrame(() => {
           if (!active) return;
-          // Frame 2: arrancar el trazado (la transición CSS ya está activa)
           setHeroMountainDrawn(true);
 
           timers.push(
             setTimeout(() => {
               if (!active) return;
               setHeroSummitGlow(true);
-              // Mantener visible 5s y repetir
               timers.push(setTimeout(startCycle, 5000));
             }, 3500)
           );
