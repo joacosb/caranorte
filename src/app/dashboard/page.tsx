@@ -139,17 +139,12 @@ const DELIVERY_DETAIL: Record<number, string[]> = {
 
 export default function DashboardPage() {
   const router = useRouter()
-  const [email, setEmail] = useState('')
-  const [empresaNombre, setEmpresaNombre] = useState('')
   const [ready, setReady] = useState(false)
   const [modalDelivery, setModalDelivery] = useState<Delivery | null>(null)
 
   // Gate de acceso simple (la validación de credenciales ocurre en /login)
   useEffect(() => {
     if (localStorage.getItem('auth') !== 'true') { router.push('/login'); return }
-    setEmail(localStorage.getItem('email') ?? '')
-    const empresaGuardada = localStorage.getItem('empresa')
-    if (empresaGuardada) setEmpresaNombre(empresaGuardada)
     setReady(true)
   }, [router])
 
@@ -195,10 +190,9 @@ export default function DashboardPage() {
             <p className="hidden text-xs text-cream/70 sm:block">Panel de cliente</p>
           </button>
           <div className="flex items-center gap-4">
-            {empresaNombre && (
-              <span className="hidden text-sm text-cream/70 sm:block">{empresaNombre}</span>
-            )}
-            <span className="hidden text-sm text-cream/70 sm:block">{email}</span>
+            <span className="hidden text-sm text-cream/70 sm:block">
+              Logueado como <span className="font-semibold text-cream">Nodek</span>
+            </span>
             <button
               onClick={handleLogout}
               className="rounded-full bg-gold px-4 py-2 text-sm font-semibold text-forest-dark transition-[transform,background-color] duration-150 ease-out hover:bg-gold-dark active:scale-[0.97]"

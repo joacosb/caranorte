@@ -11,7 +11,6 @@ const VALID_PASSWORD = 'Nodek123'
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [empresa, setEmpresa] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
@@ -24,9 +23,6 @@ export default function LoginPage() {
     if (email.trim().toLowerCase() === VALID_EMAIL && password === VALID_PASSWORD) {
       localStorage.setItem('auth', 'true')
       localStorage.setItem('email', VALID_EMAIL)
-      if (empresa.trim()) {
-        localStorage.setItem('empresa', empresa.trim())
-      }
       router.push('/dashboard')
     } else {
       setError('Email o contraseña incorrectos')
@@ -35,27 +31,23 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-forest px-4">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-forest/15">
-        <Link href="/" className="text-3xl font-bold text-forest mb-2 hover:text-forest-light transition-colors block">
+    <div className="flex min-h-screen items-center justify-center bg-forest px-4">
+      <div className="w-full max-w-md rounded-2xl border border-forest/10 bg-white p-8 shadow-xl sm:p-10">
+        <Link
+          href="/"
+          className="mb-1 block text-3xl font-extrabold tracking-tight text-forest transition-colors hover:text-forest-light"
+        >
           Cara<span className="text-gold">Norte</span>
         </Link>
-        <p className="text-muted mb-6">Ingresá a tu panel de clientes y proyectos</p>
+        <p className="mb-8 text-sm text-muted">Ingresá a tu panel de clientes y proyectos</p>
 
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
-          <input
-            type="text"
-            placeholder="Nombre de la empresa"
-            value={empresa}
-            onChange={(e) => setEmpresa(e.target.value)}
-            className="bg-cream text-ink rounded-lg px-4 py-3 outline-none border border-forest/15 focus:ring-2 focus:ring-gold"
-          />
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="bg-cream text-ink rounded-lg px-4 py-3 outline-none border border-forest/15 focus:ring-2 focus:ring-gold"
+            className="rounded-lg border border-forest/15 bg-cream px-4 py-3 text-ink outline-none transition focus:border-gold focus:ring-1 focus:ring-gold"
             required
           />
           <input
@@ -63,14 +55,14 @@ export default function LoginPage() {
             placeholder="Contraseña"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="bg-cream text-ink rounded-lg px-4 py-3 outline-none border border-forest/15 focus:ring-2 focus:ring-gold"
+            className="rounded-lg border border-forest/15 bg-cream px-4 py-3 text-ink outline-none transition focus:border-gold focus:ring-1 focus:ring-gold"
             required
           />
-          {error && <p className="text-red-600 text-sm">{error}</p>}
+          {error && <p className="text-sm text-red-600">{error}</p>}
           <button
             type="submit"
             disabled={loading}
-            className="bg-gold hover:bg-gold-dark text-forest-dark font-bold py-3 rounded-lg transition-colors disabled:opacity-50"
+            className="mt-2 rounded-lg bg-gold py-3 font-semibold text-forest-dark transition-colors hover:bg-gold-dark disabled:opacity-50"
           >
             {loading ? 'Ingresando...' : 'Ingresar'}
           </button>
