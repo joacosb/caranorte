@@ -265,7 +265,7 @@ export default function Home() {
         >
           <p className="inline-block rounded-full bg-gold/20 px-4 py-1 text-xs font-bold uppercase tracking-widest text-forest">Consultoría estratégica</p>
           <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-tight text-forest md:text-5xl lg:text-6xl">
-            Combinamos inteligencia, artificial y humana, para revolucionar tu negocio
+            Combinamos inteligencia, artificial y humana, para escalar tu negocio
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-muted">
             Acompañamos a organizaciones en su transformación combinando el criterio humano y la potencia de la inteligencia artificial. Diagnóstico honesto, implementación iterativa e impacto real y medible.
