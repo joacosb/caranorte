@@ -591,6 +591,9 @@ export default function Home() {
             <p className="mt-4 text-cream/80" data-reveal="left" style={{ transitionDelay: "200ms" }}>
               Como en la cara norte del Lanín, llegar arriba exige método, ritmo y buena compañía. Trazamos la ruta, marcamos cada hito y subimos junto a tu equipo hasta el resultado.
             </p>
+            <p className="mt-3 text-cream/60 text-sm" data-reveal="left" style={{ transitionDelay: "280ms" }}>
+              Completá el formulario de contacto y agendamos una reunión de diagnóstico para entender tu situación.
+            </p>
             <a href="#contacto" className="mt-8 inline-block rounded-xl bg-gold px-6 py-3 text-sm font-semibold text-forest-dark transition hover:bg-gold-dark" data-reveal="left" style={{ transitionDelay: "300ms" }}>
               Empezá el ascenso
             </a>
@@ -640,13 +643,13 @@ export default function Home() {
         {/* Contact */}
         <section id="contacto" className="rounded-2xl bg-forest p-6 sm:p-8">
           <h2 className="text-3xl font-bold text-cream" data-reveal="left">Contacto</h2>
-          <p className="mt-2 text-cream/70" data-reveal="left" style={{ transitionDelay: '100ms' }}>Escríbenos y te responderemos en breve.</p>
+          <p className="mt-2 text-cream/70" data-reveal="left" style={{ transitionDelay: '100ms' }}>Completá el formulario y agendamos una reunión de diagnóstico para entender tu caso. Un especialista se pondrá en contacto con vos a la brevedad.</p>
           <form className="mt-6 grid gap-4 sm:grid-cols-2" data-reveal="right" style={{ transitionDelay: '220ms' }}>
             <input type="text" placeholder="Nombre" className="rounded-lg border border-forest/30 bg-white px-4 py-3 text-forest placeholder:text-forest/40 outline-none transition focus:border-gold focus:ring-1 focus:ring-gold" />
             <input type="email" placeholder="Email" className="rounded-lg border border-forest/30 bg-white px-4 py-3 text-forest placeholder:text-forest/40 outline-none transition focus:border-gold focus:ring-1 focus:ring-gold" />
             <input type="text" placeholder="Empresa" className="sm:col-span-2 rounded-lg border border-forest/30 bg-white px-4 py-3 text-forest placeholder:text-forest/40 outline-none transition focus:border-gold focus:ring-1 focus:ring-gold" />
             <textarea placeholder="Mensaje" rows={4} className="sm:col-span-2 resize-none rounded-lg border border-forest/30 bg-white px-4 py-3 text-forest placeholder:text-forest/40 outline-none transition focus:border-gold focus:ring-1 focus:ring-gold" />
-            <button type="submit" className="sm:col-span-2 rounded-lg bg-gold px-4 py-3 font-semibold text-forest-dark transition hover:bg-gold-dark">Enviar mensaje</button>
+            <button type="submit" className="sm:col-span-2 rounded-lg bg-gold px-4 py-3 font-semibold text-forest-dark transition hover:bg-gold-dark">Enviar</button>
           </form>
         </section>
       </main>
