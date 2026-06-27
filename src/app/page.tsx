@@ -445,6 +445,14 @@ export default function Home() {
               {companyList}    ·    {companyList}    ·    {companyList}    ·    {companyList}
             </div>
           </div>
+          <div className="mt-8 flex flex-col items-center gap-3 text-center">
+            <p className="text-sm text-muted max-w-lg">
+              Nodek Energía, PyME argentina de energía solar y movilidad eléctrica, nos confió el diseño de su transformación digital de principio a fin.
+            </p>
+            <Link href="/login" className="inline-flex items-center gap-1.5 rounded-full bg-forest px-5 py-2 text-sm font-semibold text-cream transition hover:bg-forest-dark">
+              Ver el caso de éxito →
+            </Link>
+          </div>
         </section>
 
         {/* Services */}
