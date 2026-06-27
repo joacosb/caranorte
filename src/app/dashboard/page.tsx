@@ -28,7 +28,6 @@ const DELIVERIES: Delivery[] = [
     number: 1, etapa: 1, title: 'Presentación del caso de negocio', dueDate: '20/03/2026',
     links: [
       { label: 'Ver documento (PDF)', url: 'https://drive.google.com/file/d/1_SWGHuKXWyvcNVFtPRVvFVT-V36pfGrJ/view' },
-      { label: 'Ver documento (completo)', url: 'https://drive.google.com/file/d/1q8vTac7gpQotI8-dI-D8YsXIbJmZUHRA/view' },
     ],
   },
   {
@@ -222,10 +221,10 @@ export default function DashboardPage() {
         <div className="mx-auto max-w-6xl px-8 py-14 sm:py-20">
           <p className="text-xs font-bold uppercase tracking-widest text-gold/80">CaraNorte · Proyecto de consultoría</p>
           <h1 className="mt-4 text-4xl font-bold leading-tight text-cream sm:text-5xl">
-            Proyecto de transformación<br className="hidden sm:block" /> para Nodek
+            Proyecto de transformación digital<br className="hidden sm:block" /> para Nodek Energía
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-cream/75">
-            Acompañamos a Nodek en el diagnóstico, diseño e implementación de una arquitectura empresarial que potencie su operación y crecimiento.
+            Acompañamos a Nodek en el desarrollo de una propuesta integral de transformación digital que potencie su operación y crecimiento.
           </p>
         </div>
       </section>
@@ -243,9 +242,6 @@ export default function DashboardPage() {
               <strong>energía solar, movilidad eléctrica e ingeniería eléctrica</strong>. Con un equipo de 10 personas y una facturación anual cercana al millón de dólares, opera principalmente en el segmento B2B ofreciendo proyectos llave en mano a empresas y organismos públicos.
             </p>
             <p>
-              Al inicio del proyecto, Nodek enfrentaba un desafío concreto: su operación crecía más rápido que su infraestructura interna. Los procesos centrales —gestión comercial, seguimiento de proyectos, compras y administración— estaban distribuidos en herramientas desconectadas (Trello, WhatsApp, Gmail, Excel), lo que generaba pérdida de información, demoras y decisiones basadas en datos incompletos.
-            </p>
-            <p>
               El pedido inicial fue claro: <em>"Necesitamos ordenar la casa antes de seguir creciendo."</em> Nuestro trabajo fue transformar ese diagnóstico en un plan concreto, fundamentado y ejecutable.
             </p>
           </div>
@@ -257,6 +253,10 @@ export default function DashboardPage() {
           <h2 className="mt-2 text-3xl font-bold text-forest" data-reveal="right">Nuestro diagnóstico</h2>
           <p className="mt-2 text-muted" data-reveal="right" style={{ transitionDelay: '80ms' }}>
             Lo que encontramos al analizar la organización en profundidad.
+          </p>
+
+          <p className="mt-6 max-w-3xl text-sm leading-relaxed text-ink/85" data-reveal="right" style={{ transitionDelay: '120ms' }}>
+            Al inicio del proyecto, Nodek enfrentaba un desafío concreto: su operación crecía más rápido que su infraestructura interna. Los procesos centrales —gestión comercial, seguimiento de proyectos, compras y administración— estaban distribuidos en herramientas desconectadas (Trello, WhatsApp, Gmail, Excel), lo que generaba pérdida de información, demoras y decisiones basadas en datos incompletos.
           </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2" data-reveal="right" style={{ transitionDelay: '160ms' }}>
@@ -292,9 +292,25 @@ export default function DashboardPage() {
             ))}
           </div>
 
+          <div className="mt-8" data-reveal="right" style={{ transitionDelay: '200ms' }}>
+            <p className="mb-4 text-xs font-bold uppercase tracking-widest text-gold">Lo que escuchamos en las entrevistas</p>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {[
+                { role: 'CEO', story: 'Necesito saber qué está pasando en todos los proyectos sin tener que llamar a cada uno para preguntarles.' },
+                { role: 'Responsable comercial', story: 'Pierdo oportunidades porque no tengo un registro de con quién hablé ni en qué etapa quedamos. Todo está en el WhatsApp.' },
+                { role: 'Jefe de operaciones', story: 'Compro materiales que ya tenemos en stock porque no sé qué hay disponible. No hay un lugar donde mirar.' },
+              ].map(({ role, story }) => (
+                <div key={role} className="rounded-xl border border-forest/10 bg-cream p-4">
+                  <p className="text-sm leading-relaxed text-ink/80 italic">&ldquo;{story}&rdquo;</p>
+                  <p className="mt-3 text-xs font-semibold text-forest">— {role}, Nodek</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="mt-6 flex flex-col gap-4 border-t border-forest/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-muted max-w-xl">
-              La madurez organizacional se evaluó en transición entre Nivel 1 y Nivel 2 (escala CMM): procesos parcialmente documentados y dependencia de conocimiento individual en roles clave.
+              La madurez organizacional se evaluó usando la escala CMM (Capability Maturity Model), un modelo internacional de cinco niveles que mide qué tan sistemáticos y repetibles son los procesos de una organización. Nodek se encontraba en transición entre el Nivel 1 (ad hoc) y el Nivel 2 (procesos básicos): procedimientos parcialmente documentados con alta dependencia de conocimiento individual en roles clave.
             </p>
             <div className="flex flex-wrap gap-2 shrink-0">
               <a href="https://drive.google.com/file/d/1H0kqxDLkD6FjJIi7Yc9Rlav155FtpBli/view" target="_blank" rel="noopener noreferrer"
@@ -314,41 +330,78 @@ export default function DashboardPage() {
           <p className="text-xs font-bold uppercase tracking-widest text-gold">Etapa 2</p>
           <h2 className="mt-2 text-3xl font-bold text-forest" data-reveal="left">¿Qué propusimos transformar?</h2>
           <p className="mt-2 max-w-2xl text-muted" data-reveal="left" style={{ transitionDelay: '80ms' }}>
-            Con el diagnóstico claro, diseñamos una solución en dos fases que le permite a Nodek escalar de forma ordenada.
+            El camino desde el diagnóstico hasta la solución atravesó cinco etapas de diseño progresivo.
           </p>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2" data-reveal="left" style={{ transitionDelay: '160ms' }}>
-            {[
-              {
-                tag: 'Fase 1',
-                title: 'ERP centralizado',
-                body: 'Nodek operaba con cinco herramientas desconectadas. Propusimos adoptar Odoo Enterprise como sistema central que unifica CRM, gestión de proyectos, compras, inventario y contabilidad en una sola plataforma.',
-              },
-              {
-                tag: 'Fase 1',
-                title: 'Gestión comercial con pipeline',
-                body: 'La cartera de clientes se manejaba en Excel y WhatsApp. Propusimos un CRM estructurado con seguimiento de oportunidades, pipeline visual y dashboards de conversión en tiempo real.',
-              },
-              {
-                tag: 'Fase 2',
-                title: 'IA para licitaciones',
-                body: 'Nodek participa en 3–5 licitaciones mensuales con un proceso 100% manual. Propusimos un sistema de inteligencia artificial que automatice el análisis de pliegos y la preparación de propuestas técnicas.',
-              },
-              {
-                tag: 'Fases 1 y 2',
-                title: 'Arquitectura 100% cloud',
-                body: 'Nodek no tiene área IT interna. Propusimos un modelo SaaS sin infraestructura propia que se administre de forma autónoma y escale con el crecimiento del negocio.',
-              },
-            ].map((item) => (
-              <div key={item.title} className="flex flex-col gap-3 rounded-2xl border border-forest/15 bg-white p-5">
-                <span className="inline-block w-fit rounded-full bg-gold/15 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-widest text-forest">{item.tag}</span>
-                <h3 className="font-semibold text-forest">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-gray-600">{item.body}</p>
+          <div className="mt-8 flex flex-col gap-4" data-reveal="left" style={{ transitionDelay: '160ms' }}>
+            <div className="flex items-start gap-4 rounded-2xl border border-forest/15 bg-white p-5">
+              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/20 text-xs font-bold text-forest">01</span>
+              <div>
+                <h3 className="font-semibold text-forest">Innovación identificada</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                  La oportunidad de innovación surgió de la brecha entre cómo operaba Nodek y cómo debería operar para sostener su crecimiento. La innovación propuesta no fue solo tecnológica: fue la decisión de pasar de un modelo reactivo y personalista a uno estructurado, con datos centralizados y procesos repetibles.
+                </p>
               </div>
-            ))}
+            </div>
+
+            <div className="flex items-start gap-4 rounded-2xl border border-forest/15 bg-white p-5">
+              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/20 text-xs font-bold text-forest">02</span>
+              <div>
+                <h3 className="font-semibold text-forest">Arquitectura actual de Nodek</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                  Relevamos la arquitectura empresarial existente: cinco herramientas desconectadas (Trello, WhatsApp, Gmail, Excel y ACONPY) que operaban sin integración entre sí. Cada área gestionaba su propia información, lo que generaba inconsistencias, duplicaciones y puntos ciegos en la operación.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 rounded-2xl border border-forest/15 bg-white p-5">
+              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/20 text-xs font-bold text-forest">03</span>
+              <div>
+                <h3 className="font-semibold text-forest">Arquitectura destino</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                  Diseñamos la arquitectura objetivo: una plataforma única que integre la gestión de clientes, proyectos, compras, inventario y contabilidad. La visión contempla también una segunda fase con inteligencia artificial aplicada al proceso de licitaciones, sobre un modelo 100% cloud que no requiere infraestructura interna.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 rounded-2xl border border-gold/40 bg-gold/5 p-5">
+              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/30 text-xs font-bold text-forest">04</span>
+              <div>
+                <h3 className="font-semibold text-forest">Análisis de brechas</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-700">
+                  El análisis de brechas mide la distancia entre la arquitectura actual y la arquitectura destino: qué capacidades faltan, qué procesos deben rediseñarse y qué tecnología debe incorporarse. Fue en esta etapa donde quedó en evidencia la necesidad central del proyecto: <strong>Nodek no contaba con ningún sistema que centralizara la información del negocio</strong>. Esa brecha era la raíz de la mayoría de los problemas identificados en el diagnóstico.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 rounded-2xl border border-forest/15 bg-white p-5">
+              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/20 text-xs font-bold text-forest">05</span>
+              <div>
+                <h3 className="font-semibold text-forest">Alcance del proyecto</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                  Con las brechas identificadas, definimos qué se implementa en la Fase 1 (plataforma de gestión integrada con módulo de gestión de clientes, proyectos, compras e inventario), qué entra en la Fase 2 (inteligencia artificial para licitaciones) y qué queda fuera del alcance actual. El alcance fue documentado con entregables y criterios de aceptación concretos acordados con el equipo directivo de Nodek.
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-2" data-reveal="left" style={{ transitionDelay: '220ms' }}>
+          <div className="mt-8 rounded-2xl border border-gold/30 bg-gold/5 p-6" data-reveal="left" style={{ transitionDelay: '200ms' }}>
+            <h3 className="font-semibold text-forest">Impacto esperado en los objetivos estratégicos de Nodek</h3>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              {[
+                { label: 'Escalabilidad operativa', body: 'Procesos documentados y automatizados que no dependen de personas clave, habilitando el crecimiento sin caos interno.' },
+                { label: 'Decisiones basadas en datos', body: 'Dashboards en tiempo real con visibilidad sobre la cartera comercial, el estado de proyectos y la rentabilidad por cliente.' },
+                { label: 'Mayor capacidad licitatoria', body: 'Con inteligencia artificial en la Fase 2, Nodek podría participar en hasta tres veces más licitaciones con el mismo equipo.' },
+              ].map((impact) => (
+                <div key={impact.label} className="rounded-xl bg-white p-4 border border-forest/10">
+                  <h4 className="text-sm font-semibold text-forest">{impact.label}</h4>
+                  <p className="mt-1.5 text-xs leading-relaxed text-gray-600">{impact.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-2" data-reveal="left" style={{ transitionDelay: '240ms' }}>
             <a href="https://drive.google.com/file/d/1J6Lw8bSkjiWqw8yp7TDPtxeOVRLIPR_s/view" target="_blank" rel="noopener noreferrer"
               className="rounded-md border border-forest/30 px-3 py-1.5 text-xs font-medium text-forest hover:bg-forest/5 transition-colors">
               Ver propuesta de mejora →
@@ -443,7 +496,7 @@ export default function DashboardPage() {
             <div className="col-span-1 sm:col-span-2 rounded-2xl border border-forest/15 bg-white p-6">
               <h3 className="font-semibold text-forest">Proveedor seleccionado: Odoo Enterprise</h3>
               <p className="mt-3 text-sm leading-relaxed text-gray-600">
-                Tras evaluar SAP S/4HANA, Xubio, Tango Nube y Odoo Enterprise, el equipo recomendó <strong>Odoo Enterprise implementado por Adhoc SRL</strong> (Gold Partner). La decisión se basó en su cobertura funcional completa —CRM, proyectos, compras, contabilidad y portal de clientes de forma nativa— y en su adecuación al perfil de una empresa sin área IT interna.
+                Tras evaluar SAP S/4HANA, Xubio, Tango Nube y Odoo Enterprise, el equipo recomendó <strong>Odoo Enterprise implementado por Adhoc SRL</strong> (Gold Partner). La decisión se basó en su cobertura funcional completa —gestión de clientes, proyectos, compras, contabilidad y portal nativo— y en su adecuación al perfil de una empresa sin área IT interna.
               </p>
               <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
                 {[
