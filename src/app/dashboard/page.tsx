@@ -6,23 +6,24 @@ import { useRouter } from 'next/navigation'
 
 // ── Links a los documentos de trabajo (Google Drive) ───────────────────────────
 const DOCS = {
-  caso: 'https://drive.google.com/file/d/1_SWGHuKXWyvcNVFtPRVvFVT-V36pfGrJ/view',
-  diagnostico: 'https://drive.google.com/file/d/1H0kqxDLkD6FjJIi7Yc9Rlav155FtpBli/view',
-  arqOrigen: 'https://drive.google.com/file/d/1pnbL0jbBNlT8BJJiO8_B53rUKESk4pwG/view',
-  innovacion: 'https://drive.google.com/file/d/1J6Lw8bSkjiWqw8yp7TDPtxeOVRLIPR_s/view',
-  arqDestino: 'https://drive.google.com/file/d/1U8wlvDndxy9aSsLwEQ7HAk6Eza6N7WwT/view',
-  brechas: 'https://drive.google.com/file/d/1CMtgpPHMyOO-sdg2zdkZVkWV9uyD29A5/view',
-  alcance: 'https://drive.google.com/file/d/1UVS_BWJgsmDgTRCsftc6TDdG-SJAzuaD/view',
-  mercado: 'https://drive.google.com/file/d/1RqL2u_8_R52FcgRwIxzYLRNqxkzSLqIJ/view',
-  factibilidad: 'https://drive.google.com/file/d/1zstOgKiEfltZ4Bfk7fvIwtTFiK0EpeG5/view',
-  evalEconomica: 'https://drive.google.com/file/d/1rRse2n8hcejsv97RVSSy5CJfKSKaQ2rn/view',
-  propuestaComercial: 'https://drive.google.com/file/d/1b8qzExtKN25JRFIuZkPIDalwJng9J916/view',
+  caso: 'https://drive.google.com/file/d/1Bgl5hF1eRC4swFiIbeBxK2edNOnG3K_O/view',
+  diagnostico: 'https://drive.google.com/file/d/1FWhLmoOVwH5u1f8MP0iV7Bwcq9-1IYJ3/view',
+  arqOrigen: 'https://drive.google.com/file/d/1BMTcMNQc1840Mp2xvVhQNOIJRj-49NhU/view',
+  innovacion: 'https://drive.google.com/file/d/1gHOiWZLshjmLEKbWJtjtW_7kDjEOIubo/view',
+  arqDestino: 'https://drive.google.com/file/d/1fEL3E4Z9JWYw-zvgWcCPZRmcheMG5wGz/view',
+  brechas: 'https://drive.google.com/file/d/1HEQ3EqduOQ-kZ-xcdWEdQT2QGtlK0oMR/view',
+  alcance: 'https://drive.google.com/file/d/16GCHuQ6kY1-44zt8ihgOBAWJzCkNK2Zc/view',
+  mercado: 'https://drive.google.com/file/d/1x_O45p2JA4J5QUP6kgjN2ZFuSR5lZ54U/view',
+  factibilidad: 'https://drive.google.com/file/d/1lKhG9pnU5v6YfbmauyivJKpk5lqgEgn1/view',
+  evalEconomica: 'https://drive.google.com/file/d/11blAIWRGa66i9Dv3BTrf_HWWopEi7oRO/view',
+  propuestaComercial: 'https://drive.google.com/file/d/1QXw_UEIFqxCoGoCNycGRjtYp3suafaQ-/view',
+  cierre: 'https://drive.google.com/file/d/11NePQLoEcNaROd_eS5qJxkLAMb6pjsQG/view',
 }
 
 // ── Término técnico con explicación al pasar el mouse + link al documento ───────
 function Term({ children, def, href }: { children: ReactNode; def: string; href?: string }) {
   const content = (
-    <span className="font-semibold text-forest decoration-gold decoration-dotted underline underline-offset-2">
+    <span className="font-semibold text-blue-600 decoration-blue-400 decoration-dotted underline underline-offset-2">
       {children}
     </span>
   )
@@ -70,64 +71,64 @@ const DELIVERIES: Delivery[] = [
   {
     number: 1, etapa: 1, title: 'Presentación del caso de negocio', dueDate: '20/03/2026',
     links: [
-      { label: 'Ver documento (PDF)', url: 'https://drive.google.com/file/d/1_SWGHuKXWyvcNVFtPRVvFVT-V36pfGrJ/view' },
+      { label: 'Ver documento (PDF)', url: 'https://drive.google.com/file/d/1Bgl5hF1eRC4swFiIbeBxK2edNOnG3K_O/view' },
     ],
   },
   {
     number: 2, etapa: 1, title: 'Diagnóstico de la organización', dueDate: '27/03/2026',
-    links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1H0kqxDLkD6FjJIi7Yc9Rlav155FtpBli/view' }],
+    links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1FWhLmoOVwH5u1f8MP0iV7Bwcq9-1IYJ3/view' }],
   },
   {
     number: 3, etapa: 1, title: 'Análisis de la situación actual', dueDate: '03/04/2026',
-    links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1pnbL0jbBNlT8BJJiO8_B53rUKESk4pwG/view' }],
+    links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1BMTcMNQc1840Mp2xvVhQNOIJRj-49NhU/view' }],
   },
   {
     number: 4, etapa: 2, title: 'Propuesta de mejora e innovación', dueDate: '10/04/2026',
-    links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1J6Lw8bSkjiWqw8yp7TDPtxeOVRLIPR_s/view' }],
+    links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1gHOiWZLshjmLEKbWJtjtW_7kDjEOIubo/view' }],
   },
   {
     number: 5, etapa: 2, title: 'Diseño de la arquitectura objetivo', dueDate: '17/04/2026',
     links: [
-      { label: 'Ver documento', url: 'https://drive.google.com/file/d/1U8wlvDndxy9aSsLwEQ7HAk6Eza6N7WwT/view' },
+      { label: 'Ver documento', url: 'https://drive.google.com/file/d/1fEL3E4Z9JWYw-zvgWcCPZRmcheMG5wGz/view' },
       { label: 'Ver diagrama', url: 'https://drive.google.com/file/d/1D4K8R131H83eBuKXRX3GNda5xfNKM14U/view' },
     ],
   },
   {
     number: 6, etapa: 2, title: 'Análisis de brechas', dueDate: '24/04/2026',
     links: [
-      { label: 'Ver documento', url: 'https://drive.google.com/file/d/1CMtgpPHMyOO-sdg2zdkZVkWV9uyD29A5/view' },
+      { label: 'Ver documento', url: 'https://drive.google.com/file/d/1HEQ3EqduOQ-kZ-xcdWEdQT2QGtlK0oMR/view' },
       { label: 'Ver matriz', url: 'https://drive.google.com/file/d/1C_VSgxqj9wArtktDCnKxoi3tgyJecNyM/view' },
     ],
   },
   {
     number: 7, etapa: 3, title: 'Alcance y planificación', dueDate: '01/05/2026',
     links: [
-      { label: 'Ver documento', url: 'https://drive.google.com/file/d/1UVS_BWJgsmDgTRCsftc6TDdG-SJAzuaD/view' },
+      { label: 'Ver documento', url: 'https://drive.google.com/file/d/16GCHuQ6kY1-44zt8ihgOBAWJzCkNK2Zc/view' },
       { label: 'Ver cronograma Gantt', url: 'https://drive.google.com/file/d/1tOs5rduqIUdNVWRLaxeEp8VtHl4UQ92J/view' },
     ],
   },
   {
     number: 8, etapa: 3, title: 'Análisis de mercado', dueDate: '08/05/2026',
-    links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1RqL2u_8_R52FcgRwIxzYLRNqxkzSLqIJ/view' }],
+    links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1x_O45p2JA4J5QUP6kgjN2ZFuSR5lZ54U/view' }],
   },
   {
     number: 9, etapa: 3, title: 'Análisis de viabilidad', dueDate: '15/05/2026',
     links: [
-      { label: 'Ver documento', url: 'https://drive.google.com/file/d/1zstOgKiEfltZ4Bfk7fvIwtTFiK0EpeG5/view' },
+      { label: 'Ver documento', url: 'https://drive.google.com/file/d/1lKhG9pnU5v6YfbmauyivJKpk5lqgEgn1/view' },
       { label: 'Ver matriz RFP', url: 'https://drive.google.com/file/d/1kN9rg8Fv73RuH9Clo7kWfU9T4ZT6DI2B/view' },
     ],
   },
   {
     number: 10, etapa: 4, title: 'Evaluación de inversión', dueDate: '22/05/2026',
-    links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1rRse2n8hcejsv97RVSSy5CJfKSKaQ2rn/view' }],
+    links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/11blAIWRGa66i9Dv3BTrf_HWWopEi7oRO/view' }],
   },
   {
     number: 11, etapa: 4, title: 'Propuesta comercial', dueDate: '29/05/2026',
-    links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1b8qzExtKN25JRFIuZkPIDalwJng9J916/view' }],
+    links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1QXw_UEIFqxCoGoCNycGRjtYp3suafaQ-/view' }],
   },
   {
     number: 12, etapa: 4, title: 'Cierre y entrega final', dueDate: '05/06/2026',
-    links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1LHu0B4zsV4kcmn7IN8cjrUaoyyAmdc22/view' }],
+    links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/11NePQLoEcNaROd_eS5qJxkLAMb6pjsQG/view' }],
   },
 ]
 
