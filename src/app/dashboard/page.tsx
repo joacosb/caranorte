@@ -1,7 +1,50 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import type { ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
+
+// ── Links a los documentos de trabajo (Google Drive) ───────────────────────────
+const DOCS = {
+  caso: 'https://drive.google.com/file/d/1_SWGHuKXWyvcNVFtPRVvFVT-V36pfGrJ/view',
+  diagnostico: 'https://drive.google.com/file/d/1H0kqxDLkD6FjJIi7Yc9Rlav155FtpBli/view',
+  arqOrigen: 'https://drive.google.com/file/d/1pnbL0jbBNlT8BJJiO8_B53rUKESk4pwG/view',
+  innovacion: 'https://drive.google.com/file/d/1J6Lw8bSkjiWqw8yp7TDPtxeOVRLIPR_s/view',
+  arqDestino: 'https://drive.google.com/file/d/1U8wlvDndxy9aSsLwEQ7HAk6Eza6N7WwT/view',
+  brechas: 'https://drive.google.com/file/d/1CMtgpPHMyOO-sdg2zdkZVkWV9uyD29A5/view',
+  alcance: 'https://drive.google.com/file/d/1UVS_BWJgsmDgTRCsftc6TDdG-SJAzuaD/view',
+  mercado: 'https://drive.google.com/file/d/1RqL2u_8_R52FcgRwIxzYLRNqxkzSLqIJ/view',
+  factibilidad: 'https://drive.google.com/file/d/1zstOgKiEfltZ4Bfk7fvIwtTFiK0EpeG5/view',
+  evalEconomica: 'https://drive.google.com/file/d/1rRse2n8hcejsv97RVSSy5CJfKSKaQ2rn/view',
+  propuestaComercial: 'https://drive.google.com/file/d/1b8qzExtKN25JRFIuZkPIDalwJng9J916/view',
+}
+
+// ── Término técnico con explicación al pasar el mouse + link al documento ───────
+function Term({ children, def, href }: { children: ReactNode; def: string; href?: string }) {
+  const content = (
+    <span className="font-semibold text-forest decoration-gold decoration-dotted underline underline-offset-2">
+      {children}
+    </span>
+  )
+  return (
+    <span className="group relative inline-block">
+      {href ? (
+        <a href={href} target="_blank" rel="noopener noreferrer" className="hover:text-forest-dark">
+          {content}
+        </a>
+      ) : (
+        content
+      )}
+      <span
+        role="tooltip"
+        className="pointer-events-none absolute bottom-full left-1/2 z-50 mb-2 w-64 -translate-x-1/2 rounded-lg bg-forest-dark px-3 py-2 text-xs font-normal leading-relaxed text-cream opacity-0 shadow-xl transition-opacity duration-150 group-hover:opacity-100"
+      >
+        {def}
+        {href && <span className="mt-1.5 block font-semibold text-gold">Ver documento →</span>}
+      </span>
+    </span>
+  )
+}
 
 // ── Static data ───────────────────────────────────────────────────────────────
 
@@ -224,7 +267,7 @@ export default function DashboardPage() {
             Proyecto de transformación digital<br className="hidden sm:block" /> para Nodek Energía
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-cream/75">
-            Acompañamos a Nodek en el desarrollo de una propuesta integral de transformación digital que potencie su operación y crecimiento.
+            Acompañamos a Nodek en el análisis de su operación y en el diseño de una propuesta tecnológica que ordene su información y habilite su próximo salto de crecimiento.
           </p>
         </div>
       </section>
@@ -238,13 +281,32 @@ export default function DashboardPage() {
           <h2 className="mt-2 text-3xl font-bold text-forest" data-reveal="left">¿Quién es Nodek?</h2>
           <div className="mt-6 max-w-3xl flex flex-col gap-5 text-ink/85 leading-relaxed" data-reveal="left" style={{ transitionDelay: '100ms' }}>
             <p>
-              Nodek Energía es una PyME argentina fundada hace cinco años, especializada en soluciones de{' '}
-              <strong>energía solar, movilidad eléctrica e ingeniería eléctrica</strong>. Con un equipo de 10 personas y una facturación anual cercana al millón de dólares, opera principalmente en el segmento B2B ofreciendo proyectos llave en mano a empresas y organismos públicos.
+              Nodek Energía es una empresa argentina con <strong>5 años de trayectoria</strong> que brinda soluciones energéticas integrales para optimizar el consumo y acompañar la transición hacia un modelo más eficiente y sostenible. Opera principalmente con empresas y organismos públicos, con sede central en <strong>CABA</strong> y operaciones en <strong>Corrientes</strong>, y lleva <strong>más de 130 proyectos completados</strong>.
             </p>
             <p>
-              El pedido inicial fue claro: <em>"Necesitamos ordenar la casa antes de seguir creciendo."</em> Nuestro trabajo fue transformar ese diagnóstico en un plan concreto, fundamentado y ejecutable.
+              Sus cinco líneas de servicio son <strong>eficiencia energética, energía solar, movilidad eléctrica, ingeniería eléctrica y almacenamiento</strong>. El proyecto se trabajó junto a su sponsor, <strong>Matías Grosso (Director Técnico-Comercial)</strong>.
             </p>
           </div>
+
+          <div className="mt-8 grid gap-4 sm:grid-cols-2" data-reveal="left" style={{ transitionDelay: '160ms' }}>
+            <div className="rounded-xl border border-forest/10 bg-white p-5">
+              <p className="text-xs font-bold uppercase tracking-widest text-gold">Objetivo estratégico 1</p>
+              <h3 className="mt-2 font-semibold text-forest">Expansión geográfica</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-gray-600">
+                Sumar operaciones en Buenos Aires, el Noroeste argentino (NOA) y la Patagonia dentro de los próximos tres años.
+              </p>
+            </div>
+            <div className="rounded-xl border border-forest/10 bg-white p-5">
+              <p className="text-xs font-bold uppercase tracking-widest text-gold">Objetivo estratégico 2</p>
+              <h3 className="mt-2 font-semibold text-forest">Proyectos de mayor escala</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-gray-600">
+                Encarar obras de mayor envergadura, con una potencia mínima de 3 MW por proyecto.
+              </p>
+            </div>
+          </div>
+          <p className="mt-5 max-w-3xl text-sm leading-relaxed text-muted" data-reveal="left" style={{ transitionDelay: '200ms' }}>
+            Ambos objetivos comparten un mismo requisito: para crecer, Nodek necesita <strong>ganar más licitaciones</strong> (concursos en los que las empresas compiten presentando una propuesta para obtener un contrato). Y ahí estaba el cuello de botella que dio origen a este proyecto.
+          </p>
         </section>
 
         {/* ── Nuestro diagnóstico ─────────────────────────────────────────── */}
@@ -252,34 +314,35 @@ export default function DashboardPage() {
           <p className="text-xs font-bold uppercase tracking-widest text-gold">Etapa 1</p>
           <h2 className="mt-2 text-3xl font-bold text-forest" data-reveal="right">Nuestro diagnóstico</h2>
           <p className="mt-2 text-muted" data-reveal="right" style={{ transitionDelay: '80ms' }}>
-            Lo que encontramos al analizar la organización en profundidad.
+            Entrevistamos a las distintas áreas de Nodek para entender, más allá de lo visible, cómo trabaja la empresa por dentro. A eso se lo llama{' '}
+            <Term def="Una mirada profunda de la organización: no solo sus números, sino cómo se toman las decisiones, dónde se concentra el conocimiento y qué tan ordenados están sus procesos." href={DOCS.diagnostico}>diagnóstico organizacional</Term>.
           </p>
 
           <p className="mt-6 max-w-3xl text-sm leading-relaxed text-ink/85" data-reveal="right" style={{ transitionDelay: '120ms' }}>
-            Al inicio del proyecto, Nodek enfrentaba un desafío concreto: su operación crecía más rápido que su infraestructura interna. Los procesos centrales —gestión comercial, seguimiento de proyectos, compras y administración— estaban distribuidos en herramientas desconectadas (Trello, WhatsApp, Gmail, Excel), lo que generaba pérdida de información, demoras y decisiones basadas en datos incompletos.
+            El hallazgo central: la operación de Nodek crecía más rápido que su organización interna. La información del negocio vivía repartida en muchas herramientas que no se comunicaban entre sí, y los procesos más importantes dependían de la experiencia de pocas personas clave.
           </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2" data-reveal="right" style={{ transitionDelay: '160ms' }}>
             {[
               {
                 icon: '🔗',
-                title: 'Herramientas desconectadas',
-                body: 'Trello, WhatsApp, Gmail, Excel y ACONPY operaban de forma aislada. La información crítica del negocio vivía en chats y planillas sin trazabilidad.',
+                title: 'Información dispersa en muchas apps',
+                body: 'Google Drive, Excel, Trello, Gmail, WhatsApp, ACONPY, Smart Design, Modhub y FusionSolar operaban de forma aislada, sin una fuente única de datos confiable.',
               },
               {
                 icon: '👤',
-                title: 'Concentración de conocimiento',
-                body: 'Las decisiones técnicas y comerciales dependían de una o dos personas clave. Ante una ausencia, el proceso se detenía.',
+                title: 'Conocimiento y decisiones concentrados',
+                body: 'Las decisiones de inversión y muchas tareas críticas (incluso la búsqueda de personal) recaían en el Director Técnico-Comercial. Ante una ausencia, el proceso se frenaba.',
               },
               {
-                icon: '📦',
-                title: 'Sin gestión estructurada de compras',
-                body: 'Las compras se realizaban sin órdenes formales ni seguimiento. El inventario y los proveedores se gestionaban informalmente.',
+                icon: '📝',
+                title: 'Licitaciones armadas a mano',
+                body: 'Cada propuesta para una licitación se preparaba manualmente, coordinando varias áreas. Era lento y dependía de una sola persona: el principal cuello de botella.',
               },
               {
                 icon: '📊',
-                title: 'Sin visibilidad en tiempo real',
-                body: 'No había dashboards ni reportes automáticos. El seguimiento del estado de proyectos y la cartera comercial se hacía manualmente.',
+                title: 'Sin datos en tiempo real',
+                body: 'No había tableros ni reportes automáticos. El estado de los proyectos y de la cartera comercial se seguía de forma manual, con información incompleta.',
               },
             ].map((item) => (
               <div key={item.title} className="flex gap-4 rounded-xl border border-forest/10 bg-cream p-4">
@@ -292,34 +355,60 @@ export default function DashboardPage() {
             ))}
           </div>
 
-          <div className="mt-8" data-reveal="right" style={{ transitionDelay: '200ms' }}>
-            <p className="mb-4 text-xs font-bold uppercase tracking-widest text-gold">Lo que escuchamos en las entrevistas</p>
-            <div className="grid gap-4 sm:grid-cols-3">
+          <div className="mt-10" data-reveal="right" style={{ transitionDelay: '200ms' }}>
+            <p className="text-xs font-bold uppercase tracking-widest text-gold">Lo que pidió cada área</p>
+            <p className="mt-2 max-w-3xl text-sm leading-relaxed text-ink/85">
+              Registramos cada necesidad como una{' '}
+              <Term def="Una forma simple de anotar lo que necesita cada persona, en su propio idioma y con el formato: Como [rol], quiero [algo], para [un beneficio]." href={DOCS.diagnostico}>historia de usuario</Term>: una frase en el idioma de quien la pide. Luego las ordenamos por prioridad con el método{' '}
+              <Term def="Método para clasificar pedidos según su urgencia: Must (imprescindible), Should (deseable), Could (opcional) y Won't (queda para más adelante)." href={DOCS.diagnostico}>MoSCoW</Term>.
+            </p>
+
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
               {[
-                { role: 'CEO', story: 'Necesito saber qué está pasando en todos los proyectos sin tener que llamar a cada uno para preguntarles.' },
-                { role: 'Responsable comercial', story: 'Pierdo oportunidades porque no tengo un registro de con quién hablé ni en qué etapa quedamos. Todo está en el WhatsApp.' },
-                { role: 'Jefe de operaciones', story: 'Compro materiales que ya tenemos en stock porque no sé qué hay disponible. No hay un lugar donde mirar.' },
-              ].map(({ role, story }) => (
-                <div key={role} className="rounded-xl border border-forest/10 bg-cream p-4">
-                  <p className="text-sm leading-relaxed text-ink/80 italic">&ldquo;{story}&rdquo;</p>
-                  <p className="mt-3 text-xs font-semibold text-forest">— {role}, Nodek</p>
-                </div>
-              ))}
+                { code: 'US-01', area: 'Licitaciones y propuestas', rol: 'ofertista', quiero: 'automatizar el armado de propuestas y licitaciones, coordinando las áreas involucradas', para: 'alinearlas con el cliente y reducir los tiempos de elaboración', prio: 'MUST' },
+                { code: 'US-02', area: 'Preventa', rol: 'ofertista', quiero: 'automatizar campañas, registrar las interacciones con interesados y medir el embudo de ventas', para: 'agilizar la conversión de oportunidades', prio: 'MUST' },
+                { code: 'US-03', area: 'Gestión de proyectos', rol: 'responsable de tecnología y proyectos', quiero: 'ver el estado de cada proyecto en tiempo real', para: 'tener visibilidad del avance y anticipar desvíos', prio: 'MUST' },
+                { code: 'US-04', area: 'Cadena de suministro', rol: 'líder de proyecto', quiero: 'gestionar proveedores y compras de forma centralizada', para: 'seguir el proceso desde la compra hasta la entrega', prio: 'MUST' },
+                { code: 'US-05', area: 'Posventa', rol: 'director técnico', quiero: 'monitorear el rendimiento y generar reportes automáticos con indicadores clave', para: 'dar valor agregado al cliente y reducir el armado de informes', prio: 'SHOULD' },
+                { code: 'US-06', area: 'Gestión financiera', rol: 'director', quiero: 'centralizar y automatizar las finanzas con seguimiento del flujo de caja', para: 'tomar decisiones basadas en datos', prio: 'COULD' },
+                { code: 'US-07', area: 'Búsqueda de empleados', rol: 'responsable de RR.HH.', quiero: 'filtrar y clasificar candidatos automáticamente', para: 'recibir solo los perfiles adecuados al puesto', prio: 'COULD' },
+                { code: 'US-08', area: 'Nuevos productos y servicios', rol: 'director', quiero: 'agilizar la evaluación y propuesta de nuevos productos', para: 'generar ventajas competitivas', prio: "WON'T" },
+              ].map((us) => {
+                const prioMap: Record<string, { label: string; cls: string }> = {
+                  MUST: { label: 'Imprescindible', cls: 'bg-forest text-white' },
+                  SHOULD: { label: 'Deseable', cls: 'bg-gold text-forest-dark' },
+                  COULD: { label: 'Opcional', cls: 'bg-forest/10 text-forest' },
+                  "WON'T": { label: 'Más adelante', cls: 'bg-gray-200 text-gray-600' },
+                }
+                const prio = prioMap[us.prio]
+                return (
+                  <div key={us.code} className="flex flex-col gap-2 rounded-xl border border-forest/10 bg-cream p-4">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[11px] font-bold tracking-wide text-muted">{us.code} · {us.area}</span>
+                      <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${prio.cls}`}>{prio.label}</span>
+                    </div>
+                    <p className="text-sm leading-relaxed text-ink/80">
+                      <span className="font-semibold text-forest">Como</span> {us.rol}, <span className="font-semibold text-forest">quiero</span> {us.quiero} <span className="font-semibold text-forest">para</span> {us.para}.
+                    </p>
+                  </div>
+                )
+              })}
             </div>
           </div>
 
-          <div className="mt-6 flex flex-col gap-4 border-t border-forest/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-8 flex flex-col gap-4 border-t border-forest/10 pt-6 sm:flex-row sm:items-center sm:justify-between" data-reveal="right" style={{ transitionDelay: '240ms' }}>
             <p className="text-sm text-muted max-w-xl">
-              La madurez organizacional se evaluó usando la escala CMM (Capability Maturity Model), un modelo internacional de cinco niveles que mide qué tan sistemáticos y repetibles son los procesos de una organización. Nodek se encontraba en transición entre el Nivel 1 (ad hoc) y el Nivel 2 (procesos básicos): procedimientos parcialmente documentados con alta dependencia de conocimiento individual en roles clave.
+              Para medir qué tan ordenada estaba la empresa usamos la escala{' '}
+              <Term def="Capability Maturity Model: un termómetro de madurez con 5 niveles, del 1 (procesos caóticos) al 5 (procesos optimizados), que mide qué tan sistemáticos y repetibles son los procesos de una organización." href={DOCS.diagnostico}>CMM</Term>. Nodek estaba en el <strong>Nivel 2 (repetible)</strong>: procesos básicos y parcialmente documentados, pero con fuerte dependencia del conocimiento de cada persona.
             </p>
             <div className="flex flex-wrap gap-2 shrink-0">
-              <a href="https://drive.google.com/file/d/1H0kqxDLkD6FjJIi7Yc9Rlav155FtpBli/view" target="_blank" rel="noopener noreferrer"
+              <a href={DOCS.diagnostico} target="_blank" rel="noopener noreferrer"
                 className="rounded-md border border-forest/30 px-3 py-1.5 text-xs font-medium text-forest hover:bg-forest/5 transition-colors">
                 Ver diagnóstico completo →
               </a>
-              <a href="https://drive.google.com/file/d/1pnbL0jbBNlT8BJJiO8_B53rUKESk4pwG/view" target="_blank" rel="noopener noreferrer"
+              <a href={DOCS.arqOrigen} target="_blank" rel="noopener noreferrer"
                 className="rounded-md border border-forest/30 px-3 py-1.5 text-xs font-medium text-forest hover:bg-forest/5 transition-colors">
-                Ver análisis situación actual →
+                Ver situación actual →
               </a>
             </div>
           </div>
@@ -330,16 +419,18 @@ export default function DashboardPage() {
           <p className="text-xs font-bold uppercase tracking-widest text-gold">Etapa 2</p>
           <h2 className="mt-2 text-3xl font-bold text-forest" data-reveal="left">¿Qué propusimos transformar?</h2>
           <p className="mt-2 max-w-2xl text-muted" data-reveal="left" style={{ transitionDelay: '80ms' }}>
-            El camino desde el diagnóstico hasta la solución atravesó cinco etapas de diseño progresivo.
+            Del diagnóstico a la solución recorrimos cinco pasos: primero la idea innovadora, después el mapa de cómo trabaja Nodek hoy y cómo debería trabajar, qué falta para llegar y, por último, qué incluye exactamente nuestro proyecto.
           </p>
 
           <div className="mt-8 flex flex-col gap-4" data-reveal="left" style={{ transitionDelay: '160ms' }}>
             <div className="flex items-start gap-4 rounded-2xl border border-forest/15 bg-white p-5">
               <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/20 text-xs font-bold text-forest">01</span>
               <div>
-                <h3 className="font-semibold text-forest">Innovación identificada</h3>
+                <h3 className="font-semibold text-forest">La innovación: inteligencia artificial para licitaciones</h3>
                 <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                  La oportunidad de innovación surgió de la brecha entre cómo operaba Nodek y cómo debería operar para sostener su crecimiento. La innovación propuesta no fue solo tecnológica: fue la decisión de pasar de un modelo reactivo y personalista a uno estructurado, con datos centralizados y procesos repetibles.
+                  Como el cuello de botella era el armado manual de licitaciones, la idea central fue automatizarlo con{' '}
+                  <Term def="Una IA que redacta: a partir del pliego de la licitación genera un borrador de propuesta y detecta qué requisitos faltan cubrir." href={DOCS.innovacion}>inteligencia artificial generativa</Term>{' '}y{' '}
+                  <Term def="Una IA que estima: predice la probabilidad de ganar cada licitación e identifica los competidores probables, para decidir en cuáles conviene invertir esfuerzo." href={DOCS.innovacion}>predictiva</Term>. Así Nodek puede preparar más propuestas, de mejor calidad y sin depender de una sola persona. Esta innovación es el destino; pero antes hay que ordenar los datos que la alimentan.
                 </p>
               </div>
             </div>
@@ -347,9 +438,10 @@ export default function DashboardPage() {
             <div className="flex items-start gap-4 rounded-2xl border border-forest/15 bg-white p-5">
               <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/20 text-xs font-bold text-forest">02</span>
               <div>
-                <h3 className="font-semibold text-forest">Arquitectura actual de Nodek</h3>
+                <h3 className="font-semibold text-forest">Cómo trabaja Nodek hoy</h3>
                 <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                  Relevamos la arquitectura empresarial existente: cinco herramientas desconectadas (Trello, WhatsApp, Gmail, Excel y ACONPY) que operaban sin integración entre sí. Cada área gestionaba su propia información, lo que generaba inconsistencias, duplicaciones y puntos ciegos en la operación.
+                  Dibujamos su{' '}
+                  <Term def="El mapa completo de cómo funciona una empresa: sus procesos, su información, las aplicaciones que usa y la tecnología que la soporta, y cómo se conectan entre sí." href={DOCS.arqOrigen}>arquitectura empresarial</Term>{' '}actual: 14 procesos sostenidos por más de ocho herramientas que no se hablan entre sí (Google Drive, Excel, Trello, Gmail, WhatsApp, ACONPY, Smart Design, Modhub y FusionSolar). Cada área manejaba su propia información, generando inconsistencias, duplicaciones y puntos ciegos en la operación.
                 </p>
               </div>
             </div>
@@ -357,9 +449,11 @@ export default function DashboardPage() {
             <div className="flex items-start gap-4 rounded-2xl border border-forest/15 bg-white p-5">
               <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/20 text-xs font-bold text-forest">03</span>
               <div>
-                <h3 className="font-semibold text-forest">Arquitectura destino</h3>
+                <h3 className="font-semibold text-forest">Cómo debería trabajar</h3>
                 <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                  Diseñamos la arquitectura objetivo: una plataforma única que integre la gestión de clientes, proyectos, compras, inventario y contabilidad. La visión contempla también una segunda fase con inteligencia artificial aplicada al proceso de licitaciones, sobre un modelo 100% cloud que no requiere infraestructura interna.
+                  Diseñamos la arquitectura destino alrededor de un{' '}
+                  <Term def="Sistema único de gestión que reúne en un solo lugar clientes, proyectos, compras y finanzas, en lugar de tenerlo todo repartido en herramientas sueltas." href={DOCS.arqDestino}>ERP</Term>{' '}en modalidad{' '}
+                  <Term def="Software que se usa por internet, sin instalar ni mantener servidores propios: ideal porque Nodek no tiene área de sistemas." href={DOCS.arqDestino}>SaaS</Term>, con módulos de clientes, proyectos, compras, finanzas y tableros de indicadores. Sobre esa base de datos ordenada se conecta, en una segunda fase, la IA para licitaciones. Todo en la nube, sin infraestructura propia.
                 </p>
               </div>
             </div>
@@ -367,9 +461,10 @@ export default function DashboardPage() {
             <div className="flex items-start gap-4 rounded-2xl border border-forest/15 bg-white p-5">
               <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/20 text-xs font-bold text-forest">04</span>
               <div>
-                <h3 className="font-semibold text-forest">Análisis de brechas</h3>
+                <h3 className="font-semibold text-forest">Qué falta para llegar</h3>
                 <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                  El análisis de brechas mide la distancia entre la arquitectura actual y la arquitectura destino: qué capacidades faltan, qué procesos deben rediseñarse y qué tecnología debe incorporarse. Fue en esta etapa donde quedó en evidencia la necesidad central del proyecto: <strong>Nodek no contaba con ningún sistema que centralizara la información del negocio</strong>. Esa brecha era la raíz de la mayoría de los problemas identificados en el diagnóstico.
+                  Con una{' '}
+                  <Term def="Una tabla que compara, punto por punto, cómo está la empresa hoy contra cómo querría estar, para ver con claridad qué capacidades faltan." href={DOCS.brechas}>matriz de brechas</Term>{' '}medimos la distancia entre el presente y el destino. Quedó en evidencia la necesidad central del proyecto: <strong>Nodek no contaba con ningún sistema que centralizara la información del negocio</strong>. Esa única brecha era la raíz de casi todos los problemas del diagnóstico.
                 </p>
               </div>
             </div>
@@ -377,9 +472,10 @@ export default function DashboardPage() {
             <div className="flex items-start gap-4 rounded-2xl border border-forest/15 bg-white p-5">
               <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/20 text-xs font-bold text-forest">05</span>
               <div>
-                <h3 className="font-semibold text-forest">Alcance del proyecto</h3>
+                <h3 className="font-semibold text-forest">Qué incluye (y qué no) este proyecto</h3>
                 <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                  Con las brechas identificadas, definimos qué se implementa en la Fase 1 (plataforma de gestión integrada con módulo de gestión de clientes, proyectos, compras e inventario), qué entra en la Fase 2 (inteligencia artificial para licitaciones) y qué queda fuera del alcance actual. El alcance fue documentado con entregables y criterios de aceptación concretos acordados con el equipo directivo de Nodek.
+                  Definimos con claridad el{' '}
+                  <Term def="Los límites del proyecto: qué cosas SÍ hace y, sobre todo, qué cosas NO hace, para que el cliente y la consultora tengan la misma expectativa." href={DOCS.alcance}>alcance</Term>. Nuestro trabajo como consultora <strong>recomienda</strong> la solución: incluye la propuesta tecnológica, la preselección de proveedores y las recomendaciones para implementarla. <strong>No</strong> incluye la implementación en sí, el desarrollo de software a medida ni el soporte posterior: eso queda a cargo de Nodek y del proveedor que elija. La IA de licitaciones se planifica como una segunda fase futura.
                 </p>
               </div>
             </div>
@@ -402,17 +498,21 @@ export default function DashboardPage() {
           </div>
 
           <div className="mt-6 flex flex-wrap gap-2" data-reveal="left" style={{ transitionDelay: '240ms' }}>
-            <a href="https://drive.google.com/file/d/1J6Lw8bSkjiWqw8yp7TDPtxeOVRLIPR_s/view" target="_blank" rel="noopener noreferrer"
+            <a href={DOCS.innovacion} target="_blank" rel="noopener noreferrer"
               className="rounded-md border border-forest/30 px-3 py-1.5 text-xs font-medium text-forest hover:bg-forest/5 transition-colors">
-              Ver propuesta de mejora →
+              Ver innovación →
             </a>
-            <a href="https://drive.google.com/file/d/1U8wlvDndxy9aSsLwEQ7HAk6Eza6N7WwT/view" target="_blank" rel="noopener noreferrer"
+            <a href={DOCS.arqDestino} target="_blank" rel="noopener noreferrer"
               className="rounded-md border border-forest/30 px-3 py-1.5 text-xs font-medium text-forest hover:bg-forest/5 transition-colors">
-              Ver arquitectura objetivo →
+              Ver arquitectura destino →
             </a>
-            <a href="https://drive.google.com/file/d/1CMtgpPHMyOO-sdg2zdkZVkWV9uyD29A5/view" target="_blank" rel="noopener noreferrer"
+            <a href={DOCS.brechas} target="_blank" rel="noopener noreferrer"
               className="rounded-md border border-forest/30 px-3 py-1.5 text-xs font-medium text-forest hover:bg-forest/5 transition-colors">
-              Ver análisis de brechas →
+              Ver matriz de brechas →
+            </a>
+            <a href={DOCS.alcance} target="_blank" rel="noopener noreferrer"
+              className="rounded-md border border-forest/30 px-3 py-1.5 text-xs font-medium text-forest hover:bg-forest/5 transition-colors">
+              Ver alcance →
             </a>
           </div>
         </section>
@@ -463,10 +563,21 @@ export default function DashboardPage() {
             </div>
           </div>
 
+          <div className="mt-8 rounded-2xl border border-forest/15 bg-cream p-5" data-reveal="right" style={{ transitionDelay: '200ms' }}>
+            <p className="text-xs font-bold uppercase tracking-widest text-gold">Cómo conviene implementarlo</p>
+            <p className="mt-2 text-sm leading-relaxed text-ink/85">
+              Evaluamos cuatro formas de poner en marcha la solución (en servidores propios o en la nube; de golpe o por partes) y recomendamos hacerlo <strong>en la nube y por etapas</strong>. La nube, porque Nodek no tiene área de sistemas; por etapas, porque permite empezar por lo más crítico, validar resultados y que el equipo se adapte de a poco, reduciendo riesgos y resistencia al cambio.
+            </p>
+          </div>
+
           <div className="mt-6 flex flex-wrap gap-2 border-t border-forest/10 pt-6" data-reveal="right" style={{ transitionDelay: '240ms' }}>
-            <a href="https://drive.google.com/file/d/1UVS_BWJgsmDgTRCsftc6TDdG-SJAzuaD/view" target="_blank" rel="noopener noreferrer"
+            <a href={DOCS.alcance} target="_blank" rel="noopener noreferrer"
               className="rounded-md border border-forest/30 px-3 py-1.5 text-xs font-medium text-forest hover:bg-forest/5 transition-colors">
               Ver documento de alcance →
+            </a>
+            <a href={DOCS.brechas} target="_blank" rel="noopener noreferrer"
+              className="rounded-md border border-forest/30 px-3 py-1.5 text-xs font-medium text-forest hover:bg-forest/5 transition-colors">
+              Ver escenarios de implementación →
             </a>
             <a href="https://drive.google.com/file/d/1tOs5rduqIUdNVWRLaxeEp8VtHl4UQ92J/view" target="_blank" rel="noopener noreferrer"
               className="rounded-md border border-forest/30 px-3 py-1.5 text-xs font-medium text-forest hover:bg-forest/5 transition-colors">
@@ -480,21 +591,24 @@ export default function DashboardPage() {
           <p className="text-xs font-bold uppercase tracking-widest text-gold">Etapa 4</p>
           <h2 className="mt-2 text-3xl font-bold text-forest" data-reveal="left">Evaluación económica y viabilidad</h2>
           <p className="mt-2 max-w-2xl text-muted" data-reveal="left" style={{ transitionDelay: '80ms' }}>
-            Evaluamos cuatro alternativas de sistema de gestión y seleccionamos la mejor opción para el perfil y el presupuesto de Nodek.
+            Salimos al mercado con un{' '}
+            <Term def="Request for Information: una consulta abierta al mercado para conocer qué proveedores existen y preseleccionar candidatos, sin comprometerse a contratar." href={DOCS.mercado}>RFI</Term>{' '}para preseleccionar proveedores, y luego un{' '}
+            <Term def="Request for Proposal: el pedido formal de propuesta a los finalistas, para compararlos en detalle y elegir uno." href={DOCS.factibilidad}>RFP</Term>{' '}para comparar a los dos finalistas en detalle.
           </p>
 
           <div className="mt-8 grid gap-5 sm:grid-cols-3" data-reveal="left" style={{ transitionDelay: '160ms' }}>
             <div className="col-span-1 sm:col-span-2 rounded-2xl border border-forest/15 bg-white p-6">
-              <h3 className="font-semibold text-forest">Proveedor seleccionado: Odoo Enterprise</h3>
+              <h3 className="font-semibold text-forest">Proveedor recomendado: Odoo Enterprise</h3>
               <p className="mt-3 text-sm leading-relaxed text-gray-600">
-                Tras evaluar SAP S/4HANA, Xubio, Tango Nube y Odoo Enterprise, el equipo recomendó <strong>Odoo Enterprise implementado por Adhoc SRL</strong> (Gold Partner). La decisión se basó en su cobertura funcional completa —gestión de clientes, proyectos, compras, contabilidad y portal nativo— y en su adecuación al perfil de una empresa sin área IT interna.
+                De cuatro soluciones evaluadas (SAP S/4HANA, Xubio, Tango Nube y Odoo) los finalistas fueron Tango Nube y Odoo. Tras comparar funcionalidad, técnica, proveedor y costo, recomendamos <strong>Odoo Enterprise implementado por Adhoc SRL</strong> (Gold Partner). Pesó su cobertura completa —clientes, proyectos, compras, contabilidad y portal— su adecuación a una empresa sin área de sistemas, y su menor{' '}
+                <Term def="Costo Total de Propiedad (TCO): no solo lo que sale comprarlo, sino todo lo que cuesta tenerlo y usarlo durante 3 años (licencias, implementación, soporte, etc.)." href={DOCS.evalEconomica}>costo total a 3 años</Term>.
               </p>
               <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
                 {[
                   { label: 'Puntaje obtenido', value: '93,8/100' },
                   { label: 'Costo total a 3 años', value: '~USD 9.946' },
-                  { label: 'Ahorro vs. alternativa', value: '53%' },
-                  { label: 'Recupero de inversión', value: 'Año 1' },
+                  { label: 'Ahorro vs. Tango Nube', value: '53%' },
+                  { label: 'Licencia anual', value: 'USD 1.962' },
                 ].map((kpi) => (
                   <div key={kpi.label} className="rounded-xl bg-cream p-3 text-center">
                     <p className="text-lg font-bold text-forest">{kpi.value}</p>
@@ -525,15 +639,15 @@ export default function DashboardPage() {
           </div>
 
           <div className="mt-6 flex flex-wrap gap-2" data-reveal="left" style={{ transitionDelay: '220ms' }}>
-            <a href="https://drive.google.com/file/d/1rRse2n8hcejsv97RVSSy5CJfKSKaQ2rn/view" target="_blank" rel="noopener noreferrer"
+            <a href={DOCS.mercado} target="_blank" rel="noopener noreferrer"
               className="rounded-md border border-forest/30 px-3 py-1.5 text-xs font-medium text-forest hover:bg-forest/5 transition-colors">
-              Ver evaluación de inversión →
+              Ver análisis de mercado (RFI) →
             </a>
-            <a href="https://drive.google.com/file/d/1kN9rg8Fv73RuH9Clo7kWfU9T4ZT6DI2B/view" target="_blank" rel="noopener noreferrer"
+            <a href={DOCS.evalEconomica} target="_blank" rel="noopener noreferrer"
               className="rounded-md border border-forest/30 px-3 py-1.5 text-xs font-medium text-forest hover:bg-forest/5 transition-colors">
-              Ver matriz de selección →
+              Ver evaluación económica →
             </a>
-            <a href="https://drive.google.com/file/d/1b8qzExtKN25JRFIuZkPIDalwJng9J916/view" target="_blank" rel="noopener noreferrer"
+            <a href={DOCS.propuestaComercial} target="_blank" rel="noopener noreferrer"
               className="rounded-md border border-forest/30 px-3 py-1.5 text-xs font-medium text-forest hover:bg-forest/5 transition-colors">
               Ver propuesta comercial →
             </a>
