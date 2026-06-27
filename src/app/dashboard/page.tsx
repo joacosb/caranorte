@@ -15,79 +15,76 @@ const TEAM = [
   { name: 'Joaquín Sosa Beláustegui', role: 'Desarrollador', link: 'https://www.linkedin.com/in/joaquinsb/', photo: '/team/joaquin-sosa.jpg', initials: 'JS' },
 ]
 
-type DeliveryStatus = 'approved' | 'submitted' | 'pending'
-
 type Delivery = {
   number: number
   title: string
   etapa: number
   dueDate: string
-  status: DeliveryStatus
   links: { label: string; url: string }[]
 }
 
 const DELIVERIES: Delivery[] = [
   {
-    number: 1, etapa: 1, title: 'Presentación del caso de negocio', dueDate: '20/03/2026', status: 'approved',
+    number: 1, etapa: 1, title: 'Presentación del caso de negocio', dueDate: '20/03/2026',
     links: [
       { label: 'Ver documento (PDF)', url: 'https://drive.google.com/file/d/1_SWGHuKXWyvcNVFtPRVvFVT-V36pfGrJ/view' },
       { label: 'Ver documento (completo)', url: 'https://drive.google.com/file/d/1q8vTac7gpQotI8-dI-D8YsXIbJmZUHRA/view' },
     ],
   },
   {
-    number: 2, etapa: 1, title: 'Diagnóstico de la organización', dueDate: '27/03/2026', status: 'approved',
+    number: 2, etapa: 1, title: 'Diagnóstico de la organización', dueDate: '27/03/2026',
     links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1H0kqxDLkD6FjJIi7Yc9Rlav155FtpBli/view' }],
   },
   {
-    number: 3, etapa: 1, title: 'Análisis de la situación actual', dueDate: '03/04/2026', status: 'approved',
+    number: 3, etapa: 1, title: 'Análisis de la situación actual', dueDate: '03/04/2026',
     links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1pnbL0jbBNlT8BJJiO8_B53rUKESk4pwG/view' }],
   },
   {
-    number: 4, etapa: 2, title: 'Propuesta de mejora e innovación', dueDate: '10/04/2026', status: 'approved',
+    number: 4, etapa: 2, title: 'Propuesta de mejora e innovación', dueDate: '10/04/2026',
     links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1J6Lw8bSkjiWqw8yp7TDPtxeOVRLIPR_s/view' }],
   },
   {
-    number: 5, etapa: 2, title: 'Diseño de la arquitectura objetivo', dueDate: '17/04/2026', status: 'approved',
+    number: 5, etapa: 2, title: 'Diseño de la arquitectura objetivo', dueDate: '17/04/2026',
     links: [
       { label: 'Ver documento', url: 'https://drive.google.com/file/d/1U8wlvDndxy9aSsLwEQ7HAk6Eza6N7WwT/view' },
       { label: 'Ver diagrama', url: 'https://drive.google.com/file/d/1D4K8R131H83eBuKXRX3GNda5xfNKM14U/view' },
     ],
   },
   {
-    number: 6, etapa: 2, title: 'Análisis de brechas', dueDate: '24/04/2026', status: 'approved',
+    number: 6, etapa: 2, title: 'Análisis de brechas', dueDate: '24/04/2026',
     links: [
       { label: 'Ver documento', url: 'https://drive.google.com/file/d/1CMtgpPHMyOO-sdg2zdkZVkWV9uyD29A5/view' },
       { label: 'Ver matriz', url: 'https://drive.google.com/file/d/1C_VSgxqj9wArtktDCnKxoi3tgyJecNyM/view' },
     ],
   },
   {
-    number: 7, etapa: 3, title: 'Alcance y planificación', dueDate: '01/05/2026', status: 'approved',
+    number: 7, etapa: 3, title: 'Alcance y planificación', dueDate: '01/05/2026',
     links: [
       { label: 'Ver documento', url: 'https://drive.google.com/file/d/1UVS_BWJgsmDgTRCsftc6TDdG-SJAzuaD/view' },
       { label: 'Ver cronograma Gantt', url: 'https://drive.google.com/file/d/1tOs5rduqIUdNVWRLaxeEp8VtHl4UQ92J/view' },
     ],
   },
   {
-    number: 8, etapa: 3, title: 'Análisis de mercado', dueDate: '08/05/2026', status: 'approved',
+    number: 8, etapa: 3, title: 'Análisis de mercado', dueDate: '08/05/2026',
     links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1RqL2u_8_R52FcgRwIxzYLRNqxkzSLqIJ/view' }],
   },
   {
-    number: 9, etapa: 3, title: 'Análisis de viabilidad', dueDate: '15/05/2026', status: 'approved',
+    number: 9, etapa: 3, title: 'Análisis de viabilidad', dueDate: '15/05/2026',
     links: [
       { label: 'Ver documento', url: 'https://drive.google.com/file/d/1zstOgKiEfltZ4Bfk7fvIwtTFiK0EpeG5/view' },
       { label: 'Ver matriz RFP', url: 'https://drive.google.com/file/d/1kN9rg8Fv73RuH9Clo7kWfU9T4ZT6DI2B/view' },
     ],
   },
   {
-    number: 10, etapa: 4, title: 'Evaluación de inversión', dueDate: '22/05/2026', status: 'approved',
+    number: 10, etapa: 4, title: 'Evaluación de inversión', dueDate: '22/05/2026',
     links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1rRse2n8hcejsv97RVSSy5CJfKSKaQ2rn/view' }],
   },
   {
-    number: 11, etapa: 4, title: 'Propuesta comercial', dueDate: '29/05/2026', status: 'approved',
+    number: 11, etapa: 4, title: 'Propuesta comercial', dueDate: '29/05/2026',
     links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1b8qzExtKN25JRFIuZkPIDalwJng9J916/view' }],
   },
   {
-    number: 12, etapa: 4, title: 'Cierre y entrega final', dueDate: '05/06/2026', status: 'submitted',
+    number: 12, etapa: 4, title: 'Cierre y entrega final', dueDate: '05/06/2026',
     links: [{ label: 'Ver documento', url: 'https://drive.google.com/file/d/1LHu0B4zsV4kcmn7IN8cjrUaoyyAmdc22/view' }],
   },
 ]
@@ -108,26 +105,6 @@ const NAV_SECTIONS = [
   { id: 'documentacion', label: 'Documentación' },
   { id: 'equipo', label: 'Equipo' },
 ]
-
-// ── Sub-components ────────────────────────────────────────────────────────────
-
-function StatusBadge({ status }: { status: DeliveryStatus }) {
-  if (status === 'approved') return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-700">
-      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />Entregado
-    </span>
-  )
-  if (status === 'submitted') return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-0.5 text-[11px] font-semibold text-blue-700">
-      <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />En revisión
-    </span>
-  )
-  return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-semibold text-amber-700">
-      <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />Pendiente
-    </span>
-  )
-}
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
@@ -250,16 +227,6 @@ export default function DashboardPage() {
           <p className="mt-4 max-w-2xl text-lg text-cream/75">
             Acompañamos a Nodek en el diagnóstico, diseño e implementación de una arquitectura empresarial que potencie su operación y crecimiento.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-gold/50 bg-white/[0.08] px-4 py-1.5">
-              <span className="h-2 w-2 rounded-full bg-gold" />
-              <span className="text-xs font-semibold uppercase tracking-widest text-gold">En curso — Etapa 4 de 4</span>
-            </span>
-            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-white/[0.06] px-4 py-1.5">
-              <span className="h-2 w-2 rounded-full bg-emerald-400" />
-              <span className="text-xs font-semibold uppercase tracking-widest text-emerald-300">11 entregas completadas</span>
-            </span>
-          </div>
         </div>
       </section>
 
@@ -548,9 +515,8 @@ export default function DashboardPage() {
                       key={delivery.number}
                       className="flex flex-col gap-3 rounded-xl border border-forest/10 bg-cream p-4"
                     >
-                      <div className="flex items-start justify-between gap-2">
+                      <div className="flex items-start gap-2">
                         <span className="text-[11px] font-bold text-muted">Doc. {String(delivery.number).padStart(2, '0')}</span>
-                        <StatusBadge status={delivery.status} />
                       </div>
                       <h4 className="text-sm font-semibold leading-snug text-forest">{delivery.title}</h4>
                       <p className="text-xs text-muted">Fecha: {delivery.dueDate}</p>
