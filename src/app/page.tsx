@@ -449,7 +449,7 @@ export default function Home() {
             <p className="text-sm text-muted max-w-lg">
               Nodek Energía, PyME argentina de energía solar y movilidad eléctrica, nos confió el diseño de su transformación digital de principio a fin.
             </p>
-            <Link href="/login" className="inline-flex items-center gap-1.5 rounded-full bg-forest px-5 py-2 text-sm font-semibold text-white transition hover:bg-forest-dark">
+            <Link href="/login" style={{ color: 'white' }} className="inline-flex items-center gap-1.5 rounded-full bg-forest px-5 py-2 text-sm font-semibold transition hover:bg-forest-dark">
               Ver el caso de éxito →
             </Link>
           </div>
