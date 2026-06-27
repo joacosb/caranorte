@@ -364,11 +364,11 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="flex items-start gap-4 rounded-2xl border border-gold/40 bg-gold/5 p-5">
-              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/30 text-xs font-bold text-forest">04</span>
+            <div className="flex items-start gap-4 rounded-2xl border border-forest/15 bg-white p-5">
+              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/20 text-xs font-bold text-forest">04</span>
               <div>
                 <h3 className="font-semibold text-forest">Análisis de brechas</h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray-700">
+                <p className="mt-2 text-sm leading-relaxed text-gray-600">
                   El análisis de brechas mide la distancia entre la arquitectura actual y la arquitectura destino: qué capacidades faltan, qué procesos deben rediseñarse y qué tecnología debe incorporarse. Fue en esta etapa donde quedó en evidencia la necesidad central del proyecto: <strong>Nodek no contaba con ningún sistema que centralizara la información del negocio</strong>. Esa brecha era la raíz de la mayoría de los problemas identificados en el diagnóstico.
                 </p>
               </div>
@@ -433,39 +433,30 @@ export default function DashboardPage() {
                   n: '01',
                   title: 'Diagnóstico y análisis',
                   detail: 'Relevamiento de procesos, evaluación de madurez organizacional y mapeo de la situación actual.',
-                  done: true,
                 },
                 {
                   n: '02',
                   title: 'Diseño de la solución',
                   detail: 'Propuesta de arquitectura objetivo, análisis de brechas y estrategia de transformación.',
-                  done: true,
                 },
                 {
                   n: '03',
                   title: 'Planificación e implementación',
                   detail: 'Alcance detallado, análisis de mercado, selección de proveedor y evaluación de viabilidad.',
-                  done: true,
                 },
                 {
                   n: '04',
                   title: 'Evaluación y cierre',
                   detail: 'Análisis económico, propuesta comercial final y presentación de cierre del proyecto.',
-                  done: false,
                 },
               ].map((step) => (
                 <div key={step.n} className="relative flex flex-row items-start gap-4 rounded-2xl border border-forest/10 bg-cream p-4 sm:flex-col sm:gap-2 sm:p-5">
-                  <div className={`relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold sm:h-8 sm:w-8 sm:text-xs ${
-                    step.done ? 'bg-forest text-cream' : 'bg-gold text-forest-dark'
-                  }`}>
-                    {step.done ? '✓' : step.n}
+                  <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-forest text-cream text-sm font-bold sm:h-8 sm:w-8 sm:text-xs">
+                    ✓
                   </div>
                   <div>
                     <h3 className="font-semibold text-forest text-sm">{step.title}</h3>
                     <p className="mt-1 text-xs leading-relaxed text-gray-500">{step.detail}</p>
-                    {!step.done && (
-                      <span className="mt-2 inline-block rounded-full bg-gold/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-forest">En curso</span>
-                    )}
                   </div>
                 </div>
               ))}
