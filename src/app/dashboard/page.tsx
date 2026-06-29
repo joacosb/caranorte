@@ -267,7 +267,7 @@ export default function DashboardPage() {
           <h1 className="mt-4 text-4xl font-bold leading-tight text-cream sm:text-5xl">
             Proyecto de transformación digital<br className="hidden sm:block" /> para Nodek Energía
           </h1>
-          <p className="mt-4 max-w-2xl text-lg text-cream/75 text-justify">
+          <p className="mt-4 text-lg text-cream/75 text-justify">
             Acompañamos a Nodek en el análisis de su operación y en el diseño de una propuesta tecnológica que ordene su información y habilite su próximo salto de crecimiento.
           </p>
         </div>
@@ -280,7 +280,7 @@ export default function DashboardPage() {
         <section id="cliente" className="scroll-mt-36">
           <p className="text-xs font-bold uppercase tracking-widest text-gold">Sobre el cliente</p>
           <h2 className="mt-2 text-3xl font-bold text-forest" data-reveal="left">¿Quién es Nodek?</h2>
-          <div className="mt-6 max-w-3xl flex flex-col gap-5 text-ink/85 leading-relaxed text-justify" data-reveal="left" style={{ transitionDelay: '100ms' }}>
+          <div className="mt-6 flex flex-col gap-5 text-ink/85 leading-relaxed text-justify" data-reveal="left" style={{ transitionDelay: '100ms' }}>
             <p>
               Nodek Energía es una empresa argentina con <strong>5 años de trayectoria</strong> que brinda soluciones energéticas integrales para optimizar el consumo y acompañar la transición hacia un modelo más eficiente y sostenible. Opera principalmente con empresas y organismos públicos, con sede central en <strong>CABA</strong> y operaciones en <strong>Corrientes</strong>, y lleva <strong>más de 130 proyectos completados</strong>.
             </p>
@@ -305,7 +305,7 @@ export default function DashboardPage() {
               </p>
             </div>
           </div>
-          <p className="mt-5 max-w-3xl text-sm leading-relaxed text-muted text-justify" data-reveal="left" style={{ transitionDelay: '200ms' }}>
+          <p className="mt-5 text-sm leading-relaxed text-muted text-justify" data-reveal="left" style={{ transitionDelay: '200ms' }}>
             Ambos objetivos comparten un mismo requisito: para crecer, Nodek necesita <strong>ganar más licitaciones</strong> (concursos en los que las empresas compiten presentando una propuesta para obtener un contrato). Y ahí estaba el cuello de botella que dio origen a este proyecto.
           </p>
         </section>
@@ -319,7 +319,7 @@ export default function DashboardPage() {
             <Term def="Una mirada profunda de la organización: no solo sus números, sino cómo se toman las decisiones, dónde se concentra el conocimiento y qué tan ordenados están sus procesos." href={DOCS.diagnostico}>diagnóstico organizacional</Term>.
           </p>
 
-          <p className="mt-6 max-w-3xl text-sm leading-relaxed text-ink/85 text-justify" data-reveal="right" style={{ transitionDelay: '120ms' }}>
+          <p className="mt-6 text-sm leading-relaxed text-ink/85 text-justify" data-reveal="right" style={{ transitionDelay: '120ms' }}>
             El hallazgo central: la operación de Nodek crecía más rápido que su organización interna. La información del negocio vivía repartida en muchas herramientas que no se comunicaban entre sí, y los procesos más importantes dependían de la experiencia de pocas personas clave.
           </p>
 
@@ -358,7 +358,7 @@ export default function DashboardPage() {
 
           <div className="mt-10" data-reveal="right" style={{ transitionDelay: '200ms' }}>
             <p className="text-xs font-bold uppercase tracking-widest text-gold">Lo que pidió cada área</p>
-            <p className="mt-2 max-w-3xl text-sm leading-relaxed text-ink/85 text-justify">
+            <p className="mt-2 text-sm leading-relaxed text-ink/85 text-justify">
               Registramos cada necesidad como una{' '}
               <Term def="Una forma simple de anotar lo que necesita cada persona, en su propio idioma y con el formato: Como [rol], quiero [algo], para [un beneficio]." href={DOCS.diagnostico}>historia de usuario</Term>: una frase en el idioma de quien la pide. Luego las ordenamos por prioridad con el método{' '}
               <Term def="Método para clasificar pedidos según su urgencia: Must (imprescindible), Should (deseable), Could (opcional) y Won't (queda para más adelante)." href={DOCS.diagnostico}>MoSCoW</Term>.
@@ -419,7 +419,7 @@ export default function DashboardPage() {
         <section id="propuesta" className="scroll-mt-36">
           <p className="text-xs font-bold uppercase tracking-widest text-gold">Etapa 2</p>
           <h2 className="mt-2 text-3xl font-bold text-forest" data-reveal="left">¿Qué propusimos transformar?</h2>
-          <p className="mt-2 max-w-2xl text-muted text-justify" data-reveal="left" style={{ transitionDelay: '80ms' }}>
+          <p className="mt-2 text-muted text-justify" data-reveal="left" style={{ transitionDelay: '80ms' }}>
             Del diagnóstico a la solución recorrimos cinco pasos: primero la idea innovadora, después el mapa de cómo trabaja Nodek hoy y cómo debería trabajar, qué falta para llegar y, por último, qué incluye exactamente nuestro proyecto.
           </p>
 
@@ -591,7 +591,7 @@ export default function DashboardPage() {
         <section id="evaluacion" className="scroll-mt-36">
           <p className="text-xs font-bold uppercase tracking-widest text-gold">Etapa 4</p>
           <h2 className="mt-2 text-3xl font-bold text-forest" data-reveal="left">Evaluación económica y viabilidad</h2>
-          <p className="mt-2 max-w-2xl text-muted text-justify" data-reveal="left" style={{ transitionDelay: '80ms' }}>
+          <p className="mt-2 text-muted text-justify" data-reveal="left" style={{ transitionDelay: '80ms' }}>
             Salimos al mercado con un{' '}
             <Term def="Request for Information: una consulta abierta al mercado para conocer qué proveedores existen y preseleccionar candidatos, sin comprometerse a contratar." href={DOCS.mercado}>RFI</Term>{' '}para preseleccionar proveedores, y luego un{' '}
             <Term def="Request for Proposal: el pedido formal de propuesta a los finalistas, para compararlos en detalle y elegir uno." href={DOCS.factibilidad}>RFP</Term>{' '}para comparar a los dos finalistas en detalle.
