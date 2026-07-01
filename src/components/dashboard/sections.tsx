@@ -320,8 +320,8 @@ export function InnovacionSection() {
         <h3 className="mt-2 text-2xl font-bold">Un agente de IA para licitaciones</h3>
         <p className="mt-3 max-w-3xl leading-relaxed text-cream/80 text-justify">
           Combina{' '}
-          <Term def="Una IA que redacta: a partir del pliego genera un borrador de propuesta y detecta qué requisitos faltan cubrir." href={DOCS.innovacion}>IA generativa</Term>{' '}y{' '}
-          <Term def="Una IA que estima: predice la probabilidad de ganar cada licitación e identifica competidores probables." href={DOCS.innovacion}>IA predictiva</Term>{' '}
+          <Term onDark def="Una IA que redacta: a partir del pliego genera un borrador de propuesta y detecta qué requisitos faltan cubrir." href={DOCS.innovacion}>IA generativa</Term>{' '}y{' '}
+          <Term onDark def="Una IA que estima: predice la probabilidad de ganar cada licitación e identifica competidores probables." href={DOCS.innovacion}>IA predictiva</Term>{' '}
           para preparar más propuestas, de mejor calidad, sin depender de una sola persona.
         </p>
 

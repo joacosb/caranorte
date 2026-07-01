@@ -23,9 +23,11 @@ export const DOCS = {
 }
 
 // ── Término técnico con explicación al pasar el mouse + link al documento ───────
-export function Term({ children, def, href }: { children: ReactNode; def: string; href?: string }) {
+export function Term({ children, def, href, onDark }: { children: ReactNode; def: string; href?: string; onDark?: boolean }) {
   const content = (
-    <span className="font-semibold text-forest decoration-gold decoration-dotted underline underline-offset-2">
+    <span
+      className={`font-semibold decoration-gold decoration-dotted underline underline-offset-2 ${onDark ? 'text-gold' : 'text-forest'}`}
+    >
       {children}
     </span>
   )
