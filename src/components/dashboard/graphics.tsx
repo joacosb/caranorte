@@ -502,7 +502,7 @@ export function AppsArchDest() {
 
 const TEC_CAPAS_DEST = [
   { label: 'Usuarios y dispositivos', items: ['💻 PC', '📱 Móvil', '🌐 Portal cliente'] },
-  { label: 'Conectividad', items: ['🌐 Internet'] },
+  { label: 'Conectividad', items: ['🌐 Conexión a internet redundante'] },
   { label: 'ERP SaaS en la nube (Odoo)', items: ['Ventas / CRM', 'Proyectos', 'Compras', 'Administración'] },
   { label: 'Capa de integración y datos en tiempo real', items: ['API', 'IoT', 'IA'], solved: true },
 ]
