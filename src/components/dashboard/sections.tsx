@@ -328,13 +328,14 @@ export function InnovacionSection() {
         </div>
         <p className="mt-1 text-sm text-muted">Elevator pitch por el developer de Nodek.</p>
         <div className="mt-4 overflow-hidden rounded-2xl border border-forest/15 bg-black shadow-sm">
-          <div className="relative aspect-video">
+          <div className="relative mx-auto w-full" style={{ aspectRatio: '16 / 9' }}>
             <iframe
               src="https://drive.google.com/file/d/1fe_3Nf4vn-PwEBi1OgXkMGV44tgX057L/preview"
               title="Elevator pitch — Nodek"
               allow="autoplay; fullscreen"
               allowFullScreen
               className="absolute inset-0 h-full w-full"
+              style={{ border: 0 }}
             />
           </div>
         </div>

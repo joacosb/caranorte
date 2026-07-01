@@ -536,11 +536,9 @@ export default function Home() {
               <h3 className="text-base font-semibold text-forest">Estrategia</h3>
               <p className="mt-2 text-sm text-gray-600">Entender el negocio antes que la tecnología. Cada solución responde a un objetivo concreto acordado con el cliente.</p>
             </article>
-            <article className="rounded-xl border border-forest/40 bg-forest p-5 md:col-span-2 lg:col-span-3">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-gold">Nuestro lema</h3>
-              <p className="mt-2 text-lg font-semibold italic leading-snug text-cream sm:text-xl">
-                Combinamos inteligencia, artificial y humana, para escalar tu negocio.
-              </p>
+            <article className="rounded-xl border border-forest/15 bg-cream p-4 md:col-span-2 lg:col-span-3">
+              <h3 className="text-base font-semibold text-forest">Nuestro lema</h3>
+              <p className="mt-2 text-sm text-gray-600">Combinamos inteligencia, artificial y humana, para escalar tu negocio.</p>
             </article>
           </div>
 

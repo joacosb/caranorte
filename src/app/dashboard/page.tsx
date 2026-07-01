@@ -175,7 +175,7 @@ export default function DashboardPage() {
   const handleLogout = () => {
     localStorage.removeItem('auth')
     localStorage.removeItem('email')
-    router.push('/login')
+    router.push('/')
   }
 
   if (!ready) {
