@@ -1,6 +1,7 @@
 'use client'
 
 import { Term, DOCS, SectionHeader, DocLink, DocLinks, Tech } from './ui'
+import { NodekLogo } from '@/components/NodekLogo'
 import {
   OrgChart,
   ProcessMap,
@@ -60,8 +61,19 @@ export function NodekSection() {
       <SectionHeader
         eyebrow="Sobre el cliente"
         title="¿Quién es Nodek?"
-        intro="Nodek Energía es una empresa argentina de soluciones energéticas integrales. Este panel recorre, paso a paso, el proyecto de transformación digital que diseñamos junto a ellos."
       />
+
+      <div className="grid items-center gap-6 sm:gap-8 lg:grid-cols-[1.5fr_1fr]">
+        <p className="max-w-2xl text-lg leading-relaxed text-muted text-justify">
+          Nodek Energía es una empresa argentina de soluciones energéticas integrales. Este panel recorre, paso a paso, el proyecto de transformación digital que diseñamos junto a ellos.
+        </p>
+        <div className="flex justify-center lg:justify-end">
+          <NodekLogo
+            className="h-24 w-auto rounded-2xl object-contain shadow-sm sm:h-28"
+            wordmarkClassName="text-3xl font-extrabold text-forest sm:text-4xl"
+          />
+        </div>
+      </div>
 
       <div className="grid gap-5 lg:grid-cols-[1.3fr_1fr]">
         <div className="flex flex-col gap-4 rounded-2xl border border-forest/10 bg-white p-6 leading-relaxed text-ink/85 text-justify">
@@ -292,8 +304,44 @@ export function InnovacionSection() {
         intro="El corazón de la propuesta es una idea innovadora. Pero para entenderla, primero hay que ver el problema que resuelve."
       />
 
+      {/* Selector rápido: video ↔ detalle */}
+      <div className="flex flex-wrap gap-2">
+        <a
+          href="#pitch-video"
+          className="inline-flex items-center gap-2 rounded-full bg-forest px-4 py-2 text-sm font-semibold text-cream transition-colors hover:bg-forest-dark"
+        >
+          <span aria-hidden>▶</span> Ver elevator pitch
+        </a>
+        <a
+          href="#proceso-actual"
+          className="inline-flex items-center gap-2 rounded-full border border-forest/25 bg-white px-4 py-2 text-sm font-semibold text-forest transition-colors hover:border-forest/50 hover:bg-cream"
+        >
+          Ver detalle <span aria-hidden>↓</span>
+        </a>
+      </div>
+
+      {/* Elevator pitch (video) */}
+      <div id="pitch-video" className="scroll-mt-32">
+        <div className="flex items-center gap-2">
+          <span className="text-2xl">🎬</span>
+          <h3 className="text-lg font-bold text-forest">Elevator pitch</h3>
+        </div>
+        <p className="mt-1 text-sm text-muted">Elevator pitch por el developer de Nodek.</p>
+        <div className="mt-4 overflow-hidden rounded-2xl border border-forest/15 bg-black shadow-sm">
+          <div className="relative aspect-video">
+            <iframe
+              src="https://drive.google.com/file/d/1fe_3Nf4vn-PwEBi1OgXkMGV44tgX057L/preview"
+              title="Elevator pitch — Nodek"
+              allow="autoplay; fullscreen"
+              allowFullScreen
+              className="absolute inset-0 h-full w-full"
+            />
+          </div>
+        </div>
+      </div>
+
       {/* Proceso actual */}
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div id="proceso-actual" className="grid scroll-mt-32 gap-6 lg:grid-cols-2">
         <div className="rounded-2xl border border-forest/15 bg-white p-6">
           <div className="flex items-center gap-2">
             <span className="text-2xl">⚙️</span>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
+import { NodekLogo } from "@/components/NodekLogo";
 
 const services = [
   {
@@ -446,6 +447,7 @@ export default function Home() {
             </div>
           </div>
           <div className="mt-8 flex flex-col items-center gap-3 text-center">
+            <NodekLogo className="h-12 w-auto object-contain" wordmarkClassName="text-xl font-extrabold text-forest" />
             <p className="text-sm text-muted max-w-lg">
               Nodek Energía, PyME argentina de energía solar y movilidad eléctrica, nos confió el diseño de su transformación digital de principio a fin.
             </p>

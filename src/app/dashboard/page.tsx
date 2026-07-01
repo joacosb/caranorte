@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { DOCS } from '@/components/dashboard/ui'
+import { NodekLogo } from '@/components/NodekLogo'
 import {
   NodekSection,
   DiagnosticoSection,
@@ -146,6 +147,8 @@ export default function DashboardPage() {
   const [active, setActive] = useState(0)
   const contentTopRef = useRef<HTMLDivElement>(null)
   const isFirst = useRef(true)
+  const tabsScrollRef = useRef<HTMLDivElement>(null)
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
 
   useEffect(() => {
     if (localStorage.getItem('auth') !== 'true') { router.push('/login'); return }
@@ -156,6 +159,17 @@ export default function DashboardPage() {
   useEffect(() => {
     if (isFirst.current) { isFirst.current = false; return }
     contentTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [active])
+
+  // Mantener el tab activo siempre visible: centrarlo dentro de la barra al cambiar
+  useEffect(() => {
+    const container = tabsScrollRef.current
+    const btn = tabRefs.current[active]
+    if (!container || !btn) return
+    const cRect = container.getBoundingClientRect()
+    const bRect = btn.getBoundingClientRect()
+    const delta = (bRect.left + bRect.width / 2) - (cRect.left + cRect.width / 2)
+    container.scrollBy({ left: delta, behavior: 'smooth' })
   }, [active])
 
   const handleLogout = () => {
@@ -184,7 +198,7 @@ export default function DashboardPage() {
             <p className="hidden text-xs text-cream/70 sm:block">Panel del proyecto</p>
           </button>
           <div className="flex items-center gap-4">
-            <span className="hidden text-sm text-cream/70 sm:block">Nodek Energía</span>
+            <NodekLogo className="hidden h-7 w-auto object-contain sm:block" wordmarkClassName="hidden text-sm font-bold text-cream sm:block" />
             <button onClick={handleLogout}
               className="rounded-full bg-gold px-4 py-2 text-sm font-semibold text-forest-dark transition-[transform,background-color] duration-150 ease-out hover:bg-gold-dark active:scale-[0.97]">
               Cerrar sesión
@@ -208,11 +222,12 @@ export default function DashboardPage() {
 
       {/* ── Tabs de fases ──────────────────────────────────────────────────── */}
       <div className="sticky top-[64px] z-40 border-b border-forest/10 bg-cream/95 backdrop-blur-md">
-        <div className="mx-auto max-w-6xl overflow-x-auto px-4 sm:px-6">
+        <div ref={tabsScrollRef} className="mx-auto max-w-6xl overflow-x-auto px-4 sm:px-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <nav className="flex gap-1 py-2">
             {TABS.map((tab, i) => (
               <button
                 key={tab.id}
+                ref={(el) => { tabRefs.current[i] = el }}
                 onClick={() => setActive(i)}
                 className={`shrink-0 rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors duration-150 ${
                   active === i ? 'bg-forest text-cream' : 'text-muted hover:bg-forest/10 hover:text-forest'
