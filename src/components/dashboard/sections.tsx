@@ -29,23 +29,28 @@ import {
 const SERVICIOS = [
   {
     n: 1,
-    title: 'Diagnóstico y revisión de contratos',
-    items: ['Auditoría energética Nivel 1 (ahorro 5–10%)', 'Auditoría energética Nivel 2 (ahorro 10–20%)', 'Diagnóstico de contratos de energía y gas (PPA, MATER, MAT)'],
+    title: 'Eficiencia energética',
+    items: ['Auditorías y diagnóstico de consumo', 'Optimización de contratos de energía y gas', 'Gestión energética con ISO 50.001'],
   },
   {
     n: 2,
-    title: 'Monitoreo y medición inteligente',
-    items: ['Medición en tiempo real', 'Gestión de contratos eléctricos y de gas', 'Automatismos y corrección de pérdidas', 'Recambio de equipos y banco de capacitores'],
+    title: 'Movilidad eléctrica',
+    items: ['Infraestructura de carga para vehículos eléctricos', 'Puntos de carga para flotas y empresas', 'Integración con generación renovable'],
   },
   {
     n: 3,
-    title: 'Gestión energética con ISO 50.001',
-    items: ['Implementación del Sistema de Gestión de la Energía (SGE)', 'Análisis GAP ISO 50.001', 'Certificación ISO 50.001'],
+    title: 'Energía solar',
+    items: ['Diseño e instalación de plantas fotovoltaicas', 'Generación para autoconsumo', 'Monitoreo del rendimiento en tiempo real'],
   },
   {
     n: 4,
-    title: 'Neutralidad en carbono',
-    items: ['Implementación de software de huella de carbono', 'Compra de bonos verdes'],
+    title: 'Ingeniería eléctrica',
+    items: ['Proyecto y dirección de obra eléctrica', 'Diseño de instalaciones y protecciones', 'Puesta en marcha'],
+  },
+  {
+    n: 5,
+    title: 'Almacenamiento',
+    items: ['Sistemas de baterías (BESS)', 'Respaldo y gestión de la demanda', 'Integración con generación solar'],
   },
 ]
 

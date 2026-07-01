@@ -802,7 +802,7 @@ type Service = { n: number; title: string; items: string[] }
 export function ServicesAccordion({ services }: { services: Service[] }) {
   const [open, setOpen] = useState(0)
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
       {services.map((s, i) => {
         const isOpen = open === i
         return (
