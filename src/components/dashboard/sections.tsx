@@ -840,7 +840,7 @@ export function EvaluacionSection() {
         <h3 className="mt-2 text-2xl font-bold">Odoo Enterprise, implementado por Adhoc SRL</h3>
         <p className="mt-3 max-w-3xl leading-relaxed text-cream/80 text-justify">
           Pesó su cobertura completa —clientes, proyectos, compras, contabilidad y portal—, su adecuación a una empresa sin área de sistemas, y su menor{' '}
-          <Term def="Costo Total de Propiedad (TCO): todo lo que cuesta tener y usar la solución durante 3 años (licencias, implementación, soporte)." href={DOCS.evalEconomica}>costo total a 3 años</Term>.
+          <Term onDark def="Costo Total de Propiedad (TCO): todo lo que cuesta tener y usar la solución durante 3 años (licencias, implementación, soporte)." href={DOCS.evalEconomica}>costo total a 3 años</Term>.
         </p>
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
