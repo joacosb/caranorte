@@ -207,6 +207,336 @@ export function ArchMatrix({ block }: { block: ArchBlock }) {
 }
 
 // ════════════════════════════════════════════════════════════════════════════════
+//  ARQUITECTURA DE NEGOCIO (origen) — capas de proceso + decisión centralizada
+// ════════════════════════════════════════════════════════════════════════════════
+
+const NEG_CAPAS = [
+  { label: 'Estratégicos', color: 'bg-forest', caps: ['Planificación y crecimiento', 'Desarrollo de negocio', 'Control de gestión'], auto: 'Manual' },
+  { label: 'Operativos', color: 'bg-forest-light', caps: ['Diagnóstico energético', 'Diseño y propuesta', 'Instalación', 'Puesta en marcha', 'Mantenimiento'], auto: 'Manual' },
+  { label: 'De apoyo', color: 'bg-gold-dark', caps: ['Comercial', 'Compras', 'Administración', 'R.R.H.H.', 'Logística'], auto: 'Semi-manual' },
+]
+
+export function BusinessArch() {
+  return (
+    <div className="overflow-x-auto rounded-2xl border border-forest/15 bg-cream p-5">
+      <div className="min-w-[640px]">
+        {/* Decisión centralizada */}
+        <div className="flex justify-center">
+          <div className="rounded-lg border border-gold bg-gold/15 px-5 py-2 text-center">
+            <p className="text-xs font-bold text-forest">Dirección General</p>
+            <p className="text-[10px] text-muted">Decisión centralizada</p>
+          </div>
+        </div>
+        <div className="mx-auto my-2 h-4 w-px bg-forest/25" />
+
+        {/* Capas de negocio */}
+        <div className="flex flex-col gap-3">
+          {NEG_CAPAS.map((c) => (
+            <div key={c.label} className="flex items-stretch gap-3">
+              <div className={`flex w-28 shrink-0 items-center justify-center rounded-lg px-2 py-3 text-center text-[11px] font-bold uppercase leading-tight tracking-wide text-cream ${c.color}`}>
+                {c.label}
+              </div>
+              <div className="flex flex-1 flex-wrap items-center gap-1.5 rounded-lg border border-forest/10 bg-white px-3 py-3">
+                {c.caps.map((cap) => (
+                  <span key={cap} className="rounded bg-forest/8 px-2 py-1 text-[11px] font-medium text-forest">{cap}</span>
+                ))}
+              </div>
+              <div className="flex w-24 shrink-0 items-center justify-center rounded-lg border border-dashed border-forest/25 px-2 text-center text-[10px] font-semibold text-muted">
+                {c.auto}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Canales informales */}
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-2 border-t border-forest/10 pt-4 text-[11px]">
+          <span className="font-semibold text-muted">Coordinación informal:</span>
+          <Tech name="WhatsApp" />
+          <Tech name="Gmail" />
+          <span className="text-muted">· sin flujos automatizados entre áreas</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ════════════════════════════════════════════════════════════════════════════════
+//  ARQUITECTURA DE DATOS (origen) — silos sin fuente única de verdad
+// ════════════════════════════════════════════════════════════════════════════════
+
+const DATOS_SILOS = [
+  { app: 'Google Drive', datos: 'Documentos y planos' },
+  { app: 'Trello', datos: 'Estado de proyectos' },
+  { app: 'aconpy.com', datos: 'Presupuestos y cálculos' },
+  { app: 'Office 365', datos: 'Planillas y ofertas' },
+  { app: 'FusionSolar', datos: 'Monitoreo de plantas' },
+  { app: 'Modhub', datos: 'Datos de equipos' },
+  { app: 'Gmail', datos: 'Comunicación con clientes' },
+  { app: 'WhatsApp', datos: 'Coordinación operativa' },
+]
+
+export function DataArch() {
+  return (
+    <div className="rounded-2xl border border-forest/15 bg-cream p-5">
+      {/* Fuente única inexistente */}
+      <div className="mb-4 flex justify-center">
+        <div className="flex items-center gap-2 rounded-lg border border-dashed border-red-300 bg-red-50 px-4 py-2">
+          <span className="text-lg">🚫</span>
+          <div>
+            <p className="text-xs font-bold text-red-700">Sin fuente única de verdad</p>
+            <p className="text-[10px] text-red-600/80">Datos fragmentados y sin trazabilidad completa</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Silos aislados */}
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {DATOS_SILOS.map((s) => (
+          <div key={s.app} className="flex flex-col items-center gap-2 rounded-xl border border-forest/10 bg-white p-3 text-center">
+            <span className="text-xl">🗄️</span>
+            <Tech name={s.app} />
+            <p className="text-[10px] leading-snug text-muted">{s.datos}</p>
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 text-center text-[11px] text-muted">Cada aplicación guarda su propia información, sin sincronización entre sí.</p>
+    </div>
+  )
+}
+
+// ════════════════════════════════════════════════════════════════════════════════
+//  ARQUITECTURA TECNOLÓGICA (origen) — stack en capas
+// ════════════════════════════════════════════════════════════════════════════════
+
+const TEC_CAPAS = [
+  { label: 'Usuarios y dispositivos', items: ['💻 PC', '📱 Móvil'], tone: 'solid' as const },
+  { label: 'Conectividad', items: ['🌐 Internet'], tone: 'solid' as const },
+  { label: 'Aplicaciones SaaS (nube)', apps: ['Google Drive', 'Office 365', 'Trello', 'Modhub', 'FusionSolar', 'aconpy.com'], tone: 'solid' as const },
+  { label: 'Capa de integración y datos en tiempo real', items: ['Inexistente — brecha para escalar'], tone: 'gap' as const },
+]
+
+export function TechArch() {
+  return (
+    <div className="rounded-2xl border border-forest/15 bg-cream p-5">
+      <div className="flex flex-col gap-2">
+        {TEC_CAPAS.map((c) => (
+          <div
+            key={c.label}
+            className={`rounded-xl px-4 py-3 ${
+              c.tone === 'gap'
+                ? 'border-2 border-dashed border-red-300 bg-red-50'
+                : 'border border-forest/12 bg-white'
+            }`}
+          >
+            <p className={`text-[11px] font-bold uppercase tracking-wide ${c.tone === 'gap' ? 'text-red-700' : 'text-forest'}`}>{c.label}</p>
+            <div className="mt-2 flex flex-wrap items-center gap-1.5">
+              {c.apps
+                ? c.apps.map((a) => <Tech key={a} name={a} />)
+                : c.items?.map((it) => (
+                    <span key={it} className={`rounded px-2 py-1 text-[11px] font-medium ${c.tone === 'gap' ? 'text-red-600' : 'bg-forest/8 text-forest'}`}>{it}</span>
+                  ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 text-center text-[11px] text-muted">Infraestructura limitada para sostener el crecimiento y habilitar información en tiempo real.</p>
+    </div>
+  )
+}
+
+// ════════════════════════════════════════════════════════════════════════════════
+//  DIVISOR ORIGEN → DESTINO (flecha hacia abajo)
+// ════════════════════════════════════════════════════════════════════════════════
+
+export function DestinoArrow() {
+  return (
+    <div className="flex flex-col items-center gap-1 py-1">
+      <span className="text-2xl leading-none text-gold">↓</span>
+      <span className="rounded-full bg-forest px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-cream">Destino</span>
+    </div>
+  )
+}
+
+// ════════════════════════════════════════════════════════════════════════════════
+//  ARQUITECTURA DE NEGOCIO (destino) — procesos automatizados sobre ERP
+// ════════════════════════════════════════════════════════════════════════════════
+
+const NEG_CAPAS_DEST = [
+  { label: 'Estratégicos', color: 'bg-forest', caps: ['Planificación con KPIs', 'Desarrollo de negocio (CRM)', 'Control de gestión en tiempo real'], auto: 'Automatizado' },
+  { label: 'Operativos', color: 'bg-forest-light', caps: ['Diagnóstico energético', 'Diseño y propuesta', 'Instalación', 'Puesta en marcha', 'Mantenimiento (IoT)'], auto: 'Automatizado' },
+  { label: 'De apoyo', color: 'bg-gold-dark', caps: ['Comercial / CRM', 'Compras trazables', 'Administración', 'R.R.H.H.', 'Logística'], auto: 'Automatizado' },
+]
+
+export function BusinessArchDest() {
+  return (
+    <div className="overflow-x-auto rounded-2xl border border-forest/25 bg-forest/[0.04] p-5">
+      <div className="min-w-[640px]">
+        {/* Decisión basada en datos */}
+        <div className="flex justify-center">
+          <div className="rounded-lg border border-forest bg-forest px-5 py-2 text-center">
+            <p className="text-xs font-bold text-cream">Dirección + Dashboards de KPIs</p>
+            <p className="text-[10px] text-cream/70">Decisiones apoyadas en datos en tiempo real</p>
+          </div>
+        </div>
+        <div className="mx-auto my-2 h-4 w-px bg-forest/30" />
+
+        {/* Capas de negocio */}
+        <div className="flex flex-col gap-3">
+          {NEG_CAPAS_DEST.map((c) => (
+            <div key={c.label} className="flex items-stretch gap-3">
+              <div className={`flex w-28 shrink-0 items-center justify-center rounded-lg px-2 py-3 text-center text-[11px] font-bold uppercase leading-tight tracking-wide text-cream ${c.color}`}>
+                {c.label}
+              </div>
+              <div className="flex flex-1 flex-wrap items-center gap-1.5 rounded-lg border border-forest/15 bg-white px-3 py-3">
+                {c.caps.map((cap) => (
+                  <span key={cap} className="rounded bg-forest/8 px-2 py-1 text-[11px] font-medium text-forest">{cap}</span>
+                ))}
+              </div>
+              <div className="flex w-24 shrink-0 items-center justify-center rounded-lg border border-forest/30 bg-forest/10 px-2 text-center text-[10px] font-semibold text-forest">
+                {c.auto}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Coordinación formal */}
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-2 border-t border-forest/15 pt-4 text-[11px]">
+          <span className="font-semibold text-forest">Coordinación sobre el ERP:</span>
+          <Tech name="ERP (Odoo)" />
+          <span className="text-muted">· flujos entre áreas + portal del cliente + IA en licitaciones</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ════════════════════════════════════════════════════════════════════════════════
+//  ARQUITECTURA DE DATOS (destino) — fuente única de verdad (ERP)
+// ════════════════════════════════════════════════════════════════════════════════
+
+const DATOS_FUENTES = ['Modhub', 'FusionSolar', 'Gmail', 'WhatsApp', 'Portal cliente', 'IoT']
+
+export function DataArchDest() {
+  return (
+    <div className="rounded-2xl border border-forest/25 bg-forest/[0.04] p-5">
+      {/* Fuente única de verdad */}
+      <div className="mb-5 flex justify-center">
+        <div className="flex items-center gap-2 rounded-lg border border-forest bg-forest px-5 py-3 text-center">
+          <span className="text-lg">✅</span>
+          <div>
+            <p className="text-xs font-bold text-cream">Fuente única de verdad · ERP (Odoo)</p>
+            <p className="text-[10px] text-cream/70">Datos centralizados, trazables y con roles / permisos</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Fuentes integradas vía API */}
+      <p className="mb-2 text-center text-[11px] font-semibold uppercase tracking-wide text-muted">Integradas vía API</p>
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+        {DATOS_FUENTES.map((s) => (
+          <div key={s} className="flex flex-col items-center gap-2 rounded-xl border border-forest/15 bg-white p-3 text-center">
+            <span className="text-base text-gold">↑</span>
+            <Tech name={s} />
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 text-center text-[11px] text-muted">Toda la información fluye a un único repositorio con trazabilidad completa del negocio.</p>
+    </div>
+  )
+}
+
+// ════════════════════════════════════════════════════════════════════════════════
+//  ARQUITECTURA DE APLICACIONES (destino) — ERP columna vertebral + integraciones
+// ════════════════════════════════════════════════════════════════════════════════
+
+const ERP_MODULOS = ['Ventas / CRM', 'Proyectos', 'Compras', 'Administración', 'Portal cliente']
+const APPS_INTEGRADAS = ['Modhub', 'FusionSolar', 'Gmail', 'WhatsApp']
+
+export function AppsArchDest() {
+  return (
+    <div className="rounded-2xl border border-forest/25 bg-forest/[0.04] p-5">
+      {/* ERP columna vertebral */}
+      <div className="rounded-xl border border-forest bg-forest p-4">
+        <p className="text-center text-sm font-bold uppercase tracking-wide text-gold">ERP (Odoo) · columna vertebral</p>
+        <div className="mt-3 flex flex-wrap justify-center gap-2">
+          {ERP_MODULOS.map((m) => (
+            <span key={m} className="rounded-lg bg-cream/95 px-3 py-1.5 text-[11px] font-semibold text-forest">{m}</span>
+          ))}
+        </div>
+      </div>
+
+      {/* Conexiones */}
+      <div className="my-3 flex items-center justify-center gap-2 text-[11px] font-bold uppercase tracking-wide text-muted">
+        <span className="h-px flex-1 bg-forest/15" />
+        Integración vía API
+        <span className="h-px flex-1 bg-forest/15" />
+      </div>
+
+      <div className="grid gap-3 sm:grid-cols-2">
+        {/* Apps de energía / comunicación */}
+        <div className="rounded-xl border border-forest/15 bg-white p-4">
+          <p className="text-[11px] font-bold uppercase tracking-wide text-forest">Apps integradas</p>
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {APPS_INTEGRADAS.map((a) => (
+              <Tech key={a} name={a} />
+            ))}
+            <span className="rounded bg-forest/8 px-2 py-1 text-[11px] font-medium text-forest">IoT</span>
+          </div>
+        </div>
+        {/* Capa IA */}
+        <div className="rounded-xl border border-gold/50 bg-gold/10 p-4">
+          <p className="text-[11px] font-bold uppercase tracking-wide text-gold-dark">Capa de IA</p>
+          <div className="mt-2 flex flex-wrap items-center gap-1.5">
+            <Tech name="IA" />
+            <span className="text-[11px] text-muted">Propuestas y licitaciones automáticas sobre el ERP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ════════════════════════════════════════════════════════════════════════════════
+//  ARQUITECTURA TECNOLÓGICA (destino) — stack con capa de integración resuelta
+// ════════════════════════════════════════════════════════════════════════════════
+
+const TEC_CAPAS_DEST = [
+  { label: 'Usuarios y dispositivos', items: ['💻 PC', '📱 Móvil', '🌐 Portal cliente'] },
+  { label: 'Conectividad', items: ['🌐 Internet'] },
+  { label: 'ERP SaaS en la nube (Odoo)', items: ['Ventas / CRM', 'Proyectos', 'Compras', 'Administración'] },
+  { label: 'Capa de integración y datos en tiempo real', items: ['API', 'IoT', 'IA'], solved: true },
+]
+
+export function TechArchDest() {
+  return (
+    <div className="rounded-2xl border border-forest/25 bg-forest/[0.04] p-5">
+      <div className="flex flex-col gap-2">
+        {TEC_CAPAS_DEST.map((c) => (
+          <div
+            key={c.label}
+            className={`rounded-xl px-4 py-3 ${
+              c.solved
+                ? 'border-2 border-forest bg-forest/10'
+                : 'border border-forest/15 bg-white'
+            }`}
+          >
+            <p className={`text-[11px] font-bold uppercase tracking-wide ${c.solved ? 'text-forest' : 'text-forest'}`}>
+              {c.solved && '✅ '}{c.label}
+            </p>
+            <div className="mt-2 flex flex-wrap items-center gap-1.5">
+              {c.items.map((it) => (
+                <span key={it} className="rounded bg-forest/8 px-2 py-1 text-[11px] font-medium text-forest">{it}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 text-center text-[11px] text-muted">Infraestructura preparada para escalar, integrar datos en tiempo real y habilitar la IA.</p>
+    </div>
+  )
+}
+
+// ════════════════════════════════════════════════════════════════════════════════
 //  BRECHAS — tabs interactivas (una por brecha)
 // ════════════════════════════════════════════════════════════════════════════════
 

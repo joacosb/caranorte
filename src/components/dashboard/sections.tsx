@@ -5,6 +5,14 @@ import {
   OrgChart,
   ProcessMap,
   ArchMatrix,
+  BusinessArch,
+  BusinessArchDest,
+  DataArch,
+  DataArchDest,
+  AppsArchDest,
+  TechArch,
+  TechArchDest,
+  DestinoArrow,
   GapTabs,
   CriteriaDonut,
   VendorBars,
@@ -466,17 +474,67 @@ export function ArquitecturaSection() {
         </div>
       </div>
 
+      {/* Arquitectura de negocio */}
+      <div>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h3 className="text-xl font-bold text-forest">Arquitectura de negocio</h3>
+          <span className="rounded-full bg-forest/10 px-3 py-1 text-xs font-semibold text-forest">Origen → Destino</span>
+        </div>
+        <p className="mt-1 max-w-3xl text-sm text-muted text-justify">De procesos manuales y decisiones centralizadas a capas automatizadas con decisiones apoyadas en datos.</p>
+        <div className="mt-5">
+          <span className="mb-2 inline-block rounded-full bg-forest/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-forest">Origen</span>
+          <BusinessArch />
+          <DestinoArrow />
+          <BusinessArchDest />
+        </div>
+      </div>
+
+      {/* Arquitectura de datos */}
+      <div>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h3 className="text-xl font-bold text-forest">Arquitectura de datos</h3>
+          <span className="rounded-full bg-forest/10 px-3 py-1 text-xs font-semibold text-forest">Origen → Destino</span>
+        </div>
+        <p className="mt-1 max-w-3xl text-sm text-muted text-justify">De silos aislados sin fuente única de verdad a un ERP central con trazabilidad completa.</p>
+        <div className="mt-5">
+          <span className="mb-2 inline-block rounded-full bg-forest/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-forest">Origen</span>
+          <DataArch />
+          <DestinoArrow />
+          <DataArchDest />
+        </div>
+      </div>
+
       {/* Matriz aplicación / datos-tecnología */}
       <div>
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <h3 className="text-xl font-bold text-forest">Arquitectura de aplicaciones (origen)</h3>
-          <span className="rounded-full bg-forest/10 px-3 py-1 text-xs font-semibold text-forest">Situación actual · Origen</span>
+          <h3 className="text-xl font-bold text-forest">Arquitectura de aplicaciones</h3>
+          <span className="rounded-full bg-forest/10 px-3 py-1 text-xs font-semibold text-forest">Origen → Destino</span>
         </div>
-        <p className="mt-1 max-w-3xl text-sm text-muted text-justify">Para cada proceso, qué aplicaciones se usan y dónde viven los datos.</p>
-        <div className="mt-5 flex flex-col gap-4">
-          <ArchMatrix block={ARQ_ESTRATEGICOS} />
-          <ArchMatrix block={ARQ_OPERATIVOS} />
-          <ArchMatrix block={ARQ_APOYO} />
+        <p className="mt-1 max-w-3xl text-sm text-muted text-justify">De más de ocho herramientas aisladas a un ERP como columna vertebral con integraciones vía API e IA.</p>
+        <div className="mt-5">
+          <span className="mb-2 inline-block rounded-full bg-forest/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-forest">Origen</span>
+          <div className="flex flex-col gap-4">
+            <ArchMatrix block={ARQ_ESTRATEGICOS} />
+            <ArchMatrix block={ARQ_OPERATIVOS} />
+            <ArchMatrix block={ARQ_APOYO} />
+          </div>
+          <DestinoArrow />
+          <AppsArchDest />
+        </div>
+      </div>
+
+      {/* Arquitectura tecnológica */}
+      <div>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h3 className="text-xl font-bold text-forest">Arquitectura tecnológica</h3>
+          <span className="rounded-full bg-forest/10 px-3 py-1 text-xs font-semibold text-forest">Origen → Destino</span>
+        </div>
+        <p className="mt-1 max-w-3xl text-sm text-muted text-justify">De un stack SaaS sin integración a una infraestructura con capa de API, datos en tiempo real e IA.</p>
+        <div className="mt-5">
+          <span className="mb-2 inline-block rounded-full bg-forest/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-forest">Origen</span>
+          <TechArch />
+          <DestinoArrow />
+          <TechArchDest />
         </div>
       </div>
 
